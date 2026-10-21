@@ -1,0 +1,9 @@
+# Copyright material and local tooling must not be committed (see references/source-register.md)
+*.pdf
+*.epub
+*.djvu
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store

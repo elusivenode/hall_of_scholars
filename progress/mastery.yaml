@@ -1,0 +1,1396 @@
+# Mastery and coverage state per syllabus item (progress/mastery.yaml)
+#
+# Same restricted YAML subset as curriculum/coverage.yaml.
+#
+# RULES (see governance/assessment-standard.md)
+#   mastery   unassessed | familiarity | understanding | independent-competence | durable-mastery
+#   coverage  not-started | in-progress | covered   ("covered" means taught/read; it is NOT a mastery claim)
+#   Any mastery other than "unassessed" REQUIRES: non-empty evidence (paths under studies/ or assessments/),
+#   authorised_by "ChatGPT-assessor", and authorised_date (DD/MM/YYYY).
+#   Claude Code records only changes the assessor has explicitly authorised; it never infers them.
+#
+# Every item below starts at "unassessed": nothing has been assessed.
+
+- id: "IA-GP-001"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-GP-002"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-GP-003"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-GP-004"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-GP-005"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-GP-006"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-GP-007"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-GP-008"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-GP-009"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-GP-010"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-GP-011"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-GP-012"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-GP-013"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-GP-014"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-GP-015"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-GP-016"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-001"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-002"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-003"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-004"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-005"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-006"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-007"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-008"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-009"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-010"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-011"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-012"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-013"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-014"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-015"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-016"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-017"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VM-018"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-001"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-002"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-003"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-004"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-005"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-006"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-007"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-008"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-009"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-010"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-011"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-012"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-013"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-014"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-015"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-016"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-017"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-018"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-019"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-020"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-021"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-NS-022"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-001"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-002"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-003"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-004"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-005"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-006"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-007"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-008"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-009"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-010"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-011"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-012"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-013"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-014"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-015"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-016"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-017"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-018"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-019"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DE-020"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-001"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-002"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-003"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-004"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-005"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-006"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-007"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-008"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-009"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-010"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-011"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-012"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-013"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-014"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-015"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-016"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-017"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-018"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-019"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-AN-020"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-001"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-002"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-003"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-004"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-005"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-006"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-007"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-008"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-009"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-010"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-011"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-012"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-013"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-014"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-015"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-016"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-017"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-018"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-019"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-020"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-021"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-022"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-023"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-024"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-025"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-026"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-PR-027"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VC-001"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VC-002"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VC-003"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VC-004"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VC-005"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VC-006"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VC-007"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VC-008"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VC-009"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VC-010"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VC-011"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VC-012"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VC-013"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-VC-014"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-001"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-002"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-003"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-004"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-005"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-006"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-007"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-008"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-009"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-010"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-011"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-012"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-013"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-014"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-015"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-016"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-017"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-018"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-019"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-020"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-021"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-022"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-023"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-DR-024"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-CP-001"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-CP-002"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-MC-001"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-MC-002"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-MC-003"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-MC-004"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-MC-005"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-MC-006"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-MC-007"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-MC-008"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-MC-009"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
+
+- id: "IA-MC-010"
+  coverage: "not-started"
+  mastery: "unassessed"
+  evidence: []
+  authorised_by: null
+  authorised_date: null
+  notes: ""
