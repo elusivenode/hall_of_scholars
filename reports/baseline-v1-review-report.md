@@ -9,7 +9,7 @@ assessed or marked as mastered.** Awaiting the curriculum director's review.
 | | |
 |---|---|
 | Branch | `feature/curriculum-baseline-v1` (from `main` at `0228a63`) |
-| Baseline content commit | `BASELINE_COMMIT` (filled in by the follow-up commit) |
+| Baseline content commit | `774a3381e59be850cb5f5e3a73f5b5f9e4bee491` (short `774a338`); a follow-up commit records this hash in the report and holds no other change |
 | Remote | **not pushed.** See decision D1 in section 9 before pushing: the branch contains verbatim syllabus text and the repository is public. |
 
 ## 2. Files created
