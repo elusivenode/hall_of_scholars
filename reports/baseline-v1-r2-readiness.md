@@ -199,7 +199,12 @@ first commit (import of the remediation tree) versus the remediation tip:
 Reading it: the candidate has two commits not in `main`; none of the five earlier commits that carried or descended from the verbatim text is an ancestor; a scan of every file in every reachable commit finds only
 document and book titles (the control commit shows the scan does detect the old text); and apart from the two Fable review files (and then the R2 changes), the candidate's tree is the remediation tree.
 
-**Obsolete branch.** DELETION_OUTCOME
+**Obsolete branch: deleted on 22/10/2026, after the checks above.** `git push origin --delete feature/curriculum-baseline-v1` succeeded. The remote now has four branches (`candidate/baseline-v1-clean` at `c99dda3`, `main`,
+`remediation/baseline-v1-director-feedback`, `review/baseline-v1-r1-fable-2026-10-22`); the old branch's files return HTTP 404 to an anonymous request. The pushed candidate was checked anonymously before the deletion: local and
+remote commits are identical, the register has 177 summaries and no `source` fields, and a distinctive Cambridge phrase is absent.
+
+**Still reachable after the deletion (checked, not assumed):** an anonymous request for `curriculum/syllabus.md` **by the old commit hash `774a338` still returns HTTP 200**. The tips of the kept remediation and Fable
+review branches contain the summary version (the phrase test finds nothing), but their history still includes `774a338` and `c337c7a`. A local-only copy of the old branch also remains on the machine that did the work.
 
 **What deletion does and does not do.** It removes the branch name and the copies reachable only through it from the repository's visible branches. It does **not** guarantee removal of cached or otherwise retained Git objects
 (GitHub may keep objects reachable by commit hash until garbage collection), and the kept remediation and Fable review branches still contain the earlier history (the remediation branch descends from commit `774a338`).
