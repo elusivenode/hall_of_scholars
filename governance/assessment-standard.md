@@ -48,9 +48,10 @@ assessment that supports `durable-mastery`. **The interval is necessary but not 
 require independent reasoning on genuinely new material, preferably in a different context (for example an application in
 another course). The assessor may require a longer interval.
 
-What the validator can and cannot check: it checks that a `durable-mastery` decision has an earlier `independent-competence`
-decision at least 28 days before it, resting on different evidence files. It **cannot** judge whether the later work really was
-independent reasoning on new material; that judgement is the assessor's alone.
+What the validator can and cannot check: it checks that a `durable-mastery` decision follows an **unbroken** earlier `independent-competence`
+decision at least 28 days before it, resting on different evidence files; a later downgrade or withdrawal breaks the chain, so durable mastery
+cannot rest on a decision the assessor has since lowered. It **cannot** judge whether the later work really was independent reasoning on new
+material; that judgement is the assessor's alone.
 
 ## 5. Hints
 
@@ -75,7 +76,9 @@ Evidence is a file in this repository containing:
 3. the hints or assistance given, per section 5;
 4. the assessor's evaluation of the argument, including errors found.
 
-Store evidence under `studies/<course>/work/YYYY-MM-DD-<slug>.md`, or under `assessments/diagnostic/` for the diagnostic. The
+Store evidence under `studies/<course>/work/YYYY-MM-DD-<slug>.md` (the folder must be the item's own course), or under `assessments/diagnostic/`
+for the diagnostic, written from [studies/EVIDENCE-TEMPLATE.md](../studies/EVIDENCE-TEMPLATE.md). The validator requires each evidence path to be
+an existing, non-empty file in one of those places with the four parts (Problem, Student work, Hints given, Assessor evaluation) non-empty. The
 paths go in `evidence` in `progress/mastery.yaml`. Do not reconstruct evidence from memory or from general descriptions of
 earlier study. If the work was not captured, the evidence does not exist.
 
@@ -106,10 +109,20 @@ Claude Code then:
 Downgrades follow the same route: only the assessor lowers or raises a level. Earlier history entries are kept, so the record of
 what was authorised, when and on what evidence is never overwritten.
 
+**Withdrawal.** The assessor may withdraw a level altogether. This is recorded as a decision with level `unassessed` and hints null (with the rationale
+file as evidence if there is one); the item returns to `unassessed` at the top level, the history is kept, and the withdrawal breaks any chain that durable
+mastery would have relied on.
+
+**Diagnostic competence before coverage.** A valid diagnostic may establish competence before a topic is marked formally covered (director decision D-25).
+While an item's `coverage` is `not-started`, any level above `unassessed` must rest only on evidence under `assessments/diagnostic/`. Otherwise `coverage` and
+`mastery` are independent.
+
 ## 8. Integrity of the assessment records: what validation cannot do
 
 `scripts/validate.py` checks the **existence and structure** of evidence and authorisation records: required fields, valid levels,
-hint rules, chronology, the 28-day rule, that evidence files exist, and that the top-level fields match the latest decision.
+hint rules, chronology (no future dates), the 28-day rule on an unbroken chain, that each evidence path is a real, non-empty file of the right kind, in the right
+folder for the item's course, with the four required parts, and that the top-level fields match the latest decision. `scripts/selftest.py` tests each of these rules
+with synthetic records that exist only in a temporary copy.
 
 It **cannot** establish that:
 

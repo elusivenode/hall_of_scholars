@@ -55,10 +55,9 @@ The summaries are **librarian drafts** (`summary_status: librarian-draft`). They
 
 Before this remediation, the branch `feature/curriculum-baseline-v1` was pushed to the public repository (commits `774a338` and `c337c7a`, 21/10/2026) and contained the verbatim
 syllabus statements in `curriculum/coverage.yaml` and `curriculum/syllabus.md`. It was readable anonymously (checked 21/10/2026; `main` was clean; no forks, stars or pull requests).
-Replacing the text on a later commit **does not remove it from the already-published history**. Options for the director, none of which Claude Code has taken: (a) leave the history as it is
-and accept the risk; (b) delete the remote branch and republish from a history that never contained the text, which needs a force push or deleting and recreating the branch (and GitHub may
-retain cached objects reachable by commit hash until garbage collected); (c) ask GitHub to purge cached views; (d) seek Faculty permission. Deleting the branch is destructive and outward-facing, so it
-needs the owner's explicit instruction.
+Replacing the text on a later commit **does not remove it from the already-published history**. The director decided (D-26) to publish a **clean merge candidate** that does not inherit those commits and then to delete the obsolete remote branch `feature/curriculum-baseline-v1` once ancestry and content
+are verified; the remediation and Fable review branches are not to be deleted yet. Deletion does not guarantee removal of cached or otherwise retained Git objects, and until the remediation and review branches are
+also removed, the earlier history stays reachable through them. The outcome and the evidence are in [reports/baseline-v1-r2-readiness.md](../reports/baseline-v1-r2-readiness.md).
 
 ## 3. Auditing an item against the original Schedules (optional, local)
 

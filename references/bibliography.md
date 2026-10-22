@@ -20,7 +20,7 @@ No chapter, section or exercise identifier appears in this repository unless it 
 - Alignment: partial
 - Availability: Elsevier ebook; print copies secondhand (not checked); the Internet Archive copy is access-restricted. Not free.
 - Verified via: https://shop.elsevier.com/books/numbers-and-proofs/allenby/978-0-08-092877-7 https://web.archive.org/web/20070210000000/https://www.loc.gov/catdir/toc/els051/00703226.html https://openlibrary.org/books/OL6898707M
-- Seen: Elsevier page and a Library of Congress contents record (read through a 2007 web archive capture) give the same unnumbered chapter titles: "The need for proof"; "Statements and connectives"; "True or false?"; "Sets, negations, notations and functions"; "Proofs....for all"; "There exists....proofs"; "The principle of mathematical induction"; "The integers and rational numbers"; "The rational numbers and the real numbers"; "Real numbers and complex numbers"; then closing chapters. Alignment: the titles name none of IA-NS-015 to IA-NS-022 and only the number-system overview (IA-NS-001, partly). Verdict: not adequate, on verified evidence, for the real numbers or countability; needs a companion.
+- Seen: Elsevier page and a Library of Congress contents record (read through a 2007 web archive capture) give the same unnumbered chapter titles: "The need for proof"; "Statements and connectives"; "True or false?"; "Sets, negations, notations and functions"; "Proofs....for all"; "There exists....proofs"; "The principle of mathematical induction"; "The integers and rational numbers"; "The rational numbers and the real numbers"; "Real numbers and complex numbers"; then closing chapters. Alignment: the titles name none of IA-NS-015 to IA-NS-022 and only the number-system overview (IA-NS-001, partly). Verdict: not adequate, on verified evidence, for the real numbers or countability; needs a companion. The chapter titles, the ebook ISBN and the publication date were seen directly (Elsevier page; Library of Congress record via a web archive). The print imprint, print ISBN and page count (Arnold; ISBN 0340676531; x + 274 pages) rest on an Open Library record that could not be reopened during the recheck.
 - Not seen: Chapter numbers and section titles (a photo of the contents pages of a physical or borrowed copy would settle it); coverage of modular arithmetic, RSA and countability; print availability.
 - Licence: all rights reserved
 
@@ -52,7 +52,7 @@ No chapter, section or exercise identifier appears in this repository unless it 
 
 ### BIB-004 Beardon, Algebra and Geometry
 - Citation: Alan F. Beardon, *Algebra and Geometry*, Cambridge University Press, 2005.
-- Role: proposed primary for Groups; a Cambridge-listed book for Vectors and Matrices
+- Role: unconfirmed primary selection for Groups (the choice stays open); a Cambridge-listed book for Vectors and Matrices
 - Cambridge list: yes, with dagger (Groups; also listed for Vectors and Matrices)
 - Bibliographic: partial
 - Contents: partial
@@ -143,7 +143,7 @@ No chapter, section or exercise identifier appears in this repository unless it 
 
 ### BIB-011 Robinson, An Introduction to Ordinary Differential Equations
 - Citation: James C. Robinson, *An Introduction to Ordinary Differential Equations*, Cambridge University Press, 2004. (Cambridge's list calls it "An introduction to Differential Equations".)
-- Role: proposed primary for Differential Equations (verification outstanding)
+- Role: unconfirmed primary selection for Differential Equations (the choice stays open until contents are verified)
 - Cambridge list: yes (Differential Equations)
 - Bibliographic: partial
 - Contents: partial
@@ -151,7 +151,7 @@ No chapter, section or exercise identifier appears in this repository unless it 
 - Availability: Print or library; contents free on Cambridge Core, text paywalled. Not free.
 - Verified via: https://www.cambridge.org/core/books/abs/an-introduction-to-ordinary-differential-equations/preface/93EB22C0426AA8AABF3F5573931DABAA
 - Seen: Part titles on Cambridge Core: I First order differential equations; II Second order linear equations with constant coefficients; III Linear second order equations with variable coefficients; IV Numerical methods and difference equations; V Coupled linear equations; VI Coupled nonlinear equations; Appendix A Real and complex numbers; B Matrices, eigenvalues, and eigenvectors; C Derivatives and partial derivatives.
-- Not seen: Chapter titles and numbers; edition; whether it covers gradient and Hessian classification, the Heaviside and Dirac functions, series solutions and simple partial differential equations. It does not appear to be written to the Cambridge schedule.
+- Not seen: Chapter titles and numbers; edition; whether it covers gradient and Hessian classification, the Heaviside and Dirac functions, series solutions and simple partial differential equations. It does not appear to be written to the Cambridge schedule. Verification task B7 blocks confirming this selection.
 - Licence: all rights reserved
 
 ### BIB-012 Grimmett and Welsh, Probability: An Introduction
@@ -254,7 +254,7 @@ No chapter, section or exercise identifier appears in this repository unless it 
 - Alignment: checked
 - Availability: Free to read.
 - Verified via: https://davidtong.org/pdfs/teaching/vector-calculus/vc.pdf https://davidtong.org/teaching/vector-calculus/
-- Seen: PDF read. Chapters: 1 Curves (1.1.3 Curvature and Torsion; 1.2 Line Integrals; 1.3 Conservative Fields); 2 Surfaces (2.1.2 Changing Coordinates; 2.1.4 Spherical Polar and Cylindrical Polar Coordinates; 2.2 Surface Integrals); 3 Grad, Div and Curl (3.1 The Gradient; 3.2 Div and Curl; 3.2.3 Solenoidal Fields; 3.2.4 The Laplacian; 3.2.5 Some Vector Calculus Equations in Physics; 3.3 Orthogonal Curvilinear Coordinates); 4 The Integral Theorems (4.1 Divergence Theorem; 4.3 Green's Theorem in the Plane; 4.4 Stokes' Theorem); 5 Poisson and Laplace Equations (5.1.1 Gauss' Law; 5.2.1 Isotropic Solutions; 5.2.2 Some General Results; 5.2.3 Integral Solutions); 6 Tensors (6.1 What it Takes to Make a Tensor; 6.1.3 Invariant Tensors; 6.2.1 Electric Fields in Matter; 6.2.2 The Inertia Tensor). Body text covers the uniqueness theorem, the maximum principle, the quotient rule and isotropic rank 2 and 3 tensors. The only item without a titled section is the vector identities (IA-VC-007).
+- Seen: PDF read. Chapters: 1 Curves (1.1.3 Curvature and Torsion; 1.2 Line Integrals; 1.3 Conservative Fields); 2 Surfaces (2.1.2 Changing Coordinates; 2.1.4 Spherical Polar and Cylindrical Polar Coordinates; 2.2 Surface Integrals); 3 Grad, Div and Curl (3.1 The Gradient; 3.2 Div and Curl; 3.2.3 Solenoidal Fields; 3.2.4 The Laplacian; 3.2.5 Some Vector Calculus Equations in Physics; 3.3 Orthogonal Curvilinear Coordinates); 4 The Integral Theorems (4.1 Divergence Theorem; 4.3 Green's Theorem in the Plane; 4.4 Stokes' Theorem); 5 Poisson and Laplace Equations (5.1.1 Gauss' Law; 5.2.1 Isotropic Solutions; 5.2.2 Some General Results; 5.2.3 Integral Solutions); 6 Tensors (6.1 What it Takes to Make a Tensor; 6.1.3 Invariant Tensors; 6.2.1 Electric Fields in Matter; 6.2.2 The Inertia Tensor). Body text proves that a harmonic function has no interior maximum or minimum (the phrase "maximum principle" is not used) and covers the uniqueness theorem, the quotient rule and isotropic rank 2 and 3 tensors. The only item without a titled section is the vector identities (IA-VC-007).
 - Not seen: The course year; exercises; licence (not stated).
 - Licence: not stated
 

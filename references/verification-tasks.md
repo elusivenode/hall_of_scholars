@@ -27,7 +27,7 @@ says what is already usable. "Student" means a task the student can do in minute
 | B4 | Probability: whether Norris's notes are revised for 2026-27; depth of the compressed sections | The lecturer's current page | web / independent reviewer |
 | B5 | Vector Calculus: the contents pages of the student's Baxandall and Liebeck, plus index entries for tensor, Laplace, Poisson, cylindrical, curvilinear, Maxwell | A photo of those pages | student |
 | B6 | Vector Calculus: Matthews, *Vector Calculus*, contents | Springer contents page in a normal browser | web |
-| B7 | Differential Equations: Robinson chapter titles and coverage of items IA-DE-015 to IA-DE-020 (gradient, Hessian, Heaviside and Dirac, series solutions, simple PDEs); consider Boyce and DiPrima | Cambridge Core chapter pages; a library copy | library |
+| B7 (blocks the primary selection) | Differential Equations: Robinson chapter titles and coverage of items IA-DE-015 to IA-DE-020 (gradient, Hessian, Heaviside and Dirac, series solutions, simple PDEs); consider Boyce and DiPrima | Cambridge Core chapter pages; a library copy | library |
 | B8 | Dynamics and Relativity: O'Donnell section-level contents and exercises; Tong's per-item alignment; Rindler | A library copy; a second read of Tong | library / independent reviewer |
 | B9 | Computational Projects manual (IA-CP-001, IA-CP-002) | https://www.maths.cam.ac.uk/undergrad/catam/ | web |
 | B10 | Example sheets: open sheets 2 to 4 and the Analysis I and Vectors and Matrices sheets; none provide solutions | Direct read | web |

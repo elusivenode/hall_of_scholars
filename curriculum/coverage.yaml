@@ -9,11 +9,13 @@
 # item can be audited against the original Schedules on a machine that holds a local copy (scripts/validate.py
 # --schedules-text). The Cambridge PDF stays outside the repository. A passing fingerprint audit shows only that the source
 # passage is the one the item was built from; it does NOT show that the summary is a faithful rendering. Summary fidelity is
-# an academic judgement for the curriculum director and the independent reviewer.
+# an academic judgement for the curriculum director and the independent reviewer. Where the Schedules give only a bare topic
+# name, the summary necessarily repeats it (validate.py keeps an explicit list of those items).
 #
 # FORMAT (a deliberately small YAML subset, parsed with the Python standard library):
 #   - a list of records; each record starts with "- id: ..." and continues with "  key: value" lines;
-#   - every value is a JSON scalar, array or object (double-quoted strings, [..], {..}, null, numbers).
+#   - every value is a JSON scalar, array or object (double-quoted strings, [..], {..}, null, numbers);
+#   - a key may appear only once in a record (the validator rejects duplicates).
 #
 # FIELDS
 #   id             stable identifier, IA-<course code>-NNN (topics) or IA-<code>-Nnn (course notes). Never renumbered.
@@ -29,20 +31,27 @@
 #   printed_page / pdf_page   page of the Schedules 2026-27 booklet
 #   block          source paragraph (one paragraph carries one lecture count)
 #   block_item     "k of n": this item is the k-th of the n items taken from that paragraph
-#   lectures_in_block   lectures the Schedules assign to the whole paragraph (shared by its items; not a per-item figure)
+#   lectures_in_block   lectures the Schedules assign to the whole paragraph (shared by its items; not a per-item figure);
+#                  null for every item of a paragraph that has no count of its own
 #   status         examinable | starred-not-examinable | course-note | ancillary-non-examinable
-#   builds_on      typed links to earlier items, each ["<id>", "<type>", "<provenance>"]:
+#   builds_on      typed links to earlier items, each ["<id>", "<type>", "<provenance>", "<approval>"]:
 #                    type        required     mathematically necessary for the intended treatment
+#                                assumed      prior knowledge the programme takes for granted; it can be established by the
+#                                             diagnostic assessment or earlier study, so it implies no ordering within the programme
 #                                recommended  helpful preparation, not strictly necessary
 #                                connection   related material; implies NO ordering constraint
-#                    provenance  cambridge-stated          Cambridge says the link in the Schedules or Guide
-#                                inferred-from-cambridge   follows from Cambridge's wording (for example the same topic listed in
-#                                                          two courses) but is not declared as a prerequisite
+#                    provenance  cambridge-stated          Cambridge states this item-to-item link itself
+#                                cambridge-course-level    Cambridge states a dependence or link between the two COURSES (Schedules or
+#                                                          Guide); which items it joins is the librarian's mapping
+#                                inferred-from-cambridge   follows from Cambridge's wording (for example the same topic in two courses)
+#                                                          but Cambridge states no dependence
 #                                librarian-judgement       the librarian's reading of the mathematics
-#                                director-approved         confirmed by the curriculum director (none yet)
+#                    approval    provisional | director-approved   (separate from provenance: where a link comes from is not
+#                                whether the director has accepted it)
 #                  A prerequisite may be satisfied by prior study; it never means "mastery must be recorded first".
 #   readings       reading-map identifiers (curriculum/reading-map.md)
-#   fingerprint    {"chars": N, "sha256": "..."} of the normalised source statement; see scripts/validate.py for the normalisation
+#   fingerprint    {"chars": N, "sha256": "..."} of the normalised source statement; N is at least 1; see scripts/validate.py for the
+#                  normalisation
 #
 # Mastery and coverage STATE is deliberately NOT stored here; it lives in progress/mastery.yaml.
 
@@ -76,7 +85,7 @@
   block_item: "2 of 3"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-GP-001", "required", "librarian-judgement"]]
+  builds_on: [["IA-GP-001", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-GP-01"]
   fingerprint: {"chars": 115, "sha256": "a5007ef6bff10d7dd8bf280a96fee5fd438078940712ff007540d1e315bfacc0"}
 
@@ -93,7 +102,7 @@
   block_item: "3 of 3"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-GP-002", "recommended", "librarian-judgement"], ["IA-VM-001", "required", "librarian-judgement"]]
+  builds_on: [["IA-GP-002", "recommended", "librarian-judgement", "provisional"], ["IA-VM-001", "assumed", "librarian-judgement", "provisional"]]
   readings: ["RM-GP-01"]
   fingerprint: {"chars": 116, "sha256": "f52b4b1fbfd3125a9050c92b1122df06dc67c9f7156872dfc080e9879dac5e72"}
 
@@ -110,14 +119,14 @@
   block_item: "1 of 3"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-GP-002", "required", "librarian-judgement"], ["IA-NS-006", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-GP-002", "required", "librarian-judgement", "provisional"], ["IA-NS-006", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-GP-02"]
   fingerprint: {"chars": 25, "sha256": "fc95c82925d7b6aec5456732539097ad69b30fab8a2b62ab85b607f60ab48e05"}
 
 - id: "IA-GP-005"
   course: "Groups"
   heading: "Lagrange's theorem"
-  summary: "Classification of the groups of small order (up to order 8); the quaternion group."
+  summary: "Groups of small order (up to order 8); the quaternion group."
   summary_status: "librarian-draft"
   qualifiers: []
   source_doc: "SRC-01"
@@ -127,7 +136,7 @@
   block_item: "2 of 3"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-GP-004", "required", "librarian-judgement"]]
+  builds_on: [["IA-GP-004", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-GP-02"]
   fingerprint: {"chars": 43, "sha256": "08e0985225e87725590deef8f69e030da6a26e050e6c886b889fdc9d3aa7c663"}
 
@@ -144,7 +153,7 @@
   block_item: "3 of 3"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-GP-004", "required", "librarian-judgement"], ["IA-NS-012", "recommended", "inferred-from-cambridge"]]
+  builds_on: [["IA-GP-004", "required", "librarian-judgement", "provisional"], ["IA-NS-012", "recommended", "inferred-from-cambridge", "provisional"]]
   readings: ["RM-GP-02"]
   fingerprint: {"chars": 51, "sha256": "06f05d2166bf25c6cf47a58f563ff414075c1e58f61363493a4dfae26c45e1ad"}
 
@@ -161,7 +170,7 @@
   block_item: "1 of 3"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-GP-002", "required", "librarian-judgement"], ["IA-GP-004", "required", "librarian-judgement"]]
+  builds_on: [["IA-GP-002", "required", "librarian-judgement", "provisional"], ["IA-GP-004", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-GP-03"]
   fingerprint: {"chars": 57, "sha256": "0246ae6476ef88c3033597d33cd21bbbff24efeed9a38704d358840ec59affb8"}
 
@@ -178,7 +187,7 @@
   block_item: "2 of 3"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-GP-007", "required", "librarian-judgement"]]
+  builds_on: [["IA-GP-007", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-GP-03"]
   fingerprint: {"chars": 70, "sha256": "87946e456611b4f1ffdb432f9e2bc5426ad2fb7f2b9a912e185deb63fa589acb"}
 
@@ -195,7 +204,7 @@
   block_item: "3 of 3"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-GP-007", "required", "librarian-judgement"]]
+  builds_on: [["IA-GP-007", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-GP-03"]
   fingerprint: {"chars": 33, "sha256": "f12d357fc9863b94042f85ff203418177ae4035f63649d2a889655be8a15794d"}
 
@@ -212,7 +221,7 @@
   block_item: "1 of 1"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-GP-004", "required", "librarian-judgement"], ["IA-GP-002", "required", "librarian-judgement"]]
+  builds_on: [["IA-GP-004", "required", "librarian-judgement", "provisional"], ["IA-GP-002", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-GP-04"]
   fingerprint: {"chars": 55, "sha256": "d5667e61c099ae57b0b6521a71ce4c8a19dcd3c16455a99c281dda7e1791864f"}
 
@@ -229,7 +238,7 @@
   block_item: "1 of 3"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-GP-001", "required", "librarian-judgement"], ["IA-VM-009", "required", "inferred-from-cambridge"]]
+  builds_on: [["IA-GP-001", "required", "librarian-judgement", "provisional"], ["IA-VM-009", "required", "inferred-from-cambridge", "provisional"]]
   readings: ["RM-GP-05"]
   fingerprint: {"chars": 60, "sha256": "1a23a847e6f9fb1b6b2cd0e4d9f521e0993c8c64e660531464d92b485b7f578a"}
 
@@ -246,7 +255,7 @@
   block_item: "2 of 3"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-GP-011", "recommended", "librarian-judgement"], ["IA-VM-012", "required", "inferred-from-cambridge"]]
+  builds_on: [["IA-GP-011", "recommended", "librarian-judgement", "provisional"], ["IA-VM-012", "required", "inferred-from-cambridge", "provisional"], ["IA-VM-018", "connection", "inferred-from-cambridge", "director-approved"]]
   readings: ["RM-GP-05"]
   fingerprint: {"chars": 142, "sha256": "141c6c50f1029c464745519ee34b0296de82f44c19ba8aaa270b4a1fa2aeae98"}
 
@@ -263,7 +272,7 @@
   block_item: "3 of 3"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-GP-003", "recommended", "librarian-judgement"], ["IA-VM-015", "recommended", "inferred-from-cambridge"]]
+  builds_on: [["IA-GP-003", "recommended", "librarian-judgement", "provisional"], ["IA-VM-015", "recommended", "inferred-from-cambridge", "provisional"]]
   readings: ["RM-GP-05"]
   fingerprint: {"chars": 36, "sha256": "481dd309a7866d3dc8364a38506052ada6177b10d670ce439a05d60764436acc"}
 
@@ -280,7 +289,7 @@
   block_item: "1 of 3"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-GP-002", "required", "librarian-judgement"]]
+  builds_on: [["IA-GP-002", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-GP-06"]
   fingerprint: {"chars": 59, "sha256": "52e3a7d029a1ebceb966144ed84af2ee856ec88c04516797ea3bdc8c06f5faa7"}
 
@@ -297,14 +306,14 @@
   block_item: "2 of 3"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-GP-014", "required", "librarian-judgement"], ["IA-GP-009", "required", "librarian-judgement"]]
+  builds_on: [["IA-GP-014", "required", "librarian-judgement", "provisional"], ["IA-GP-009", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-GP-06"]
   fingerprint: {"chars": 21, "sha256": "3e2bbbb8af538d6010bc08d2835f1f37d17b6c9ef4328a1a93ed137e04ec5c0b"}
 
 - id: "IA-GP-016"
   course: "Groups"
   heading: "Permutations"
-  summary: "Simple groups, including a proof that A_5 is simple."
+  summary: "Simple groups, and the simplicity of A_5."
   summary_status: "librarian-draft"
   qualifiers: []
   source_doc: "SRC-01"
@@ -314,7 +323,7 @@
   block_item: "3 of 3"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-GP-010", "required", "librarian-judgement"], ["IA-GP-015", "required", "librarian-judgement"]]
+  builds_on: [["IA-GP-010", "required", "librarian-judgement", "provisional"], ["IA-GP-015", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-GP-06"]
   fingerprint: {"chars": 28, "sha256": "b65b678649f1cd5d499b9e5a5a4fdc054af70530e5d0aa42e7fc0534478ccc95"}
 
@@ -338,7 +347,7 @@
 - id: "IA-VM-002"
   course: "Vectors and Matrices"
   heading: "Complex numbers"
-  summary: "Informal treatment of complex logarithms, n-th roots and powers, and de Moivre's theorem."
+  summary: "Informal treatment of complex logarithms, n-th roots and powers (the informal qualifier applies to this part only). De Moivre's theorem."
   summary_status: "librarian-draft"
   qualifiers: ["informal-treatment"]
   source_doc: "SRC-01"
@@ -348,7 +357,7 @@
   block_item: "2 of 2"
   lectures_in_block: 2
   status: "examinable"
-  builds_on: [["IA-VM-001", "required", "librarian-judgement"]]
+  builds_on: [["IA-VM-001", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-VM-01"]
   fingerprint: {"chars": 79, "sha256": "9c4b83457a63a9477f2c661a5338da5d8655de501bc50ccb45fb1eb065fd191f"}
 
@@ -382,7 +391,7 @@
   block_item: "2 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VM-003", "required", "librarian-judgement"], ["IA-VM-001", "required", "librarian-judgement"]]
+  builds_on: [["IA-VM-003", "required", "librarian-judgement", "provisional"], ["IA-VM-001", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-VM-02"]
   fingerprint: {"chars": 78, "sha256": "e27cd6fd956f08e5cbc8bdfc1afa2243e250d6febcba3008f5f8bb0b745d6a5c"}
 
@@ -399,7 +408,7 @@
   block_item: "3 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VM-004", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-VM-004", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-VM-02"]
   fingerprint: {"chars": 68, "sha256": "f21b4e707b5857f52baf1dcb70f00aae580eb80b9fa44b3bd0adcb05e6e442b5"}
 
@@ -416,7 +425,7 @@
   block_item: "4 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VM-003", "required", "librarian-judgement"]]
+  builds_on: [["IA-VM-003", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-VM-02"]
   fingerprint: {"chars": 55, "sha256": "700ffced4a58523881e91f1013258efb4f7ac07874ad9ba3d412503cf991d0bf"}
 
@@ -433,7 +442,7 @@
   block_item: "5 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VM-006", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-VM-006", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-VM-02"]
   fingerprint: {"chars": 101, "sha256": "bb1866119f6f7a8dba923e05823e699115e34efb6c8ced9fa591cf6d987216d8"}
 
@@ -450,7 +459,7 @@
   block_item: "6 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VM-007", "required", "librarian-judgement"]]
+  builds_on: [["IA-VM-007", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-VM-02"]
   fingerprint: {"chars": 75, "sha256": "5bc329e2b45ec164c8f39f3fda69d9ce250eeb6ad68f9cffaa4eac2c57945f90"}
 
@@ -484,7 +493,7 @@
   block_item: "2 of 2"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-VM-009", "required", "librarian-judgement"], ["IA-VM-005", "required", "librarian-judgement"]]
+  builds_on: [["IA-VM-009", "required", "librarian-judgement", "provisional"], ["IA-VM-005", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-VM-03"]
   fingerprint: {"chars": 158, "sha256": "6db68679c4e0c1a5366461ec7cf76f8685023bb61cc46b7fd547fd5e8ace88ff"}
 
@@ -501,7 +510,7 @@
   block_item: "1 of 1"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-VM-009", "required", "librarian-judgement"], ["IA-VM-010", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-VM-009", "required", "librarian-judgement", "provisional"], ["IA-VM-010", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-VM-03"]
   fingerprint: {"chars": 124, "sha256": "fa65ce9eea8316aad23c194fa0fb9411c7a446faa29bd7464601813a87ce1604"}
 
@@ -518,7 +527,7 @@
   block_item: "1 of 1"
   lectures_in_block: 1
   status: "examinable"
-  builds_on: [["IA-VM-009", "required", "librarian-judgement"]]
+  builds_on: [["IA-VM-009", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-VM-03"]
   fingerprint: {"chars": 146, "sha256": "516d767badbfc4fde80258055a48f65502aa573a5b3bcc644e8d372a7c6774e1"}
 
@@ -535,7 +544,7 @@
   block_item: "1 of 1"
   lectures_in_block: 2
   status: "examinable"
-  builds_on: [["IA-VM-010", "required", "librarian-judgement"], ["IA-VM-011", "required", "librarian-judgement"]]
+  builds_on: [["IA-VM-010", "required", "librarian-judgement", "provisional"], ["IA-VM-011", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-VM-04"]
   fingerprint: {"chars": 49, "sha256": "2743aa5a05c191151e1188ccc54c675ffcdbb4cee1c2eb2dc65eff0a8dfdf135"}
 
@@ -552,7 +561,7 @@
   block_item: "1 of 3"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VM-013", "required", "librarian-judgement"], ["IA-VM-012", "required", "librarian-judgement"], ["IA-VM-004", "required", "librarian-judgement"]]
+  builds_on: [["IA-VM-013", "required", "librarian-judgement", "provisional"], ["IA-VM-012", "required", "librarian-judgement", "provisional"], ["IA-VM-004", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-VM-04"]
   fingerprint: {"chars": 107, "sha256": "6a5a3300a821708e3d6112097af99290da1bedfa78055619643d52c09efee31e"}
 
@@ -569,7 +578,7 @@
   block_item: "2 of 3"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VM-013", "recommended", "librarian-judgement"], ["IA-VM-005", "required", "librarian-judgement"]]
+  builds_on: [["IA-VM-013", "recommended", "librarian-judgement", "provisional"], ["IA-VM-005", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-VM-04"]
   fingerprint: {"chars": 60, "sha256": "0cf2b9609dc9b5227337a5d8b3697588ac4fa8c5eaf9fb2f639917977a157ba4"}
 
@@ -586,7 +595,7 @@
   block_item: "3 of 3"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VM-015", "required", "librarian-judgement"]]
+  builds_on: [["IA-VM-015", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-VM-04"]
   fingerprint: {"chars": 126, "sha256": "3739ac6cec0695b56f8c4441a7389f4e30b714e374dcaf8b0634058d84d283c1"}
 
@@ -603,7 +612,7 @@
   block_item: "1 of 1"
   lectures_in_block: 1
   status: "examinable"
-  builds_on: [["IA-VM-014", "required", "librarian-judgement"], ["IA-VM-015", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-VM-014", "required", "librarian-judgement", "provisional"], ["IA-VM-015", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-VM-04"]
   fingerprint: {"chars": 96, "sha256": "e2f19b7a1ec6623c0d37c483466060d0fbdb8188f6ae3019422bd847bfc9e7d3"}
 
@@ -620,7 +629,7 @@
   block_item: "1 of 1"
   lectures_in_block: 1
   status: "examinable"
-  builds_on: [["IA-VM-010", "required", "librarian-judgement"], ["IA-VM-012", "required", "librarian-judgement"], ["IA-GP-001", "connection", "librarian-judgement"]]
+  builds_on: [["IA-VM-010", "required", "librarian-judgement", "provisional"], ["IA-VM-012", "required", "librarian-judgement", "provisional"], ["IA-GP-001", "connection", "librarian-judgement", "provisional"]]
   readings: ["RM-VM-04"]
   fingerprint: {"chars": 64, "sha256": "fc6b18f89fda716f552286057008a6eab0aaf91b1d82d3f82fe65185d5a159d8"}
 
@@ -688,7 +697,7 @@
   block_item: "1 of 5"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-NS-002", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-NS-002", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-02"]
   fingerprint: {"chars": 36, "sha256": "1b3ce83de6da1235ddd3815adfbe21ff8d65d2d420ef92e981c06a6be384e0da"}
 
@@ -705,7 +714,7 @@
   block_item: "2 of 5"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-NS-003", "required", "librarian-judgement"]]
+  builds_on: [["IA-NS-003", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-02"]
   fingerprint: {"chars": 71, "sha256": "91e95570c00e2cdd0ba3282b5871456591f855fcae1b9b4567d4d298c6f1cc4e"}
 
@@ -722,7 +731,7 @@
   block_item: "3 of 5"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-NS-003", "required", "librarian-judgement"]]
+  builds_on: [["IA-NS-003", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-02"]
   fingerprint: {"chars": 46, "sha256": "95ed1aef7b913df069f896a091e0bbb9e8d973b2e1cf91dd0f691aa64fedb75e"}
 
@@ -739,7 +748,7 @@
   block_item: "4 of 5"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-NS-003", "required", "librarian-judgement"]]
+  builds_on: [["IA-NS-003", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-02"]
   fingerprint: {"chars": 34, "sha256": "1bc0d37ee05cd124955e3db88ae804a93f46e4246e090e3957e4a151192049d7"}
 
@@ -756,7 +765,7 @@
   block_item: "5 of 5"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-NS-005", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-NS-005", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-02"]
   fingerprint: {"chars": 75, "sha256": "515110c40389020c3459dea172872768ed9c97a6fd478533a888146219640b52"}
 
@@ -773,7 +782,7 @@
   block_item: "1 of 1"
   lectures_in_block: 2
   status: "examinable"
-  builds_on: [["IA-NS-002", "recommended", "librarian-judgement"], ["IA-NS-003", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-NS-002", "recommended", "librarian-judgement", "provisional"], ["IA-NS-003", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-03"]
   fingerprint: {"chars": 104, "sha256": "d31d9a727726af0b0e6809cf4c5ac2f8e251ade75d05b5656488f9c46b09849c"}
 
@@ -790,7 +799,7 @@
   block_item: "1 of 6"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-NS-008", "required", "librarian-judgement"]]
+  builds_on: [["IA-NS-008", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-04"]
   fingerprint: {"chars": 110, "sha256": "c12cc0c3b009737bd4d0f4d0b919a94c600c57a3712077ab7813706af2d20653"}
 
@@ -807,7 +816,7 @@
   block_item: "2 of 6"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-NS-009", "required", "librarian-judgement"]]
+  builds_on: [["IA-NS-009", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-04"]
   fingerprint: {"chars": 35, "sha256": "0a234335209576df69288cf6a6df1de82fd929fad6cd87987209ddc3813317ba"}
 
@@ -824,7 +833,7 @@
   block_item: "3 of 6"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-NS-009", "required", "librarian-judgement"]]
+  builds_on: [["IA-NS-009", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-04"]
   fingerprint: {"chars": 46, "sha256": "15770938f28e19d7096f6930b3bcb7f8d9570de4aebe1318f2588929f312b871"}
 
@@ -841,7 +850,7 @@
   block_item: "4 of 6"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-NS-011", "required", "librarian-judgement"], ["IA-NS-006", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-NS-011", "required", "librarian-judgement", "provisional"], ["IA-NS-006", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-04"]
   fingerprint: {"chars": 44, "sha256": "a7b05ad4a94503bcd216d3adb6ceb8b6cb9b8c94909654c54a15f495895c280b"}
 
@@ -858,14 +867,14 @@
   block_item: "5 of 6"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-NS-012", "required", "librarian-judgement"]]
+  builds_on: [["IA-NS-012", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-04"]
   fingerprint: {"chars": 62, "sha256": "dfcd7b478ac3c4b5287e0360befda3ed505c8ce0cbf77ba9adfde7e9acfbd943"}
 
 - id: "IA-NS-014"
   course: "Numbers and Sets"
   heading: "Elementary number theory"
-  summary: "Public-key cryptography and the RSA algorithm."
+  summary: "Public-key cryptography, in particular the RSA algorithm."
   summary_status: "librarian-draft"
   qualifiers: []
   source_doc: "SRC-01"
@@ -875,7 +884,7 @@
   block_item: "6 of 6"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-NS-013", "required", "librarian-judgement"]]
+  builds_on: [["IA-NS-013", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-04"]
   fingerprint: {"chars": 40, "sha256": "be7498bd746a0f14707004ec9bc0df6f45e2be02b44b6f374da2614840f67f1d"}
 
@@ -892,7 +901,7 @@
   block_item: "1 of 4"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-NS-001", "recommended", "librarian-judgement"], ["IA-NS-003", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-NS-001", "recommended", "librarian-judgement", "provisional"], ["IA-NS-003", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-05"]
   fingerprint: {"chars": 53, "sha256": "8b6358d540297436e85ea43f9b42fa700855b96e51d9b6c361d5cf1c5b6a161d"}
 
@@ -909,7 +918,7 @@
   block_item: "2 of 4"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-NS-015", "required", "librarian-judgement"]]
+  builds_on: [["IA-NS-015", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-05"]
   fingerprint: {"chars": 58, "sha256": "b9a9b23380c41b392cc9b97439127ddabdc046c881d72a43b181ec6f142d6629"}
 
@@ -926,7 +935,7 @@
   block_item: "3 of 4"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-NS-009", "recommended", "librarian-judgement"], ["IA-NS-016", "required", "librarian-judgement"]]
+  builds_on: [["IA-NS-009", "recommended", "librarian-judgement", "provisional"], ["IA-NS-016", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-05"]
   fingerprint: {"chars": 40, "sha256": "9910526ac063e5e1dbc224614d0404176f2925803d5b35ae2444965c248432d3"}
 
@@ -943,7 +952,7 @@
   block_item: "4 of 4"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-NS-017", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-NS-017", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-05"]
   fingerprint: {"chars": 36, "sha256": "95ea8efc2791229666a7bafcb803d72a544ebbf8267fcc127f7065b1704b3dd4"}
 
@@ -960,7 +969,7 @@
   block_item: "1 of 4"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-NS-005", "required", "librarian-judgement"]]
+  builds_on: [["IA-NS-005", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-06"]
   fingerprint: {"chars": 57, "sha256": "2e142679d59ab0297ebb8d836d1de728f7f5866bd9ba1cab13550405398816bf"}
 
@@ -977,7 +986,7 @@
   block_item: "2 of 4"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-NS-019", "required", "librarian-judgement"]]
+  builds_on: [["IA-NS-019", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-06"]
   fingerprint: {"chars": 42, "sha256": "57a6a7be6166e3d37afa56362ee15f66cf8c0e2524e9757d44c816c85637db49"}
 
@@ -994,7 +1003,7 @@
   block_item: "3 of 4"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-NS-019", "required", "librarian-judgement"], ["IA-NS-017", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-NS-019", "required", "librarian-judgement", "provisional"], ["IA-NS-017", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-06"]
   fingerprint: {"chars": 64, "sha256": "596f954e9a0eae89d32f21020a0eb86aa62eb54578ac12475fc76ed240092de4"}
 
@@ -1011,7 +1020,7 @@
   block_item: "4 of 4"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-NS-020", "required", "librarian-judgement"], ["IA-NS-021", "required", "librarian-judgement"], ["IA-NS-001", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-NS-020", "required", "librarian-judgement", "provisional"], ["IA-NS-021", "required", "librarian-judgement", "provisional"], ["IA-NS-001", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-NS-06"]
   fingerprint: {"chars": 48, "sha256": "da7640c7f899720d252d1d6cba5480db3a434391e91bb97727b352bf43e9a622"}
 
@@ -1045,7 +1054,7 @@
   block_item: "1 of 3"
   lectures_in_block: 2
   status: "examinable"
-  builds_on: [["IA-DE-001", "required", "librarian-judgement"]]
+  builds_on: [["IA-DE-001", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-01"]
   fingerprint: {"chars": 149, "sha256": "cb9136e8eacb13eef1fc5debdaf5889d40f2eee0cb10652c2711c0cb620da931"}
 
@@ -1062,7 +1071,7 @@
   block_item: "2 of 3"
   lectures_in_block: 2
   status: "examinable"
-  builds_on: [["IA-DE-002", "required", "librarian-judgement"]]
+  builds_on: [["IA-DE-002", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-01"]
   fingerprint: {"chars": 61, "sha256": "51c8e37271e21351fae2524565a676ef533538ae89016bbeea1cfc1ba3e37773"}
 
@@ -1079,7 +1088,7 @@
   block_item: "3 of 3"
   lectures_in_block: 2
   status: "examinable"
-  builds_on: [["IA-DE-002", "required", "librarian-judgement"]]
+  builds_on: [["IA-DE-002", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-01"]
   fingerprint: {"chars": 51, "sha256": "4beebb6ba809a58f7cb745370121916e005aafc0d92219283566e676bf566e67"}
 
@@ -1096,7 +1105,7 @@
   block_item: "1 of 2"
   lectures_in_block: 2
   status: "examinable"
-  builds_on: [["IA-DE-001", "required", "librarian-judgement"]]
+  builds_on: [["IA-DE-001", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-02"]
   fingerprint: {"chars": 142, "sha256": "528e9718764320eb96a1714cf4b9fad79bdadae6e1f95ac8f021a0c5f0a18f67"}
 
@@ -1113,7 +1122,7 @@
   block_item: "2 of 2"
   lectures_in_block: 2
   status: "examinable"
-  builds_on: [["IA-DE-005", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-DE-005", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-02"]
   fingerprint: {"chars": 65, "sha256": "f997998d7f56d4d0e54fb8f6f6cae4b62f57de23a81abc91781d3066191aebc7"}
 
@@ -1130,7 +1139,7 @@
   block_item: "1 of 3"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-DE-006", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-DE-006", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-03"]
   fingerprint: {"chars": 34, "sha256": "f96b5c49d9bd56f4d7155244a2b134ff3aaddd7b5359cf608e11eeb631ee75e5"}
 
@@ -1147,7 +1156,7 @@
   block_item: "2 of 3"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-DE-007", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-DE-007", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-03"]
   fingerprint: {"chars": 129, "sha256": "5ebe73634b3f38bfd5ade7b78cfa721608c9f4cf3d8648d04c7541d91deb11d4"}
 
@@ -1164,7 +1173,7 @@
   block_item: "3 of 3"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-DE-005", "recommended", "librarian-judgement"], ["IA-DE-008", "required", "librarian-judgement"]]
+  builds_on: [["IA-DE-005", "recommended", "librarian-judgement", "provisional"], ["IA-DE-008", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-03"]
   fingerprint: {"chars": 81, "sha256": "1d86b9c1fcd52e4714f11a93c042abaf81a44d5a8b5ffa070efc315bc585ddb2"}
 
@@ -1181,7 +1190,7 @@
   block_item: "1 of 5"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-DE-005", "required", "librarian-judgement"], ["IA-VM-005", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-DE-005", "required", "librarian-judgement", "provisional"], ["IA-VM-005", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-04"]
   fingerprint: {"chars": 111, "sha256": "317d1e4e3a30841b0689e422b8edb99c6e237285dfbfcbba1156c5f0b1e6ddb3"}
 
@@ -1198,14 +1207,14 @@
   block_item: "2 of 5"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-DE-010", "required", "librarian-judgement"], ["IA-VM-001", "required", "librarian-judgement"]]
+  builds_on: [["IA-DE-010", "required", "librarian-judgement", "provisional"], ["IA-VM-001", "assumed", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-04"]
   fingerprint: {"chars": 167, "sha256": "b515c5ccdcee30fee4c238d529146126f09a66cc59657a23e837db0dccaa3b37"}
 
 - id: "IA-DE-012"
   course: "Differential Equations"
   heading: "Higher-order linear differential equations"
-  summary: "Homogeneous (equidimensional) equations."
+  summary: "Homogeneous equations, as named in the Schedules, which do not say which class is meant (see curriculum/ambiguities.md, A-01)."
   summary_status: "librarian-draft"
   qualifiers: []
   source_doc: "SRC-01"
@@ -1215,7 +1224,7 @@
   block_item: "3 of 5"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-DE-011", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-DE-007", "connection", "librarian-judgement", "provisional"], ["IA-DE-011", "connection", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-04"]
   fingerprint: {"chars": 21, "sha256": "ffa5c4e5abcebb4f3c9ed2c39564d5cb713fef001901b073d137e1be68af0e8b"}
 
@@ -1232,7 +1241,7 @@
   block_item: "4 of 5"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-DE-011", "required", "librarian-judgement"]]
+  builds_on: [["IA-DE-011", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-04"]
   fingerprint: {"chars": 114, "sha256": "d593b16ef60d13334a3d48daa26c84ac260494d7800540c6dcd63f3593c10d89"}
 
@@ -1249,14 +1258,14 @@
   block_item: "5 of 5"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-DE-010", "required", "librarian-judgement"]]
+  builds_on: [["IA-DE-010", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-04"]
   fingerprint: {"chars": 72, "sha256": "c33f720f5d8dbb3223a43a379fce0a2355ccb928f37aa7bbf5aecb770edb9683"}
 
 - id: "IA-DE-015"
   course: "Differential Equations"
   heading: "Multivariate functions: applications"
-  summary: "Directional derivatives and the gradient vector."
+  summary: "Rates of change in a chosen direction, and the gradient vector."
   summary_status: "librarian-draft"
   qualifiers: []
   source_doc: "SRC-01"
@@ -1266,7 +1275,7 @@
   block_item: "1 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-DE-002", "required", "librarian-judgement"]]
+  builds_on: [["IA-DE-002", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-05"]
   fingerprint: {"chars": 43, "sha256": "4fdeee7c41c8e071e69a52f7ebc1c3445619ee5a25122501a3f6c25a5db86c87"}
 
@@ -1283,7 +1292,7 @@
   block_item: "2 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-DE-002", "required", "librarian-judgement"], ["IA-DE-001", "required", "librarian-judgement"]]
+  builds_on: [["IA-DE-002", "required", "librarian-judgement", "provisional"], ["IA-DE-001", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-05"]
   fingerprint: {"chars": 40, "sha256": "e1237c7c4528865490175a439355baa7e5afdcc7e627da8fcb912a6b14af449b"}
 
@@ -1300,7 +1309,7 @@
   block_item: "3 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-DE-016", "required", "librarian-judgement"], ["IA-VM-014", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-DE-016", "required", "librarian-judgement", "provisional"], ["IA-VM-014", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-05"]
   fingerprint: {"chars": 64, "sha256": "6e9c3dd6a7e00d65941674b5a0072c67835a0b68424623ed7f273a9faf5d3f40"}
 
@@ -1317,7 +1326,7 @@
   block_item: "4 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-DE-011", "required", "librarian-judgement"], ["IA-VM-016", "required", "inferred-from-cambridge"]]
+  builds_on: [["IA-DE-011", "required", "librarian-judgement", "provisional"], ["IA-VM-016", "required", "inferred-from-cambridge", "provisional"]]
   readings: ["RM-DE-05"]
   fingerprint: {"chars": 89, "sha256": "68da30e8899f767babf9f2151f176d59c2fe9b7afb2f04747faf91fd83cf024d"}
 
@@ -1334,7 +1343,7 @@
   block_item: "5 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-DE-018", "required", "librarian-judgement"], ["IA-DE-008", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-DE-018", "required", "librarian-judgement", "provisional"], ["IA-DE-008", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-05"]
   fingerprint: {"chars": 62, "sha256": "d8f28563aa3ed76b39169f1677bdf0a21962c5cba5c65f83f8017a4e93f2ff0d"}
 
@@ -1351,7 +1360,7 @@
   block_item: "6 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-DE-002", "required", "librarian-judgement"]]
+  builds_on: [["IA-DE-002", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DE-05"]
   fingerprint: {"chars": 114, "sha256": "ca0261aea55a37662ef2859042f52cbf21d804dacc1b7d1c91fea9bf0a6ec78d"}
 
@@ -1368,7 +1377,7 @@
   block_item: "1 of 3"
   lectures_in_block: 6
   status: "examinable"
-  builds_on: [["IA-NS-016", "recommended", "inferred-from-cambridge"], ["IA-NS-015", "recommended", "inferred-from-cambridge"], ["IA-VM-001", "required", "librarian-judgement"]]
+  builds_on: [["IA-NS-016", "recommended", "inferred-from-cambridge", "provisional"], ["IA-NS-015", "recommended", "inferred-from-cambridge", "provisional"], ["IA-VM-001", "assumed", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-01"]
   fingerprint: {"chars": 110, "sha256": "3f0e649b5e647e56d6ffb15a60476d4621534fdc7fb9213ca959223dbcce27d9"}
 
@@ -1385,7 +1394,7 @@
   block_item: "2 of 3"
   lectures_in_block: 6
   status: "examinable"
-  builds_on: [["IA-AN-001", "required", "librarian-judgement"], ["IA-NS-015", "required", "librarian-judgement"]]
+  builds_on: [["IA-AN-001", "required", "librarian-judgement", "provisional"], ["IA-NS-015", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-01"]
   fingerprint: {"chars": 78, "sha256": "f487692dbd5541449d459b4b2cad1fa7ee7dd699d0c7b82cac7f4eef61b2dbbd"}
 
@@ -1402,7 +1411,7 @@
   block_item: "3 of 3"
   lectures_in_block: 6
   status: "examinable"
-  builds_on: [["IA-AN-001", "required", "librarian-judgement"]]
+  builds_on: [["IA-AN-001", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-01"]
   fingerprint: {"chars": 46, "sha256": "abd3ab22cb3c26754592ff8343598202b18be7509ca15e3fd3e41ae786c89593"}
 
@@ -1419,7 +1428,7 @@
   block_item: "1 of 3"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-AN-001", "required", "librarian-judgement"]]
+  builds_on: [["IA-AN-001", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-02"]
   fingerprint: {"chars": 65, "sha256": "87aaa248b4d94372f137a563e577f4ce4734d0d09111404d7b5445276b1227eb"}
 
@@ -1436,14 +1445,14 @@
   block_item: "2 of 3"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-AN-004", "required", "librarian-judgement"], ["IA-AN-002", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-AN-004", "required", "librarian-judgement", "provisional"], ["IA-AN-002", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-02"]
   fingerprint: {"chars": 28, "sha256": "ed10afb3af51cb014e7db816523ffe3b7641f2bf83492d3f108ea609838d2c4d"}
 
 - id: "IA-AN-006"
   course: "Analysis I"
   heading: "Continuity"
-  summary: "A continuous function on a closed interval is bounded and achieves its upper and lower bounds."
+  summary: "On a closed bounded interval, a continuous function is bounded and reaches its upper and lower bounds."
   summary_status: "librarian-draft"
   qualifiers: []
   source_doc: "SRC-01"
@@ -1453,14 +1462,14 @@
   block_item: "3 of 3"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-AN-004", "required", "librarian-judgement"], ["IA-AN-002", "required", "librarian-judgement"]]
+  builds_on: [["IA-AN-004", "required", "librarian-judgement", "provisional"], ["IA-AN-002", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-02"]
   fingerprint: {"chars": 72, "sha256": "3a59143319bc3ebf47ef2d37de48aca74a7be4e80bc00e66a20a81f01a1098ef"}
 
 - id: "IA-AN-007"
   course: "Analysis I"
   heading: "Differentiability"
-  summary: "Differentiability of functions from R to R."
+  summary: "Differentiability of a real function of one real variable."
   summary_status: "librarian-draft"
   qualifiers: []
   source_doc: "SRC-01"
@@ -1470,7 +1479,7 @@
   block_item: "1 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-AN-004", "required", "librarian-judgement"], ["IA-DE-001", "connection", "inferred-from-cambridge"]]
+  builds_on: [["IA-AN-004", "required", "librarian-judgement", "provisional"], ["IA-DE-001", "connection", "inferred-from-cambridge", "provisional"]]
   readings: ["RM-AN-03"]
   fingerprint: {"chars": 37, "sha256": "9fccbf5277e41b941bc8be9d03ed7098a85687a7621566ada151d38ac7b69d12"}
 
@@ -1487,7 +1496,7 @@
   block_item: "2 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-AN-007", "required", "librarian-judgement"]]
+  builds_on: [["IA-AN-007", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-03"]
   fingerprint: {"chars": 72, "sha256": "f9ef3d5a072b3a3da09ec5c68936d979dee3715ceebde83771f2beb0aa500127"}
 
@@ -1504,7 +1513,7 @@
   block_item: "3 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-AN-008", "recommended", "librarian-judgement"], ["IA-AN-006", "required", "librarian-judgement"]]
+  builds_on: [["IA-AN-008", "recommended", "librarian-judgement", "provisional"], ["IA-AN-006", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-03"]
   fingerprint: {"chars": 35, "sha256": "e630d6fb42b3314cdeda9fa9d647bfb73fde3770f35cc119ba85b9b3e83e18af"}
 
@@ -1521,7 +1530,7 @@
   block_item: "4 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-AN-009", "required", "librarian-judgement"], ["IA-AN-005", "required", "librarian-judgement"]]
+  builds_on: [["IA-AN-009", "required", "librarian-judgement", "provisional"], ["IA-AN-005", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-03"]
   fingerprint: {"chars": 49, "sha256": "4ca50d7ffd73f96da621038986623e512daab070ee174cf78e220919e13cec65"}
 
@@ -1538,7 +1547,7 @@
   block_item: "5 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-AN-009", "required", "librarian-judgement"], ["IA-DE-001", "connection", "inferred-from-cambridge"]]
+  builds_on: [["IA-AN-009", "required", "librarian-judgement", "provisional"], ["IA-DE-001", "connection", "inferred-from-cambridge", "provisional"]]
   readings: ["RM-AN-03"]
   fingerprint: {"chars": 53, "sha256": "e6d52ee0923c743cfdb83cd805268ecfb3063052e71aa318f4d48e111373f722"}
 
@@ -1555,7 +1564,7 @@
   block_item: "6 of 6"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-AN-007", "required", "librarian-judgement"], ["IA-VM-001", "required", "librarian-judgement"]]
+  builds_on: [["IA-AN-007", "required", "librarian-judgement", "provisional"], ["IA-VM-001", "assumed", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-03"]
   fingerprint: {"chars": 23, "sha256": "1d5f2a1a0f54c78328b02820738ebd7bf38ba5ddb783ee354fcd5ec573fbdd54"}
 
@@ -1572,7 +1581,7 @@
   block_item: "1 of 3"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-AN-003", "required", "librarian-judgement"]]
+  builds_on: [["IA-AN-003", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-04"]
   fingerprint: {"chars": 41, "sha256": "c56eb12c76bd35cd2aa7d2da00e07cbabc45b8433b14f75e44ce58e38db5818a"}
 
@@ -1589,7 +1598,7 @@
   block_item: "2 of 3"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-AN-013", "required", "librarian-judgement"], ["IA-VM-002", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-AN-013", "required", "librarian-judgement", "provisional"], ["IA-VM-002", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-04"]
   fingerprint: {"chars": 72, "sha256": "47bfc39df96c96f11fbccac635d2d3bdf9a45afb7f331c1caecd915265c4bb63"}
 
@@ -1606,7 +1615,7 @@
   block_item: "3 of 3"
   lectures_in_block: 4
   status: "starred-not-examinable"
-  builds_on: [["IA-AN-013", "required", "librarian-judgement"], ["IA-AN-008", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-AN-013", "required", "librarian-judgement", "provisional"], ["IA-AN-008", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-04"]
   fingerprint: {"chars": 78, "sha256": "3930a3f1349aa083129ec0f1d3b3611e18a66677e044eae36d672c2c6c4b05a1"}
 
@@ -1623,7 +1632,7 @@
   block_item: "1 of 5"
   lectures_in_block: 6
   status: "examinable"
-  builds_on: [["IA-NS-015", "required", "librarian-judgement"], ["IA-AN-006", "required", "librarian-judgement"], ["IA-DE-001", "connection", "inferred-from-cambridge"]]
+  builds_on: [["IA-NS-015", "required", "librarian-judgement", "provisional"], ["IA-AN-006", "required", "librarian-judgement", "provisional"], ["IA-DE-001", "connection", "inferred-from-cambridge", "provisional"]]
   readings: ["RM-AN-05"]
   fingerprint: {"chars": 49, "sha256": "08b399603e163db6116a7e635026a21cdaa1a37c13c304b7c1000d526121f01f"}
 
@@ -1640,7 +1649,7 @@
   block_item: "2 of 5"
   lectures_in_block: 6
   status: "examinable"
-  builds_on: [["IA-AN-016", "required", "librarian-judgement"]]
+  builds_on: [["IA-AN-016", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-05"]
   fingerprint: {"chars": 101, "sha256": "1d9e76c34929f51f07b08333688636490c57a0cfdb06e768665dac08d4ff0979"}
 
@@ -1657,7 +1666,7 @@
   block_item: "3 of 5"
   lectures_in_block: 6
   status: "examinable"
-  builds_on: [["IA-AN-016", "required", "librarian-judgement"], ["IA-AN-009", "required", "librarian-judgement"]]
+  builds_on: [["IA-AN-016", "required", "librarian-judgement", "provisional"], ["IA-AN-009", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-05"]
   fingerprint: {"chars": 69, "sha256": "efe5e3e0358a03170477739f4634fb268898c467c70a09743ee43cc3aafef243"}
 
@@ -1674,7 +1683,7 @@
   block_item: "4 of 5"
   lectures_in_block: 6
   status: "examinable"
-  builds_on: [["IA-AN-018", "required", "librarian-judgement"], ["IA-AN-011", "required", "librarian-judgement"]]
+  builds_on: [["IA-AN-018", "required", "librarian-judgement", "provisional"], ["IA-AN-011", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-05"]
   fingerprint: {"chars": 66, "sha256": "8e3297f4e4abb7d9202bd669f90657b25ebcab24722c0d2f8abc700d0d8b7d8d"}
 
@@ -1691,7 +1700,7 @@
   block_item: "5 of 5"
   lectures_in_block: 6
   status: "examinable"
-  builds_on: [["IA-AN-016", "required", "librarian-judgement"], ["IA-AN-001", "required", "librarian-judgement"]]
+  builds_on: [["IA-AN-016", "required", "librarian-judgement", "provisional"], ["IA-AN-001", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-AN-05"]
   fingerprint: {"chars": 18, "sha256": "3f3e7f4dcadca8ad47022f130704b93990d75a60ca5be9680733a1ed946c464a"}
 
@@ -1708,14 +1717,14 @@
   block_item: "1 of 3"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-NS-007", "recommended", "cambridge-stated"]]
+  builds_on: [["IA-NS-007", "recommended", "cambridge-course-level", "provisional"]]
   readings: ["RM-PR-01"]
   fingerprint: {"chars": 43, "sha256": "7ccee6708b7734b4f9371b39a1d0492294470cc69bc005e62d47bb48ee7c09f1"}
 
 - id: "IA-PR-002"
   course: "Probability"
   heading: "Basic concepts"
-  summary: "Combinatorial analysis: permutations and combinations."
+  summary: "Counting methods based on permutations and combinations."
   summary_status: "librarian-draft"
   qualifiers: []
   source_doc: "SRC-01"
@@ -1725,7 +1734,7 @@
   block_item: "2 of 3"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-NS-007", "recommended", "cambridge-stated"]]
+  builds_on: [["IA-NS-007", "recommended", "cambridge-course-level", "provisional"]]
   readings: ["RM-PR-01"]
   fingerprint: {"chars": 50, "sha256": "9eda6c6f61a326a523bb8e8787f668c3bc67a36a2d07c0ff0daceb559ecf5a8f"}
 
@@ -1742,7 +1751,7 @@
   block_item: "3 of 3"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-PR-002", "recommended", "librarian-judgement"], ["IA-AN-001", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-PR-002", "recommended", "librarian-judgement", "provisional"], ["IA-AN-001", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-01"]
   fingerprint: {"chars": 45, "sha256": "6ebd041ca54af0b2c8a88b37dad8b9be4d4c1bba5dfa6f0f0c6996b83a04668b"}
 
@@ -1759,7 +1768,7 @@
   block_item: "1 of 5"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-PR-001", "recommended", "librarian-judgement"], ["IA-NS-003", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-PR-001", "recommended", "librarian-judgement", "provisional"], ["IA-NS-003", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-02"]
   fingerprint: {"chars": 40, "sha256": "7a29bcf1c920e2a119e7513a35bf043ccc78f165f457b717f193bc83879f2f38"}
 
@@ -1776,7 +1785,7 @@
   block_item: "2 of 5"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-PR-004", "required", "librarian-judgement"], ["IA-NS-007", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-PR-004", "required", "librarian-judgement", "provisional"], ["IA-NS-007", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-02"]
   fingerprint: {"chars": 74, "sha256": "b799a832bb9a3ae506ff695316ba4271d771aeca170876499a77345736ab880e"}
 
@@ -1793,7 +1802,7 @@
   block_item: "3 of 5"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-PR-004", "required", "librarian-judgement"]]
+  builds_on: [["IA-PR-004", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-02"]
   fingerprint: {"chars": 13, "sha256": "83cea427aff57b7269d139e96358bee90e27626ef4bfc072b1e7f18b977da3d3"}
 
@@ -1810,7 +1819,7 @@
   block_item: "4 of 5"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-PR-006", "required", "librarian-judgement"], ["IA-PR-002", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-PR-006", "required", "librarian-judgement", "provisional"], ["IA-PR-002", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-02"]
   fingerprint: {"chars": 89, "sha256": "9a70fae8b1ca8af6b3f1387b6f24fe345e5157181622ef1e95687f48940e89de"}
 
@@ -1827,7 +1836,7 @@
   block_item: "5 of 5"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-PR-004", "required", "librarian-judgement"]]
+  builds_on: [["IA-PR-004", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-02"]
   fingerprint: {"chars": 73, "sha256": "1e6a5b870bf6c64249dedec9722f5af690e361020b99b778ff63fa9cbb112dca"}
 
@@ -1844,7 +1853,7 @@
   block_item: "1 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-PR-007", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-PR-007", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-03"]
   fingerprint: {"chars": 12, "sha256": "0dd609c838aad2ae9c618d8715ff2c1281e5af976f45882cd76f52b528846067"}
 
@@ -1861,7 +1870,7 @@
   block_item: "2 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-PR-009", "required", "librarian-judgement"]]
+  builds_on: [["IA-PR-009", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-03"]
   fingerprint: {"chars": 72, "sha256": "98bfb95f3492a79f325dbdd3224b5541da3fd0cb78cf0519d2213d61eea605ad"}
 
@@ -1878,7 +1887,7 @@
   block_item: "3 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-PR-010", "required", "librarian-judgement"], ["IA-PR-006", "required", "librarian-judgement"]]
+  builds_on: [["IA-PR-010", "required", "librarian-judgement", "provisional"], ["IA-PR-006", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-03"]
   fingerprint: {"chars": 41, "sha256": "ceda244e27a116508d67667659ddbde471a46a62c39d5ae0e50700307cee2734"}
 
@@ -1895,7 +1904,7 @@
   block_item: "4 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-PR-011", "required", "librarian-judgement"], ["IA-AN-013", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-PR-011", "required", "librarian-judgement", "provisional"], ["IA-AN-013", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-03"]
   fingerprint: {"chars": 78, "sha256": "04ffe558b02740e2f606818e8b1cfffc8f4240c9d0c736bc03f4875ed29a406e"}
 
@@ -1912,7 +1921,7 @@
   block_item: "5 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-PR-009", "required", "librarian-judgement"], ["IA-PR-008", "required", "librarian-judgement"]]
+  builds_on: [["IA-PR-009", "required", "librarian-judgement", "provisional"], ["IA-PR-008", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-03"]
   fingerprint: {"chars": 23, "sha256": "8e04371bb206ca330b3742522ce1d67a60f9a6e0b9fcb661583937cf52c20d58"}
 
@@ -1929,7 +1938,7 @@
   block_item: "6 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-PR-013", "recommended", "librarian-judgement"], ["IA-DE-011", "connection", "cambridge-stated"]]
+  builds_on: [["IA-PR-013", "recommended", "librarian-judgement", "provisional"], ["IA-DE-011", "connection", "cambridge-course-level", "provisional"]]
   readings: ["RM-PR-03"]
   fingerprint: {"chars": 103, "sha256": "89e6aee29431494aec45edee2285b6791e3d80388fa77bd1aabf49a6d9ddfbf5"}
 
@@ -1946,14 +1955,14 @@
   block_item: "7 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-PR-012", "required", "librarian-judgement"], ["IA-PR-013", "required", "librarian-judgement"]]
+  builds_on: [["IA-PR-012", "required", "librarian-judgement", "provisional"], ["IA-PR-013", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-03"]
   fingerprint: {"chars": 63, "sha256": "f657c846c4df07d49f3c59c69b5a989b5a234919705ba3a7df6586d3bfa9d8cd"}
 
 - id: "IA-PR-016"
   course: "Probability"
   heading: "Discrete random variables"
-  summary: "Combinatorial applications of generating functions."
+  summary: "Using generating functions to solve combinatorial problems."
   summary_status: "librarian-draft"
   qualifiers: []
   source_doc: "SRC-01"
@@ -1963,7 +1972,7 @@
   block_item: "8 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-PR-012", "required", "librarian-judgement"]]
+  builds_on: [["IA-PR-012", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-03"]
   fingerprint: {"chars": 47, "sha256": "5fc3f8acd4f51dfdb5ac0be2e252f480182d3580eb89e0f7c5e775c4ce18059c"}
 
@@ -1980,7 +1989,7 @@
   block_item: "1 of 6"
   lectures_in_block: 6
   status: "examinable"
-  builds_on: [["IA-PR-009", "recommended", "librarian-judgement"], ["IA-DE-001", "recommended", "inferred-from-cambridge"], ["IA-AN-020", "recommended", "inferred-from-cambridge"]]
+  builds_on: [["IA-PR-009", "recommended", "librarian-judgement", "provisional"], ["IA-DE-001", "recommended", "cambridge-course-level", "provisional"], ["IA-AN-020", "recommended", "cambridge-course-level", "provisional"]]
   readings: ["RM-PR-04"]
   fingerprint: {"chars": 86, "sha256": "4242d4d2c0c96f6658d2e765a065ed6a7efa83855cc851e986188920c0a1d302"}
 
@@ -1997,7 +2006,7 @@
   block_item: "2 of 6"
   lectures_in_block: 6
   status: "examinable"
-  builds_on: [["IA-PR-017", "required", "librarian-judgement"]]
+  builds_on: [["IA-PR-017", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-04"]
   fingerprint: {"chars": 88, "sha256": "0beeb1c1463e3df87ab44c91105f9f28ca6ba7a959aa5664464774105866aceb"}
 
@@ -2014,7 +2023,7 @@
   block_item: "3 of 6"
   lectures_in_block: 6
   status: "examinable"
-  builds_on: [["IA-PR-017", "required", "librarian-judgement"], ["IA-DE-002", "recommended", "inferred-from-cambridge"], ["IA-VC-003", "recommended", "inferred-from-cambridge"]]
+  builds_on: [["IA-PR-017", "required", "librarian-judgement", "provisional"], ["IA-DE-002", "recommended", "cambridge-course-level", "provisional"], ["IA-VC-003", "recommended", "cambridge-course-level", "provisional"]]
   readings: ["RM-PR-04"]
   fingerprint: {"chars": 80, "sha256": "4c90281e637a6ce0fc71d9c8769ab322137a16f248b7ac7ce35c2fc9decd96d8"}
 
@@ -2031,7 +2040,7 @@
   block_item: "4 of 6"
   lectures_in_block: 6
   status: "examinable"
-  builds_on: [["IA-PR-018", "required", "librarian-judgement"], ["IA-PR-019", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-PR-018", "required", "librarian-judgement", "provisional"], ["IA-PR-019", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-04"]
   fingerprint: {"chars": 85, "sha256": "3b3ce02e490e4ae9803147f9e3f55714b408a5e1ef9482fe17cde6125b3d89a4"}
 
@@ -2048,7 +2057,7 @@
   block_item: "5 of 6"
   lectures_in_block: 6
   status: "examinable"
-  builds_on: [["IA-PR-017", "required", "librarian-judgement"]]
+  builds_on: [["IA-PR-017", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-04"]
   fingerprint: {"chars": 56, "sha256": "0515a4a29a26a890d3121d83a55a5ba284705ed015ab67e76cde3397c5b5393f"}
 
@@ -2065,7 +2074,7 @@
   block_item: "6 of 6"
   lectures_in_block: 6
   status: "examinable"
-  builds_on: [["IA-PR-019", "required", "librarian-judgement"], ["IA-PR-011", "required", "librarian-judgement"]]
+  builds_on: [["IA-PR-019", "required", "librarian-judgement", "provisional"], ["IA-PR-011", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-04"]
   fingerprint: {"chars": 54, "sha256": "921d4652bc9bf2d44dd63be450a773bd373f6199de3074612b9d3c02b7f5a21a"}
 
@@ -2082,7 +2091,7 @@
   block_item: "1 of 5"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-PR-009", "required", "librarian-judgement"], ["IA-PR-010", "required", "librarian-judgement"]]
+  builds_on: [["IA-PR-009", "required", "librarian-judgement", "provisional"], ["IA-PR-010", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-05"]
   fingerprint: {"chars": 41, "sha256": "0586932988a4aae744766f6f7d5c80241ae8f46f0ebad4213dbf0f7f45ecd88d"}
 
@@ -2099,7 +2108,7 @@
   block_item: "2 of 5"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-PR-023", "required", "librarian-judgement"], ["IA-PR-011", "required", "librarian-judgement"]]
+  builds_on: [["IA-PR-023", "required", "librarian-judgement", "provisional"], ["IA-PR-011", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-05"]
   fingerprint: {"chars": 22, "sha256": "defd6deb9eb454608ea32d80498e697f2f9332e814565bc16bc86d5820dccc11"}
 
@@ -2116,7 +2125,7 @@
   block_item: "3 of 5"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-PR-009", "required", "librarian-judgement"]]
+  builds_on: [["IA-PR-009", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-05"]
   fingerprint: {"chars": 70, "sha256": "46f51045e0cb3bd0191ad4a1807d9afeac9811105d0c83f21409f3fe903cb78b"}
 
@@ -2133,7 +2142,7 @@
   block_item: "4 of 5"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-PR-012", "recommended", "librarian-judgement"], ["IA-PR-017", "required", "librarian-judgement"]]
+  builds_on: [["IA-PR-012", "recommended", "librarian-judgement", "provisional"], ["IA-PR-017", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-05"]
   fingerprint: {"chars": 66, "sha256": "411dc787c92203d5d4f44853b7497ef841e37f84d748652977f9085772db215c"}
 
@@ -2150,7 +2159,7 @@
   block_item: "5 of 5"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-PR-026", "required", "librarian-judgement"], ["IA-PR-018", "required", "librarian-judgement"], ["IA-PR-024", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-PR-026", "required", "librarian-judgement", "provisional"], ["IA-PR-018", "required", "librarian-judgement", "provisional"], ["IA-PR-024", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-PR-05"]
   fingerprint: {"chars": 74, "sha256": "361682d97dcaf5f7fea4c0f90d26b9bf0f7a004f88b16283f28ab6f7d9a89fd7"}
 
@@ -2167,7 +2176,7 @@
   block_item: "1 of 1"
   lectures_in_block: 1
   status: "examinable"
-  builds_on: [["IA-DE-001", "recommended", "librarian-judgement"], ["IA-VM-007", "recommended", "librarian-judgement"], ["IA-AN-007", "connection", "inferred-from-cambridge"]]
+  builds_on: [["IA-DE-001", "recommended", "librarian-judgement", "provisional"], ["IA-VM-007", "recommended", "librarian-judgement", "provisional"], ["IA-AN-007", "connection", "inferred-from-cambridge", "provisional"]]
   readings: ["RM-VC-01"]
   fingerprint: {"chars": 83, "sha256": "959d3b7674d4cf22df2238cb8a94350a724d8d8950d0de810ff58f78f211787a"}
 
@@ -2184,7 +2193,7 @@
   block_item: "1 of 2"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-VC-001", "required", "librarian-judgement"], ["IA-DE-002", "recommended", "librarian-judgement"], ["IA-AN-016", "connection", "inferred-from-cambridge"]]
+  builds_on: [["IA-VC-001", "required", "librarian-judgement", "provisional"], ["IA-DE-002", "recommended", "librarian-judgement", "provisional"], ["IA-AN-016", "connection", "inferred-from-cambridge", "provisional"]]
   readings: ["RM-VC-02"]
   fingerprint: {"chars": 14, "sha256": "f4725ae122e8305c01865d04431f823bb60860dbb03affdd7ba9e7ee5fd0d65d"}
 
@@ -2201,7 +2210,7 @@
   block_item: "2 of 2"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-VC-002", "recommended", "librarian-judgement"], ["IA-VM-007", "recommended", "librarian-judgement"], ["IA-AN-016", "connection", "inferred-from-cambridge"]]
+  builds_on: [["IA-VC-002", "recommended", "librarian-judgement", "provisional"], ["IA-VM-007", "recommended", "librarian-judgement", "provisional"], ["IA-AN-016", "connection", "inferred-from-cambridge", "provisional"]]
   readings: ["RM-VC-02"]
   fingerprint: {"chars": 114, "sha256": "8f94c3af5b15a212af0db11aef94bde471899319940a0d8a5a9dbb17a584ed2d"}
 
@@ -2219,7 +2228,7 @@
   block_item: "1 of 4"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-DE-015", "recommended", "inferred-from-cambridge"], ["IA-VM-006", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-DE-015", "recommended", "inferred-from-cambridge", "provisional"], ["IA-VM-006", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-VC-03"]
   fingerprint: {"chars": 196, "sha256": "83145ceb38a4247368976c8b9e8c272154505ab4e40f3c01dca10339fd7ac111"}
 
@@ -2237,7 +2246,7 @@
   block_item: "2 of 4"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VC-004", "required", "librarian-judgement"], ["IA-VM-006", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-VC-004", "required", "librarian-judgement", "provisional"], ["IA-VM-006", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-VC-03"]
   fingerprint: {"chars": 160, "sha256": "4d978ca8957f11cb3344a748ad71acd1b6a7030f64337b045c8a31a6d7dbe31f"}
 
@@ -2254,7 +2263,7 @@
   block_item: "3 of 4"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VC-005", "required", "librarian-judgement"]]
+  builds_on: [["IA-VC-005", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-VC-03"]
   fingerprint: {"chars": 74, "sha256": "1ac5ee266bef35b209736e70a2c051bb5526621216cd8b6d5a57527539bda6d8"}
 
@@ -2271,7 +2280,7 @@
   block_item: "4 of 4"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VC-005", "required", "librarian-judgement"], ["IA-VM-006", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-VC-005", "required", "librarian-judgement", "provisional"], ["IA-VM-006", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-VC-03"]
   fingerprint: {"chars": 27, "sha256": "74a99a797499644caa15a1e7eb8f5a44143de5d0c503f3d1bf3c23b8f134ec69"}
 
@@ -2288,7 +2297,7 @@
   block_item: "1 of 1"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VC-003", "required", "librarian-judgement"], ["IA-VC-005", "required", "librarian-judgement"]]
+  builds_on: [["IA-VC-003", "required", "librarian-judgement", "provisional"], ["IA-VC-005", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-VC-04"]
   fingerprint: {"chars": 192, "sha256": "0d7da481c374c6506c833ae0169aa050b4f12564f9bd556e82c691c2bcecddb8"}
 
@@ -2305,7 +2314,7 @@
   block_item: "1 of 2"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-VC-008", "required", "librarian-judgement"], ["IA-VC-005", "required", "librarian-judgement"]]
+  builds_on: [["IA-VC-008", "required", "librarian-judgement", "provisional"], ["IA-VC-005", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-VC-05"]
   fingerprint: {"chars": 64, "sha256": "ae56f93cf65951c13b6bc1a61bb96c412841ce8a438619b4fd13a1572eb65a64"}
 
@@ -2322,7 +2331,7 @@
   block_item: "2 of 2"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-VC-009", "recommended", "librarian-judgement"], ["IA-VC-008", "required", "librarian-judgement"]]
+  builds_on: [["IA-VC-009", "recommended", "librarian-judgement", "provisional"], ["IA-VC-008", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-VC-05"]
   fingerprint: {"chars": 94, "sha256": "6b1d8a0678fe6c3e38de18d941f42388ef55fd2c330cf7c1dd39a828ed0e38d7"}
 
@@ -2339,7 +2348,7 @@
   block_item: "1 of 4"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VM-006", "required", "inferred-from-cambridge"], ["IA-VM-018", "required", "inferred-from-cambridge"]]
+  builds_on: [["IA-VM-006", "required", "inferred-from-cambridge", "provisional"], ["IA-VM-012", "required", "librarian-judgement", "director-approved"], ["IA-VM-018", "connection", "librarian-judgement", "director-approved"]]
   readings: ["RM-VC-06"]
   fingerprint: {"chars": 95, "sha256": "3d1a03b14b5509f6cd1ce4c9b229e00b8199d69de53a5dd97fff848f49663e60"}
 
@@ -2356,7 +2365,7 @@
   block_item: "2 of 4"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VC-011", "required", "librarian-judgement"]]
+  builds_on: [["IA-VC-011", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-VC-06"]
   fingerprint: {"chars": 35, "sha256": "0c32e0a9409bcc652ff23da3177a1cf7c6c8c8497379de68de485cb49b824a68"}
 
@@ -2373,7 +2382,7 @@
   block_item: "3 of 4"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VC-011", "required", "librarian-judgement"], ["IA-VM-014", "recommended", "inferred-from-cambridge"]]
+  builds_on: [["IA-VC-011", "required", "librarian-judgement", "provisional"], ["IA-VM-014", "recommended", "inferred-from-cambridge", "provisional"]]
   readings: ["RM-VC-06"]
   fingerprint: {"chars": 75, "sha256": "d2098ef7dffae9361f787774b254ff1e5bf8955d7712126a5e4f4f1db744161e"}
 
@@ -2390,7 +2399,7 @@
   block_item: "4 of 4"
   lectures_in_block: 5
   status: "examinable"
-  builds_on: [["IA-VC-011", "required", "librarian-judgement"]]
+  builds_on: [["IA-VC-011", "required", "librarian-judgement", "provisional"], ["IA-DR-014", "connection", "inferred-from-cambridge", "director-approved"]]
   readings: ["RM-VC-06"]
   fingerprint: {"chars": 56, "sha256": "de9cc469f04290f8011b2c79a8d087c67d2d3e118a894a8e975f25fafd5c92f6"}
 
@@ -2441,7 +2450,7 @@
   block_item: "1 of 4"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-MC-002", "required", "inferred-from-cambridge"]]
+  builds_on: [["IA-MC-002", "assumed", "cambridge-course-level", "provisional"]]
   readings: ["RM-DR-01"]
   fingerprint: {"chars": 55, "sha256": "655f1deca7521031bdae5ab44d4893d5a744b9209ae70eff2a71a6d275bfca53"}
 
@@ -2458,7 +2467,7 @@
   block_item: "2 of 4"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-MC-005", "required", "inferred-from-cambridge"]]
+  builds_on: [["IA-MC-005", "assumed", "cambridge-course-level", "provisional"]]
   readings: ["RM-DR-01"]
   fingerprint: {"chars": 13, "sha256": "98bbaeba75e5143c367559e28d9ef486939f2f8985f9bc2d0f1540132fc08866"}
 
@@ -2492,7 +2501,7 @@
   block_item: "4 of 4"
   lectures_in_block: 4
   status: "examinable"
-  builds_on: [["IA-MC-003", "required", "inferred-from-cambridge"]]
+  builds_on: [["IA-MC-003", "assumed", "cambridge-course-level", "provisional"]]
   readings: ["RM-DR-01"]
   fingerprint: {"chars": 53, "sha256": "88389fcf40a7f3ed04571b0347d46dbcfe378b7f74dab6953d8640da71ab7c29"}
 
@@ -2509,7 +2518,7 @@
   block_item: "1 of 6"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-DR-002", "required", "librarian-judgement"], ["IA-DE-011", "recommended", "cambridge-stated"], ["IA-VM-003", "required", "cambridge-stated"]]
+  builds_on: [["IA-DR-002", "required", "librarian-judgement", "provisional"], ["IA-DE-011", "recommended", "cambridge-course-level", "provisional"], ["IA-VM-003", "assumed", "cambridge-course-level", "provisional"]]
   readings: ["RM-DR-02"]
   fingerprint: {"chars": 52, "sha256": "bb73f1be9397a5db43acfa9c47cb0d9b09a568052aa48b8eea80c05c30611962"}
 
@@ -2526,7 +2535,7 @@
   block_item: "2 of 6"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-DR-005", "required", "librarian-judgement"], ["IA-MC-007", "required", "inferred-from-cambridge"], ["IA-VC-004", "connection", "librarian-judgement"]]
+  builds_on: [["IA-DR-005", "required", "librarian-judgement", "provisional"], ["IA-MC-007", "assumed", "cambridge-course-level", "provisional"], ["IA-VC-004", "connection", "librarian-judgement", "provisional"]]
   readings: ["RM-DR-02"]
   fingerprint: {"chars": 141, "sha256": "a8a0c40c6780ed936d310db86605b12a1fcc5de3ad52a4476cd4f7f14a0adfce"}
 
@@ -2543,7 +2552,7 @@
   block_item: "3 of 6"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-VM-007", "required", "librarian-judgement"], ["IA-MC-004", "recommended", "inferred-from-cambridge"]]
+  builds_on: [["IA-VM-007", "required", "librarian-judgement", "provisional"], ["IA-MC-004", "recommended", "cambridge-course-level", "provisional"]]
   readings: ["RM-DR-02"]
   fingerprint: {"chars": 39, "sha256": "d23eedb8458fa314936aecf96ba1073f8808ca373f071901d7c8f27a606b6be2"}
 
@@ -2560,7 +2569,7 @@
   block_item: "4 of 6"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-DR-007", "required", "librarian-judgement"], ["IA-DR-006", "required", "librarian-judgement"], ["IA-DE-011", "recommended", "cambridge-stated"]]
+  builds_on: [["IA-DR-007", "required", "librarian-judgement", "provisional"], ["IA-DR-006", "required", "librarian-judgement", "provisional"], ["IA-DE-011", "recommended", "cambridge-course-level", "provisional"]]
   readings: ["RM-DR-02"]
   fingerprint: {"chars": 119, "sha256": "3f4de72937bd676138e33ce3a482644efa276a32a6803d991459d995404c33c6"}
 
@@ -2577,7 +2586,7 @@
   block_item: "5 of 6"
   lectures_in_block: 8
   status: "examinable"
-  builds_on: [["IA-DR-007", "required", "librarian-judgement"], ["IA-VM-007", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-DR-007", "required", "librarian-judgement", "provisional"], ["IA-VM-007", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-DR-02"]
   fingerprint: {"chars": 44, "sha256": "3266dfc8e17a64399337398ca7e6bd8ed08c523702a4b5099b5c3afde1090065"}
 
@@ -2594,7 +2603,7 @@
   block_item: "6 of 6"
   lectures_in_block: 8
   status: "starred-not-examinable"
-  builds_on: [["IA-DR-009", "required", "librarian-judgement"]]
+  builds_on: [["IA-DR-009", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DR-02"]
   fingerprint: {"chars": 36, "sha256": "4f742d21b6794a6ee605c2fb82d3e558f9564d4068a6b8875858a05047f78b12"}
 
@@ -2611,7 +2620,7 @@
   block_item: "1 of 3"
   lectures_in_block: 2
   status: "examinable"
-  builds_on: [["IA-DR-007", "recommended", "librarian-judgement"], ["IA-MC-008", "required", "inferred-from-cambridge"]]
+  builds_on: [["IA-DR-007", "recommended", "librarian-judgement", "provisional"], ["IA-MC-008", "assumed", "cambridge-course-level", "provisional"]]
   readings: ["RM-DR-03"]
   fingerprint: {"chars": 32, "sha256": "f443730b8c35d3daea1d98063530901acfe4b503bf5ffd7b5a7156e2d9fb2422"}
 
@@ -2628,7 +2637,7 @@
   block_item: "2 of 3"
   lectures_in_block: 2
   status: "examinable"
-  builds_on: [["IA-DR-011", "required", "librarian-judgement"]]
+  builds_on: [["IA-DR-011", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DR-03"]
   fingerprint: {"chars": 50, "sha256": "9aecd5aa1c90eeea7ff116644da76fbf78f4ad7064494aca58ea1a484976e578"}
 
@@ -2645,7 +2654,7 @@
   block_item: "3 of 3"
   lectures_in_block: 2
   status: "examinable"
-  builds_on: [["IA-DR-011", "required", "librarian-judgement"]]
+  builds_on: [["IA-DR-011", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DR-03"]
   fingerprint: {"chars": 39, "sha256": "f5e354fd1a218e621efaa0519714fb843a27551aabb05d15a40ac88960d3f500"}
 
@@ -2662,7 +2671,7 @@
   block_item: "1 of 3"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-DR-011", "required", "librarian-judgement"]]
+  builds_on: [["IA-DR-011", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DR-04"]
   fingerprint: {"chars": 54, "sha256": "49e67081047d84cc2dc484bf605e171d286f29d29fe095253ec3eb1d77576fae"}
 
@@ -2679,7 +2688,7 @@
   block_item: "2 of 3"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-DR-014", "required", "librarian-judgement"]]
+  builds_on: [["IA-DR-014", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DR-04"]
   fingerprint: {"chars": 20, "sha256": "f8b96361e34b1e60593e3d73656868e20ebc1e5f4780c99eab95e04f71ef9a5c"}
 
@@ -2696,7 +2705,7 @@
   block_item: "3 of 3"
   lectures_in_block: 3
   status: "examinable"
-  builds_on: [["IA-DR-015", "recommended", "librarian-judgement"], ["IA-DR-014", "required", "librarian-judgement"]]
+  builds_on: [["IA-DR-015", "recommended", "librarian-judgement", "provisional"], ["IA-DR-014", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DR-04"]
   fingerprint: {"chars": 71, "sha256": "9c405f9f4cc850f4316e468591880db116c8cc254c24722f2d2a31134c7067ba"}
 
@@ -2713,7 +2722,7 @@
   block_item: "1 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-DR-001", "required", "librarian-judgement"]]
+  builds_on: [["IA-DR-001", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DR-05"]
   fingerprint: {"chars": 51, "sha256": "e30beea277a868aa8a98ddf111920a298d9e91c25353055594c6a79e2f35cadc"}
 
@@ -2730,7 +2739,7 @@
   block_item: "2 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-DR-017", "required", "librarian-judgement"]]
+  builds_on: [["IA-DR-017", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DR-05"]
   fingerprint: {"chars": 21, "sha256": "f111eb46157461fc2d3a7b15b2f921167c73d367334e5b3ae20858fde69ab0f5"}
 
@@ -2747,7 +2756,7 @@
   block_item: "3 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-DR-018", "required", "librarian-judgement"], ["IA-VM-018", "connection", "librarian-judgement"]]
+  builds_on: [["IA-DR-018", "required", "librarian-judgement", "provisional"], ["IA-VM-018", "connection", "inferred-from-cambridge", "director-approved"]]
   readings: ["RM-DR-05"]
   fingerprint: {"chars": 83, "sha256": "3b85d0f9903f04d05e1833bb92f312b4a7e352fa1c3b95ac1c3d062d54c075c9"}
 
@@ -2764,7 +2773,7 @@
   block_item: "4 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-DR-019", "required", "librarian-judgement"]]
+  builds_on: [["IA-DR-019", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DR-05"]
   fingerprint: {"chars": 47, "sha256": "c8b01a9b1a212795efbdb898403b4006ee7b9d33d3ca5881778328b023ac9510"}
 
@@ -2781,7 +2790,7 @@
   block_item: "5 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-DR-019", "required", "librarian-judgement"], ["IA-VM-018", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-DR-019", "required", "librarian-judgement", "provisional"], ["IA-VM-018", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-DR-05"]
   fingerprint: {"chars": 40, "sha256": "fe129688801b6a4b267bfbd8a61e8305b8541c48354c1d904c8a2b14db765411"}
 
@@ -2798,7 +2807,7 @@
   block_item: "6 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-DR-021", "required", "librarian-judgement"], ["IA-VM-006", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-DR-021", "required", "librarian-judgement", "provisional"], ["IA-VM-006", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-DR-05"]
   fingerprint: {"chars": 41, "sha256": "a2462a4ae0ea3bc993d2a2955cd46aa57fb1c019d26027b382e14bccec994ca7"}
 
@@ -2815,7 +2824,7 @@
   block_item: "7 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-DR-022", "required", "librarian-judgement"]]
+  builds_on: [["IA-DR-022", "required", "librarian-judgement", "provisional"]]
   readings: ["RM-DR-05"]
   fingerprint: {"chars": 24, "sha256": "2c40621672b7416ffd586c301d525f5e60b56c31efc41b1db4d3b10a93803dee"}
 
@@ -2832,7 +2841,7 @@
   block_item: "8 of 8"
   lectures_in_block: 7
   status: "examinable"
-  builds_on: [["IA-DR-023", "required", "librarian-judgement"], ["IA-DR-011", "recommended", "librarian-judgement"]]
+  builds_on: [["IA-DR-023", "required", "librarian-judgement", "provisional"], ["IA-DR-011", "recommended", "librarian-judgement", "provisional"]]
   readings: ["RM-DR-05"]
   fingerprint: {"chars": 69, "sha256": "efc12c55e0d53e85eb5b86c11813593ecf8cdb5cb2f5ef9dacea825669b2a331"}
 
@@ -2846,7 +2855,7 @@
   printed_page: 12
   pdf_page: 14
   block: "CP-B01"
-  block_item: "1 of 2"
+  block_item: "1 of 1"
   lectures_in_block: 8
   status: "ancillary-non-examinable"
   builds_on: []
@@ -2862,8 +2871,8 @@
   source_doc: "SRC-01"
   printed_page: 12
   pdf_page: 14
-  block: "CP-B01"
-  block_item: "2 of 2"
+  block: "CP-B02"
+  block_item: "1 of 1"
   lectures_in_block: null
   status: "ancillary-non-examinable"
   builds_on: []
@@ -2873,7 +2882,7 @@
 - id: "IA-MC-N01"
   course: "Mechanics (non-examinable)"
   heading: "(course note)"
-  summary: "Course note: ten lectures for students with limited A-level mechanics; Dynamics and Relativity builds on them."
+  summary: "Course note: ten lectures for students with limited A-level mechanics; Dynamics and Relativity takes this material as a prerequisite."
   summary_status: "librarian-draft"
   qualifiers: []
   source_doc: "SRC-01"

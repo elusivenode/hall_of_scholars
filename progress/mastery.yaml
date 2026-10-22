@@ -1,6 +1,6 @@
 # Mastery and coverage state per syllabus item (progress/mastery.yaml)
 #
-# Same restricted YAML subset as curriculum/coverage.yaml.
+# Same restricted YAML subset as curriculum/coverage.yaml (JSON values; a key may appear once per record).
 #
 # FIELDS
 #   coverage   not-started | in-progress | covered   ("covered" means taught or read; it is NOT a mastery claim)
@@ -8,20 +8,28 @@
 #   hints      for the current evidence: none | minor | substantial | unknown   (null while unassessed)
 #              "unknown" is permitted where hint history is genuinely unavailable. The validator never converts unknown
 #              hint history into a level; the assessor decides what, if anything, the evidence supports.
-#   evidence   repository paths of the student's actual work (non-empty once mastery is not "unassessed")
-#   authorised_by / authorised_date   the assessor ("ChatGPT-assessor") and DD/MM/YYYY
+#   evidence   repository paths of the student's actual work. Each must be an existing, non-empty file at
+#              studies/<this item's course folder>/work/YYYY-MM-DD-<slug>.md or assessments/diagnostic/<file>.md, written from
+#              studies/EVIDENCE-TEMPLATE.md (Problem, Student work, Hints given, Assessor evaluation).
+#   authorised_by / authorised_date   the assessor ("ChatGPT-assessor") and DD/MM/YYYY (never in the future)
 #   history    every authorised decision, oldest first: {"date","level","hints","evidence","authorised_by"}.
 #              The top-level mastery, hints, evidence and authorisation always mirror the LAST history entry.
+#              A WITHDRAWAL is a decision with level "unassessed" and hints null: the assessor removes a level without
+#              deleting history. After a withdrawal the top-level mastery is "unassessed" with no evidence, but the history
+#              is kept and the authorisation fields mirror the withdrawal.
 #   notes      free text
 #
 # RULES (governance/assessment-standard.md)
 #   - Only ChatGPT acting as assessor authorises a change. Claude Code records authorised changes and never infers them.
 #   - independent-competence and durable-mastery require hints "none".
-#   - durable-mastery requires an earlier independent-competence entry at least 28 days before, resting on DIFFERENT
-#     evidence. Time elapsed is necessary but not sufficient: the assessor must judge the later work to be independent
-#     reasoning on genuinely new material (preferably in a different context). That judgement cannot be validated here.
+#   - durable-mastery requires an UNBROKEN earlier independent-competence decision at least 28 days before, resting on DIFFERENT
+#     evidence; a later downgrade or withdrawal breaks it. Time elapsed is necessary but not sufficient: the assessor must judge
+#     the later work to be independent reasoning on genuinely new material, preferably in a different context. That judgement
+#     cannot be validated here.
+#   - A valid DIAGNOSTIC may establish competence before a topic is marked covered: while coverage is "not-started", any level
+#     above unassessed must rest only on evidence under assessments/diagnostic/.
 #   - The validator checks that records exist and are well formed and that the rules above hold structurally. It cannot
-#     check mathematical correctness or authenticate an assessment decision.
+#     check mathematical correctness, that a file really holds the student's unaided work, or authenticate a decision.
 #
 # Every item below starts at "unassessed": nothing has been assessed.
 

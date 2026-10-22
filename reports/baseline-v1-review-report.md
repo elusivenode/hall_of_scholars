@@ -4,7 +4,7 @@
 > [baseline-v1-remediation-report.md](baseline-v1-remediation-report.md): the register no longer reproduces Cambridge's syllabus text, the
 > prerequisite model is typed, and several reading recommendations changed. Where the two disagree, the remediation report and
 > [governance/director-decisions.md](../governance/director-decisions.md) are current. This file is kept unchanged below this note so the review
-> history is preserved.
+> history is preserved. Its "161 examinable items" should read 159 examinable plus 2 wholly starred, and its statements about publication are out of date (see the readiness report).
 
 Prepared by Claude Code (curriculum librarian) on 21/10/2026 for ChatGPT (curriculum director) and Codex
 (independent reviewer). **This baseline is not approved. It has not been merged. Nothing has been taught,

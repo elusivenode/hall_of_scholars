@@ -1,5 +1,11 @@
 # Curriculum Baseline v1 - Remediation Report
 
+> **Corrections added 22/10/2026 (the original text below is unchanged).** (1) Section 1 says the remediation branch was **not pushed**; it was pushed later the same day, and the branch exists on the remote
+> at `93bb00f`. (2) The "161 examinable" count should read **159 examinable plus 2 wholly starred** core-course items. (3) "Verbatim statements replaced by original summaries (177)" overstated what was done:
+> five summaries repeated a full Cambridge sentence and several short topic names are necessarily shared; this was corrected in the second remediation. (4) The relationship model described here (three
+> types, a provenance that included approval) has been superseded by four types and a separate approval field. (5) "141 item-by-resource rows" excluded the 20 Differential Equations items; there are now 161. See
+> [baseline-v1-r2-readiness.md](baseline-v1-r2-readiness.md) for the current state.
+
 Prepared by Claude Code (curriculum librarian) on 21 to 22/10/2026 in response to the curriculum director's feedback and remediation directive. **The baseline is not
 approved. Merge authorisation has not been granted (D-10).** Nothing has been taught, assessed or marked as mastered; all 173 mastery records remain `unassessed`.
 Where this report says something is "decided" it points to [governance/director-decisions.md](../governance/director-decisions.md); anything else is a proposal.

@@ -9,13 +9,28 @@ Each Schedules sub-heading has an entry `RM-<course>-<nn>`; every register item 
 | Course | Working primary and companions | Verification | Notes and open points |
 |---|---|---|---|
 | Numbers and Sets | Logic, sets, induction (IA-NS-001 to IA-NS-008): BIB-001 Allenby with BIB-003 Hammack. Number theory (009 to 014): BIB-002 Davenport. Reals and countability (015 to 022): BIB-009 Lebl | Allenby: bibliographic verified, contents partial; Hammack, Lebl, Davenport: verified | Allenby does not name the reals or countability and needs a companion; Lebl is free but has gaps (017 e, 018, 020); Burn and Hamilton need a library check |
-| Groups | BIB-004 Beardon | bibliographic partial; contents partial (chapter titles) | BIB-005 Judson (free; verified; no Mobius groups or quaternions) |
+| Groups | BIB-004 Beardon (unconfirmed primary selection; the choice stays open) | bibliographic partial; contents partial (chapter titles) | BIB-005 Judson (free; verified; no Mobius groups or quaternions) covers most items |
 | Vectors and Matrices | BIB-007 Cowley notes (the course-matched spine; covers all 18 items); BIB-006 Axler for the conceptual development | Cowley and Axler: verified | Beardon (chapter titles); nine items need Cowley or Beardon because Axler does not cover them |
-| Differential Equations | BIB-011 Robinson (provisional) | bibliographic partial; contents partial (Part titles) | Unconfirmed against the schedule; Priority B verification |
+| Differential Equations | BIB-011 Robinson (unconfirmed primary selection; the choice stays open) | bibliographic partial; contents partial (Part titles) | No verified reading covers most items (see the alignment table); verification task B7 blocks confirming it |
 | Analysis I | BIB-009 Lebl (working primary), with BIB-025 Chua/Gowers notes for the complex material | Lebl and Chua notes: verified | Burkill (Cambridge dagger; access risk; omits Bolzano-Weierstrass); Garling (real only; contents gated) |
 | Probability | BIB-015 Norris notes (working primary), with BIB-014 Weber notes | verified | BIB-012 Grimmett and Welsh as the companion book (contents verified; does not show four items) |
 | Vector Calculus | BIB-019 Tong notes (working primary; names all 14 items) | verified | BIB-018 Baxandall and Liebeck as a rigorous companion for the calculus core (contents UNVERIFIED); BIB-016 Bourne and Kendall for tensors; BIB-017 Riley et al |
 | Dynamics and Relativity | BIB-021 O'Donnell (provisional primary) | verified; 3 items not named, several partial | BIB-024 Tong notes for dimensional analysis and moments of inertia |
+
+## The director's working reading choices (R2)
+
+Recorded from the curriculum director's decision of 22/10/2026 ([director-decisions.md](../governance/director-decisions.md)). They are **working and provisional**, and none is a claim of full verification:
+
+| Course | Working choice | What is not yet verified |
+|---|---|---|
+| Analysis I | Lebl, with the Gowers-lecture notes (Chua) provisionally, for the complex material | Lebl has no complex analysis; the student notes are unlicensed and student-written |
+| Probability | Norris's notes with Grimmett and Welsh as the companion book | Depth and exercise supply of the compressed notes; Grimmett and Welsh does not show four items |
+| Vector Calculus | Tong's notes with Baxandall and Liebeck as the companion | **Baxandall and Liebeck's contents are not yet verified** (a photo of the contents pages would settle it) |
+| Dynamics and Relativity | O'Donnell, provisionally | Three items not named (dimensional analysis, parallel axis theorem, the starred Foucault pendulum) |
+| Numbers and Sets | Allenby selectively (logic and induction), Hammack for proofs, Lebl for the reals and cardinality, Davenport for number theory | Allenby section titles; Burn and Hamilton library check; several items shown by no source |
+| Groups | **Open.** Beardon is an unconfirmed selection | Beardon is verified to chapter titles only |
+| Differential Equations | **Open.** Robinson is an unconfirmed selection | Robinson is verified to Part titles only; no verified reading covers most items |
+| Vectors and Matrices | Cowley's notes as the spine, with Axler for the conceptual development | Cowley is the 2010 course |
 
 ## Axler's role in Vectors and Matrices
 

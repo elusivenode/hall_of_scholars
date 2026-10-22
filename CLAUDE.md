@@ -25,7 +25,8 @@ Codex reviews independently. The roles are separate on purpose.
 5. **Copyright (director decision D-16).** The repository is public. Do not commit textbooks, examination papers, Cambridge PDFs or Cambridge
    syllabus wording. Items carry original summaries, exact locators and fingerprints; never reintroduce a verbatim `source` field (the validator rejects it).
    Short quotations in prose are acceptable only where an argument needs them. Do not describe an unresolved academic decision as approved.
-6. **Branches.** Work on `feature/*` or `remediation/*` branches. Do not merge. Do not declare a baseline approved. Do not push without the owner's say-so.
+6. **Branches.** Work on `feature/*`, `remediation/*` or `candidate/*` branches. Do not merge. Do not declare a baseline approved. Pushing a session checkpoint at session close is part of the
+   routine (D-27); any other push, and any deletion of a remote branch, needs the owner's say-so.
 7. **Reviewer separation.** Do not edit anything under `reviews/` or on `review/*` branches. Apply
    accepted review findings only after the director agrees.
 8. **Public repository.** Do not add personal or sensitive information to any file.
@@ -38,7 +39,7 @@ Codex reviews independently. The roles are separate on purpose.
   (the subset described at the top of `curriculum/coverage.yaml`). No databases, web apps, dashboards or
   new dependencies. `scripts/validate.py` and `scripts/selftest.py` are standard library only.
 - Relationships between items are typed (`required`, `recommended`, `connection`) with separate provenance; they are guidance, never gates, and
-  nothing may require a predecessor's mastery before a topic starts. Only the director sets `director-approved` provenance.
+  nothing may require a predecessor's mastery before a topic starts. Only the director sets a link's approval to `director-approved`; provenance (where the link comes from) is a separate field.
 - Syllabus ids (`IA-XX-NNN`) are stable. Never renumber. If an item must be split or merged, add new ids and
   record the change in a report; keep the old id's history in git.
 - `curriculum/syllabus.md` is generated from `coverage.yaml`. Edit the YAML first and keep the markdown
@@ -48,14 +49,9 @@ Codex reviews independently. The roles are separate on purpose.
 
 - **Before committing:** `python3 scripts/validate.py` (and `python3 scripts/selftest.py` if the validator changed). It must report PASS.
 - **Decisions:** record director decisions in `governance/director-decisions.md` and keep "not yet decided" matters out of the decided list.
-- **After a study session:** follow "End-of-session routine" in `governance/agent-workflow.md`.
+- **After a study session:** follow "End-of-session routine" in `governance/agent-workflow.md`, including a confirmed push; report a failed push.
 - **After an Assessment Decision:** follow `governance/assessment-standard.md` section 7, then validate.
 - **Source audit:** `python3 scripts/validate.py --schedules-text <text> [--guide-text <text>]` where the text comes from
   `scripts/extract_pdf_text.py` run on the Cambridge PDFs. A pass is a fingerprint match, not proof that a summary is faithful.
 
-## Account setup on this machine
-
-Personal repositories under `~/en_repos/` commit as the personal identity and use the `github-personal`
-SSH host alias. `gh` run from inside `~/en_repos/` uses the personal login through a wrapper at
-`~/.local/bin/gh`. The McNab setup elsewhere on the machine is separate and must not be touched. The
-remote is `git@github-personal:elusivenode/hall_of_scholars.git`.
+Local machine and account setup is kept in an untracked `CLAUDE.local.md` (git-ignored), not here, because this repository is public.

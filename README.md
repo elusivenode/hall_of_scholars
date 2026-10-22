@@ -5,10 +5,10 @@ Tripos Part IA**, aimed at a firm foundation in pure and applied mathematics and
 mathematical physics. It prizes mathematical maturity, independent proof construction and durable
 understanding over speed or syllabus completion.
 
-**Status: Curriculum Baseline v1, remediated after the curriculum director's feedback - awaiting independent (Codex) review and the
-director's approval. Merge authorisation has not been granted.** Nothing has been taught, assessed or marked as mastered. See
-[reports/baseline-v1-remediation-report.md](reports/baseline-v1-remediation-report.md) and
-[governance/director-decisions.md](governance/director-decisions.md) for what is decided and what is open.
+**Status: Curriculum Baseline v1, remediated twice (director feedback, then the independent Fable review) - awaiting the curriculum director's final decision. Merge authorisation has not been granted.**
+Nothing has been taught, assessed or marked as mastered. See [reports/baseline-v1-r2-readiness.md](reports/baseline-v1-r2-readiness.md) and
+[governance/director-decisions.md](governance/director-decisions.md) for what is decided and what is open. The authoritative branch is named in
+[progress/current-session.md](progress/current-session.md).
 
 ## Who does what
 
@@ -25,7 +25,7 @@ Details: [governance/agent-workflow.md](governance/agent-workflow.md).
 1. Read [governance/teaching-charter.md](governance/teaching-charter.md) and
    [governance/assessment-standard.md](governance/assessment-standard.md).
 2. Read [governance/director-decisions.md](governance/director-decisions.md): what the director has decided and what is still open.
-3. Open [progress/current-session.md](progress/current-session.md). It is the resume pack and says exactly
+3. Open [progress/current-session.md](progress/current-session.md). It is the resume pack, names the authoritative branch, and says exactly
    where to start; it also has a suggested opening message for a new ChatGPT conversation.
 4. Find syllabus items in [curriculum/syllabus.md](curriculum/syllabus.md) (readable) or
    [curriculum/coverage.yaml](curriculum/coverage.yaml) (the register). Items have ids such as `IA-GP-004`. The descriptions are the
@@ -35,8 +35,8 @@ Details: [governance/agent-workflow.md](governance/agent-workflow.md).
    see [curriculum/dependencies.md](curriculum/dependencies.md). Optional Harvard Math 55 enrichment is in
    [curriculum/enrichment.md](curriculum/enrichment.md).
 6. After a session, ChatGPT writes a checkpoint using
-   [progress/sessions/TEMPLATE.md](progress/sessions/TEMPLATE.md), recording the exact question, the student's actual response, the hints given and the tutor's
-   evaluation. Claude Code files it (saved records are append-only), refreshes the resume pack, and applies any **Assessment Decision** issued by ChatGPT.
+   [progress/sessions/TEMPLATE.md](progress/sessions/TEMPLATE.md), recording the exact question, the student's actual response and questions, what the tutor explained, the hints given and the tutor's
+   evaluation. Claude Code files it (saved records are append-only), refreshes the resume pack, applies any **Assessment Decision** issued by ChatGPT, then commits and **pushes, confirming the push succeeded**.
 
 Mastery is recorded as an evidence-based level, never as a percentage:
 `unassessed` -> `familiarity` -> `understanding` -> `independent-competence` -> `durable-mastery`. A level above

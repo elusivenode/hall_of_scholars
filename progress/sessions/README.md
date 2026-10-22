@@ -17,5 +17,8 @@ exact academic context, and the evidence behind any later mastery judgement.
 **Never fabricate.** If the exact wording or the student's response was not captured, write "not captured". Do not rebuild a
 record from a general description of a conversation.
 
+**Close the session properly.** Commit the record, the resume pack and any evidence files, **push, and confirm the push succeeded**; a fresh conversation can see only what has been pushed. If the
+push fails, say so: the session is not safely recorded.
+
 See [governance/agent-workflow.md](../../governance/agent-workflow.md) for the end-of-session routine and
 [governance/session-continuity-test.md](../../governance/session-continuity-test.md) for the end-to-end test of this mechanism.

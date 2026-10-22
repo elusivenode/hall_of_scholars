@@ -16,7 +16,7 @@ repository and none may be invented. Where the validator is tested, it uses synt
    ids, the source references and the exact next question. Claude Code saves it as `progress/sessions/YYYY-MM-DD-NN-<slug>.md`.
 3. **Refresh the resume pack.** Claude Code rewrites `progress/current-session.md` from the checkpoint and runs
    `python3 scripts/validate.py` (it must pass, including the session-structure and immutability checks).
-4. **Commit.** Commit the session record and the resume pack together, so the repository state is a recoverable checkpoint.
+4. **Commit and push.** Commit the session record and the resume pack together, **push, and confirm the push succeeded**, so the repository state a new conversation sees is a recoverable checkpoint.
 5. **Restart.** Open a fresh ChatGPT conversation with no memory of step 1. Give it only the repository URL and the opening message
    in `progress/current-session.md`.
 6. **Recover.** Ask the new conversation the checklist below, without prompting it with the answers, and compare each answer with
@@ -35,8 +35,11 @@ The test passes only if the new conversation reproduces, from the repository, al
 | 5 | Any unresolved misconception | "Unresolved misconceptions" |
 | 6 | The syllabus ids and what they mean | `curriculum/coverage.yaml`, `curriculum/syllabus.md` |
 | 7 | The source reference for the exercise | "Source references" and `curriculum/reading-map.md` |
-| 8 | The exact next question or exercise | "Next question or exercise" |
+| 8 | The exact next question or exercise, and why it was chosen | "Next question or exercise" (including "Why this next") |
 | 9 | That no mastery has been recorded without an Assessment Decision | `progress/mastery.yaml` |
+| 10 | What the student asked, and what the tutor explained (so nothing is re-taught or assumed) | "Student questions" and "Tutor explanation" |
+| 11 | Which branch is authoritative and the identifier of the last session | the resume pack's "Authoritative branch" and "Last session id" |
+| 12 | That the checkpoint was pushed before the new conversation began | the repository's remote branch, compared with the local record |
 
 Record the result (pass or fail per row, and any paraphrase that lost precision) in a file under `reviews/` or `reports/`. A failure
 is a defect in the template or the resume pack to be fixed, not a reason to adjust the checklist.

@@ -73,7 +73,10 @@ rendering of Cambridge's text. Those judgements belong to the director and the i
    loses nothing.
 4. Any Assessment Decisions in the checkpoint are processed under `assessment-standard.md` section 7.
 5. `coverage` fields may be updated from the checkpoint; `mastery` fields only by Assessment Decision.
-6. `scripts/validate.py` is run and the result committed with the records.
+6. `scripts/validate.py` is run; it must pass.
+7. The session record, the resume pack and any evidence files are **committed and pushed together, and the push is confirmed successful** (director decision D-27). If the push fails,
+   say so plainly: the session is not safely recorded until it succeeds, because a fresh conversation can see only what has been pushed.
+8. The resume pack names the **authoritative branch** and the **stable session identifier** (`YYYY-MM-DD-NN`). It does not try to embed its own commit hash.
 
 ## Integrity rules for every agent
 

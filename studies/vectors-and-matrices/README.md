@@ -14,4 +14,4 @@ Cambridge: 24 lectures, Michaelmas Term, examined on Paper 1 (Schedules 2026-27)
   [governance/assessment-standard.md](../../governance/assessment-standard.md) section 6.
 - Study notes the student writes for themselves, in their own words.
 
-Nothing here has been created yet. Do not add textbook text or Tripos paper text (copyright).
+Write evidence from [../EVIDENCE-TEMPLATE.md](../EVIDENCE-TEMPLATE.md) (the validator requires its four sections). Nothing here has been created yet. Do not add textbook text or Tripos paper text (copyright).

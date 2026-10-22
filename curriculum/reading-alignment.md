@@ -23,7 +23,7 @@ Item labels are the librarian's own short descriptions; the full summaries are i
 | IA-NS-011 | Euclid's algorithm, and solving ax + by = c in integers | U | N | U | P |
 | IA-NS-012 | Modular arithmetic (congruences) and the units modulo n | U | C | U | C |
 | IA-NS-013 | The Chinese Remainder Theorem, Wilson's Theorem and the... | U | N | U | P |
-| IA-NS-014 | Public-key cryptography and the RSA algorithm | U | N | U | P |
+| IA-NS-014 | Public-key cryptography, in particular the RSA algorithm | U | N | U | P |
 | IA-NS-015 | Least upper bounds with simple examples, and the least... | N | N | C | U |
 | IA-NS-016 | Sequences and series, including convergence of bounded... | N | P | C | U |
 | IA-NS-017 | Irrationality of the square root of 2 and of e; decimal... | N | N | P | U |
@@ -45,7 +45,7 @@ Items with no `C` in any column shown: IA-NS-001, IA-NS-010, IA-NS-011, IA-NS-01
 | IA-GP-002 | Permutations of a set and the symmetric group; subgroups... | C | C |
 | IA-GP-003 | The Mobius group of transformations of the extended... | C | N |
 | IA-GP-004 | Cosets of a subgroup, leading to Lagrange's theorem | U | C |
-| IA-GP-005 | Classification of the groups of small order (up to order... | P | U |
+| IA-GP-005 | Groups of small order (up to order 8); the quaternion... | P | U |
 | IA-GP-006 | The Fermat-Euler theorem re-derived using group theory | U | C |
 | IA-GP-007 | Group actions on a set: orbits and stabilisers, and the... | C | P |
 | IA-GP-008 | Cayley's theorem: every group embeds as a subgroup of a... | U | U |
@@ -56,7 +56,7 @@ Items with no `C` in any column shown: IA-NS-001, IA-NS-010, IA-NS-011, IA-NS-01
 | IA-GP-013 | A change of basis viewed as an instance of conjugation | U | U |
 | IA-GP-014 | Permutations written as cycles and as products of... | C | C |
 | IA-GP-015 | When two permutations are conjugate in S_n, and in A_n | U | U |
-| IA-GP-016 | Simple groups, including a proof that A_5 is simple | U | C |
+| IA-GP-016 | Simple groups, and the simplicity of A_5 | U | C |
 
 Beardon is judged from chapter titles only (a P or U there reflects the limit of a title list, not absence from the book). Judson has no Mobius groups and, in the contents extracted, no quaternions.
 
@@ -77,7 +77,7 @@ Items with no `C` in any column shown: IA-GP-005, IA-GP-009, IA-GP-012.
 | IA-VM-009 | Arithmetic of 3 x 3 matrices and their determinants,... | C | P | P |
 | IA-VM-010 | Matrices as linear maps, with geometric examples... | C | P | P |
 | IA-VM-011 | Systems of linear equations in matrix form: when... | C | P | P |
-| IA-VM-012 | Special classes of matrix (symmetric, antisymmetric,... | P | P | U |
+| IA-VM-012 | Special classes of matrix (symmetric, antisymmetric,... | C | P | U |
 | IA-VM-013 | Eigenvalues and eigenvectors and their geometric meaning | C | C | C |
 | IA-VM-014 | Proof that hermitian matrices have real eigenvalues and... | C | C | U |
 | IA-VM-015 | How a matrix changes under an arbitrary change of basis... | C | C | P |
@@ -85,9 +85,36 @@ Items with no `C` in any column shown: IA-GP-005, IA-GP-009, IA-GP-012.
 | IA-VM-017 | Quadratic forms, including how they change under a change... | C | P | U |
 | IA-VM-018 | Rotation matrices and Lorentz transformations presented... | C | N | U |
 
-Axler: determinants only via 9B and 9C (alternating multilinear forms), not by the 3 x 3 formula; 'rank-nullity' is the Fundamental Theorem of Linear Maps (3B) and is PROVED there (Cambridge only states it); unitary and orthogonal ideas appear in 7D and 6B; quadratic forms in 9A but conics are not named; no hits for cross product, Levi-Civita, summation convention, Lorentz, conic, shear. Axler's Jordan form (8C) and singular value decomposition (7E) lie beyond the schedule. Cowley is the 2010 course and was mapped from its verified section titles; item 012's decomposition into isotropic, symmetric trace-free and antisymmetric parts is not named as a section.
+Axler: determinants only via 9B and 9C (alternating multilinear forms), not by the 3 x 3 formula; 'rank-nullity' is the Fundamental Theorem of Linear Maps (3B) and is PROVED there (Cambridge only states it); unitary and orthogonal ideas appear in 7D and 6B; quadratic forms in 9A but conics are not named; no hits for cross product, Levi-Civita, summation convention, Lorentz, conic, shear. Axler's Jordan form (8C) and singular value decomposition (7E) lie beyond the schedule. Cowley is the 2010 course and was mapped from its verified section titles; its section 3.6.8 names the decomposition of a square matrix into isotropic, symmetric trace-free and antisymmetric parts (IA-VM-012). Axler does not.
 
-Items with no `C` in any column shown: IA-VM-012.
+## Differential Equations
+
+| Item | Topic | BIB-011 Robinson (Part titles only) | BIB-020 Allanach and Evans (calculus chapter only) |
+|---|---|---|---|
+| IA-DE-001 | A working (non-rigorous) review of single-variable... | P | P |
+| IA-DE-002 | Partial derivatives introduced informally with their... | P | C |
+| IA-DE-003 | Differentials, treated informally, including exact... | U | U |
+| IA-DE-004 | Differentiating an integral with respect to a parameter | U | U |
+| IA-DE-005 | First-order linear equations with constant coefficients:... | P | N |
+| IA-DE-006 | First-order linear equations with variable coefficients,... | P | N |
+| IA-DE-007 | Separable equations and exact equations | P | N |
+| IA-DE-008 | Sketching solution curves; equilibria and their stability... | P | N |
+| IA-DE-009 | Discrete (difference) equations: equilibria and... | P | N |
+| IA-DE-010 | Linear equations of higher order: complementary function... | P | N |
+| IA-DE-011 | Higher-order linear equations with constant coefficients... | P | N |
+| IA-DE-012 | Homogeneous equations, as named in the Schedules, which... | U | N |
+| IA-DE-013 | How a system responds to step and impulse inputs,... | U | N |
+| IA-DE-014 | Series solutions of linear equations; it is only stated,... | U | N |
+| IA-DE-015 | Rates of change in a chosen direction, and the gradient... | U | C |
+| IA-DE-016 | The Taylor series for functions of several variables,... | U | U |
+| IA-DE-017 | Local extrema of functions of several variables,... | U | N |
+| IA-DE-018 | Coupled first-order systems: equivalence with a single... | P | N |
+| IA-DE-019 | Phase portraits near non-degenerate equilibrium points,... | P | N |
+| IA-DE-020 | Simple first- and second-order partial differential... | U | N |
+
+**No verified reading covers most Differential Equations items.** Robinson's Part titles are the only contents verified (Parts I to VI and three appendices), so every Robinson cell is P (a Part title suggests the topic) or U (nothing shown). Allanach and Evans' contents were read in full but they cover only the opening calculus (chain rule, gradient and directional derivatives); N there means a verified contents list does not show the topic. The Differential Equations primary selection therefore stays **open** and verification task B7 blocks confirming it.
+
+Items with no `C` in any column shown: IA-DE-001, IA-DE-005, IA-DE-006, IA-DE-007, IA-DE-008, IA-DE-009, IA-DE-010, IA-DE-011, IA-DE-012, IA-DE-013, IA-DE-014, IA-DE-017, IA-DE-018, IA-DE-019, IA-DE-020.
 
 ## Analysis I
 
@@ -98,8 +125,8 @@ Items with no `C` in any column shown: IA-VM-012.
 | IA-AN-003 | Convergence tests for series: comparison, ratio and... | C | C | U | C | C |
 | IA-AN-004 | Continuity of real- or complex-valued functions on... | P | P | P | C | C |
 | IA-AN-005 | The intermediate value theorem | C | C | U | C | C |
-| IA-AN-006 | A continuous function on a closed interval is bounded and... | C | C | U | C | C |
-| IA-AN-007 | Differentiability of functions from R to R | C | C | C | C | C |
+| IA-AN-006 | A continuous function on a closed bounded interval is... | C | C | U | C | C |
+| IA-AN-007 | Differentiability of a real function of one real variable | C | C | C | C | C |
 | IA-AN-008 | The derivative of sums and products, the chain rule, and... | C | C | U | C | P |
 | IA-AN-009 | Rolle's theorem and the mean value theorem | C | C | U | C | C |
 | IA-AN-010 | The one-variable inverse function theorem | C | C | U | C | U |
@@ -121,7 +148,7 @@ Burkill's column rests on a reading of an unofficial scan that is not linked her
 | Item | Topic | BIB-015 Norris 2024 | BIB-014 Weber 2014 | BIB-012 Grimmett and Welsh |
 |---|---|---|---|---|
 | IA-PR-001 | Classical probability with equally likely outcomes | C | C | N |
-| IA-PR-002 | Combinatorial analysis: permutations and combinations | C | C | P |
+| IA-PR-002 | Counting methods based on permutations and combinations | C | C | P |
 | IA-PR-003 | Stirling's formula, with the asymptotics of log n! proved | C | C | N |
 | IA-PR-004 | The axioms of probability in the countable case;... | C | C | C |
 | IA-PR-005 | Inclusion-exclusion; continuity and subadditivity... | C | C | P |
@@ -135,7 +162,7 @@ Burkill's column rests on a reading of an unofficial scan that is not linked her
 | IA-PR-013 | Conditional expectation | C | C | C |
 | IA-PR-014 | Random walks: gambler's ruin and recurrence relations,... | C | C | P |
 | IA-PR-015 | Branching processes: generating functions and the... | C | C | C |
-| IA-PR-016 | Combinatorial applications of generating functions | C | C | N |
+| IA-PR-016 | Using generating functions to solve combinatorial problems | C | C | N |
 | IA-PR-017 | Distributions and density functions of continuous random... | C | C | C |
 | IA-PR-018 | The uniform, normal and exponential distributions, and... | C | C | N |
 | IA-PR-019 | Joint distributions and transformations of random... | C | C | C |
