@@ -9,7 +9,7 @@ Where this report says something is "decided" it points to [governance/director-
 | | |
 |---|---|
 | Branch | `remediation/baseline-v1-director-feedback`, based on `feature/curriculum-baseline-v1` at `c337c7a` so the review history is preserved |
-| Remediation content commit | `REMEDIATION_COMMIT` (a follow-up commit records this hash in the report and holds no other change) |
+| Remediation content commit | `fe09a422633f65097840cbd56f44280015482c66` (short `fe09a42`); a follow-up commit records this hash in the report and holds no other change |
 | Earlier commits (unchanged) | `774a338`, `c337c7a` on `feature/curriculum-baseline-v1` |
 | `main` | untouched at `0228a63` |
 | Pushed? | **No.** The remediation branch has not been pushed, awaiting the owner's instruction. |
