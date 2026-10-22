@@ -8,7 +8,15 @@ below that rest on the R2 summary are marked **D**; dispositions where the summa
 
 ## 1. Branches and commits for review
 
-BRANCH_IDS
+| Role | Branch | Commit |
+|---|---|---|
+| **Merge candidate (clean history from `main`)** | `candidate/baseline-v1-clean` | content commit `0612da15f53ae33cb5ed841721a4ce7a21c94db5` (R2 changes) on import commit `0c34747497f4bb16dbde35209812f3342ebe2720`, on `main` at `0228a63`. One later commit adds only this report with its evidence. |
+| `main` | `main` | `0228a63`, untouched |
+| Kept, not to be deleted yet (D-26) | `remediation/baseline-v1-director-feedback` | `93bb00f` |
+| Kept, not to be deleted yet (D-26) | `review/baseline-v1-r1-fable-2026-10-22` | `54e1216` |
+| Obsolete | `feature/curriculum-baseline-v1` | `c337c7a`; status in section 7 |
+
+Review the **merge candidate**. Earlier hashes cited in the Fable review (`93bb00f`, `fe09a42`) refer to the remediation branch, which is kept unchanged.
 
 ## 2. Disposition of every Fable finding (F-01 to F-39)
 
@@ -100,7 +108,38 @@ relationships provisional" has been followed: none was approved by the librarian
 
 ## 5. Validation and regression results
 
-VALIDATION_RESULTS
+Run from the repository with a local copy of the Schedules and Guide (command: `python3 scripts/validate.py --schedules-text <schedules text> --guide-text <guide text>`):
+
+```text
+audit: 164 items matched their source passages in order with no unmapped gaps (7 identical bare topic names, all allowed; 0 possible-copy warnings)
+audit: NOTE - this is a fingerprint match, not proof that any summary is a faithful rendering of its source.
+leak-scan: 9 shared passage(s) of 70+ letters reported as warnings for review (document and book titles are expected; syllabus sentences are not)
+register records by course code: AN=20, CP=2, DE=20, DR=26, GP=16, MC=11, NS=23, PR=27, VC=14, VM=18
+relations by type: {'required': 157, 'recommended': 74, 'assumed': 10, 'connection': 15} | by provenance: {'librarian-judgement': 221, 'inferred-from-cambridge': 19, 'cambridge-course-level': 16} | by approval: {'provisional': 251, 'director-approved': 5}
+bibliography entries: 40; reading-map entries: 45; mastery records: 173; session records: 0
+WARNING: leak-scan: curriculum/coverage.yaml repeats 98 letters of Cambridge text: 'E: Schedules of Lecture Courses and Form of Examinations for the Mathematical Tripos 2026-'
+WARNING: leak-scan: curriculum/syllabus.md repeats 98 letters of Cambridge text: 'e:** *Schedules of Lecture Courses and Form of Examinations for the Mathematical Tripos 20'
+WARNING: leak-scan: references/bibliography.md repeats 92 letters of Cambridge text: 'K.F. Riley, M.P. Hobson and S.J. Bence, *Mathematical Methods for Physics and Engineering*'
+WARNING: leak-scan: references/bibliography.md repeats 83 letters of Cambridge text: 'A.G. Hamilton, *Numbers, Sets and Axioms: The Apparatus of Mathematics*, Cambridge Univers'
+WARNING: leak-scan: references/source-register.md repeats 95 letters of Cambridge text: 'Schedules of Lecture Courses and Form of Examinations for the Mathematical Tripos | **2026'
+WARNING: leak-scan: reports/baseline-v1-remediation-report.md repeats 75 letters of Cambridge text: 'E: Schedules of Lecture Courses and Form of Examinations for the Mathematical Tripos 2026'
+WARNING: leak-scan: reports/baseline-v1-remediation-report.md repeats 73 letters of Cambridge text: 'e:** *Schedules of Lecture Courses and Form of Examinations for the Mathematical Tripos 20'
+WARNING: leak-scan: reports/baseline-v1-remediation-report.md repeats 71 letters of Cambridge text: 'A.G. Hamilton, *Numbers, Sets and Axioms: The Apparatus of Mathematics*, Cambridge Univers'
+WARNING: leak-scan: reports/baseline-v1-remediation-report.md repeats 74 letters of Cambridge text: 'Schedules of Lecture Courses and Form of Examinations for the Mathematical Tripos | **2026'
+LIMITS: structural validation only - not mathematical correctness, not authentication of assessment decisions, not proof that summaries are faithful to Cambridge.
+RESULT: PASS (0 errors, 9 warnings)
+```
+
+Regression suite (`python3 scripts/selftest.py --schedules-text <schedules text>`): **80 tests passed, 0 failed**, including each defect Fable demonstrated (F-21 (a) to (h), F-22, F-23, F-24, F-31, F-32),
+positive tests for valid unusual records (withdrawal, diagnostic competence before coverage, mutual recommended links, evidence in a different order, durable mastery on an unbroken chain, an empty `Verified via`), a leak-scan test,
+and the audit tests. A sensitivity check ran the suite against a validator with its error reporting disabled: 66 tests failed, so the tests do detect the defects they name.
+
+```text
+RESULT: ALL SELF-TESTS PASSED
+```
+
+The 9 leak-scan warnings are the document title and book titles that Cambridge's documents also contain (the extra ones quote the earlier report's own output). What these results do **not** show: mathematical correctness,
+that any summary is faithful (all stay `librarian-draft`), or that any assessment decision is authentic (none exists).
 
 ## 6. Reading selections and verification gaps
 
@@ -121,7 +160,50 @@ Detail: [reading-map.md](../curriculum/reading-map.md), [reading-alignment.md](.
 
 ## 7. Clean merge-candidate history and the obsolete branch
 
-ANCESTRY_EVIDENCE
+Evidence gathered on 22/10/2026 **before** any remote change, on commit `0612da1` (the one later commit adds only this report):
+
+```text
+== 1. Ancestry ==
+merge-base with main : 0228a63aacd84093308d1afaee56b82d040d76f6  (main = 0228a63aacd84093308d1afaee56b82d040d76f6)
+commits not in main  : 2
+  0612da1 Second remediation (R2): apply the director's decisions on the Fable review
+  0c34747 Add Curriculum Baseline v1 (remediated tree) on a clean history from main
+first-parent chain   :
+  0612da1 Second remediation (R2): apply the director's decisions on the Fable review
+  0c34747 Add Curriculum Baseline v1 (remediated tree) on a clean history from main
+  0228a63 Initial commit
+
+== 2. Earlier commits must NOT be ancestors of the candidate ==
+  774a338 is not an ancestor (good)
+  c337c7a is not an ancestor (good)
+  fe09a42 is not an ancestor (good)
+  93bb00f is not an ancestor (good)
+  54e1216 is not an ancestor (good)
+reachable commits    : 3 (0612da15f53ae33cb5ed841721a4ce7a21c94db5 0c34747497f4bb16dbde35209812f3342ebe2720 0228a63aacd84093308d1afaee56b82d040d76f6 )
+
+== 3. Content scan of every reachable commit's files for 70+ letters shared with Cambridge text ==
+  candidate commit 0612da1: 9 shared passages, all of them document or book titles
+  candidate commit 0c34747: 9 shared passages, all of them document or book titles
+  candidate commit 0228a63: 0 shared passage(s), of which 0 are document or book titles; 0 other
+  control (earlier commit 774a338, known to hold the verbatim text):
+     774a338: 155 shared passages (this shows the scan detects the old text)
+
+== 4. Content preserved: candidate tip versus the remediation branch tree (R2 changes only expected) ==
+ 36 files changed, 1586 insertions(+), 630 deletions(-)
+first commit (import of the remediation tree) versus the remediation tip:
+ reviews/README.md                      |  10 +
+ reviews/baseline-v1-r1-fable-review.md | 421 +++++++++++++++++++++++++++++++++
+ 2 files changed, 431 insertions(+)
+```
+
+Reading it: the candidate has two commits not in `main`; none of the five earlier commits that carried or descended from the verbatim text is an ancestor; a scan of every file in every reachable commit finds only
+document and book titles (the control commit shows the scan does detect the old text); and apart from the two Fable review files (and then the R2 changes), the candidate's tree is the remediation tree.
+
+**Obsolete branch.** DELETION_OUTCOME
+
+**What deletion does and does not do.** It removes the branch name and the copies reachable only through it from the repository's visible branches. It does **not** guarantee removal of cached or otherwise retained Git objects
+(GitHub may keep objects reachable by commit hash until garbage collection), and the kept remediation and Fable review branches still contain the earlier history (the remediation branch descends from commit `774a338`).
+Until the director has those two deleted as well, the old text remains publicly reachable through them.
 
 ## 8. Matters still unresolved (not described as approved)
 
