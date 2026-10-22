@@ -1,2152 +1,3058 @@
 # Cambridge Mathematical Tripos Part IA - syllabus register (coverage.yaml)
 #
 # SOURCE: Schedules of Lecture Courses and Form of Examinations for the Mathematical Tripos 2026-27
-# (Revised 19 August 2026), Part IA, printed pp.8-12 (PDF pp.10-14). See references/source-register.md.
+# (Revised 19 August 2026), Part IA (SRC-01 in references/source-register.md).
 #
-# FORMAT (a deliberately small YAML subset so it can be parsed with the Python standard library):
+# COPYRIGHT-SENSITIVE REPRESENTATION. This public file does NOT reproduce the Cambridge syllabus text. Each item has an
+# original SUMMARY written by the curriculum librarian, an exact LOCATOR (document, edition, printed and PDF page, source
+# heading, paragraph and position in it) and a FINGERPRINT (length and SHA-256 of the normalised source statement), so the
+# item can be audited against the original Schedules on a machine that holds a local copy (scripts/validate.py
+# --schedules-text). The Cambridge PDF stays outside the repository. A passing fingerprint audit shows only that the source
+# passage is the one the item was built from; it does NOT show that the summary is a faithful rendering. Summary fidelity is
+# an academic judgement for the curriculum director and the independent reviewer.
+#
+# FORMAT (a deliberately small YAML subset, parsed with the Python standard library):
 #   - a list of records; each record starts with "- id: ..." and continues with "  key: value" lines;
-#   - every value is a JSON scalar or JSON array (double-quoted strings, [..] arrays, null, numbers).
+#   - every value is a JSON scalar, array or object (double-quoted strings, [..], {..}, null, numbers).
 #
 # FIELDS
-#   id            stable identifier, IA-<course code>-NNN (topic items); IA-<code>-Nnn (course notes)
-#   course        Cambridge course name
-#   heading       the sub-heading under which the Schedules list the item
-#   source        the syllabus statement, text exactly as in the Schedules after the normalisation listed
-#                 in references/source-register.md (the lecture-count marker [n] is stored separately)
-#   lectures_in_block  lectures the Schedules assign to the whole source paragraph [n]; NOT per item
-#   block         identifier of the source paragraph (items sharing a block share its lecture count)
-#   location      source document and page
-#   status        examinable | starred-not-examinable | course-note | ancillary-non-examinable
-#   starred_spans (optional) spans inside an otherwise examinable item that the Schedules star
-#   prerequisites ids of items whose content this item builds on (see prereq_basis)
-#   prereq_basis  cambridge-stated (the Schedules or Guide say so) | librarian-judgement (Claude's
-#                 reading of the mathematics; for the curriculum director to confirm or amend)
-#   readings      reading-map identifiers (curriculum/reading-map.md), one per Schedules sub-heading
+#   id             stable identifier, IA-<course code>-NNN (topics) or IA-<code>-Nnn (course notes). Never renumbered.
+#   course         Cambridge course name
+#   heading        the exact Cambridge sub-heading under which the Schedules place the item (a short label, kept for audit)
+#   summary        original summary (see above); scope qualifiers in the source are preserved in the wording and in `qualifiers`
+#   summary_status librarian-draft | reviewed   ("reviewed" is set only after the director or independent reviewer has compared
+#                  the summary with the source; none has been so far)
+#   qualifiers     scope tags derived from the source wording: statement-only, informal-treatment, informal-proof,
+#                  proof-sketch, proof-given, brief, revision
+#   starred_part   (optional) description of a starred (lectured, not examinable) part of an otherwise examinable item
+#   source_doc     SRC-01
+#   printed_page / pdf_page   page of the Schedules 2026-27 booklet
+#   block          source paragraph (one paragraph carries one lecture count)
+#   block_item     "k of n": this item is the k-th of the n items taken from that paragraph
+#   lectures_in_block   lectures the Schedules assign to the whole paragraph (shared by its items; not a per-item figure)
+#   status         examinable | starred-not-examinable | course-note | ancillary-non-examinable
+#   builds_on      typed links to earlier items, each ["<id>", "<type>", "<provenance>"]:
+#                    type        required     mathematically necessary for the intended treatment
+#                                recommended  helpful preparation, not strictly necessary
+#                                connection   related material; implies NO ordering constraint
+#                    provenance  cambridge-stated          Cambridge says the link in the Schedules or Guide
+#                                inferred-from-cambridge   follows from Cambridge's wording (for example the same topic listed in
+#                                                          two courses) but is not declared as a prerequisite
+#                                librarian-judgement       the librarian's reading of the mathematics
+#                                director-approved         confirmed by the curriculum director (none yet)
+#                  A prerequisite may be satisfied by prior study; it never means "mastery must be recorded first".
+#   readings       reading-map identifiers (curriculum/reading-map.md)
+#   fingerprint    {"chars": N, "sha256": "..."} of the normalised source statement; see scripts/validate.py for the normalisation
 #
 # Mastery and coverage STATE is deliberately NOT stored here; it lives in progress/mastery.yaml.
 
 - id: "IA-GP-001"
   course: "Groups"
   heading: "Examples of groups"
-  source: "Axioms for groups. Examples from geometry: symmetry groups of regular polygons, cube, tetrahedron."
-  lectures_in_block: 4
+  summary: "The group axioms, with examples drawn from geometry: the symmetry groups of regular polygons, the cube and the tetrahedron."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B01"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "1 of 3"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-GP-01"]
+  fingerprint: {"chars": 86, "sha256": "cf9f18266cee00ee0b0dfb7b6d0833727cf44fe751f08ff3d8a32c979d290436"}
 
 - id: "IA-GP-002"
   course: "Groups"
   heading: "Examples of groups"
-  source: "Permutations on a set; the symmetric group. Subgroups and homomorphisms. Symmetry groups as subgroups of general permutation groups."
-  lectures_in_block: 4
+  summary: "Permutations of a set and the symmetric group; subgroups and homomorphisms; a symmetry group seen as a subgroup of a permutation group."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B01"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "2 of 3"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-GP-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-GP-001", "required", "librarian-judgement"]]
   readings: ["RM-GP-01"]
+  fingerprint: {"chars": 115, "sha256": "a5007ef6bff10d7dd8bf280a96fee5fd438078940712ff007540d1e315bfacc0"}
 
 - id: "IA-GP-003"
   course: "Groups"
   heading: "Examples of groups"
-  source: "The Möbius group; cross-ratios, preservation of circles, the point at infinity. Conjugation. Fixed points of Möbius maps and iteration."
-  lectures_in_block: 4
+  summary: "The Mobius group of transformations of the extended plane: cross-ratio, how circles are preserved, the point at infinity; conjugation, and the fixed points of Mobius maps with the behaviour of their iterates."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B01"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "3 of 3"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-GP-002", "IA-VM-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-GP-002", "recommended", "librarian-judgement"], ["IA-VM-001", "required", "librarian-judgement"]]
   readings: ["RM-GP-01"]
+  fingerprint: {"chars": 116, "sha256": "f52b4b1fbfd3125a9050c92b1122df06dc67c9f7156872dfc080e9879dac5e72"}
 
 - id: "IA-GP-004"
   course: "Groups"
   heading: "Lagrange's theorem"
-  source: "Cosets. Lagrange's theorem."
-  lectures_in_block: 5
+  summary: "Cosets of a subgroup, leading to Lagrange's theorem."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B02"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "1 of 3"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-GP-002", "IA-NS-006"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-GP-002", "required", "librarian-judgement"], ["IA-NS-006", "recommended", "librarian-judgement"]]
   readings: ["RM-GP-02"]
+  fingerprint: {"chars": 25, "sha256": "fc95c82925d7b6aec5456732539097ad69b30fab8a2b62ab85b607f60ab48e05"}
 
 - id: "IA-GP-005"
   course: "Groups"
   heading: "Lagrange's theorem"
-  source: "Groups of small order (up to order 8). Quaternions."
-  lectures_in_block: 5
+  summary: "Classification of the groups of small order (up to order 8); the quaternion group."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B02"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "2 of 3"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-GP-004"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-GP-004", "required", "librarian-judgement"]]
   readings: ["RM-GP-02"]
+  fingerprint: {"chars": 43, "sha256": "08e0985225e87725590deef8f69e030da6a26e050e6c886b889fdc9d3aa7c663"}
 
 - id: "IA-GP-006"
   course: "Groups"
   heading: "Lagrange's theorem"
-  source: "Fermat-Euler theorem from the group-theoretic point of view."
-  lectures_in_block: 5
+  summary: "The Fermat-Euler theorem re-derived using group theory."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B02"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "3 of 3"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-GP-004", "IA-NS-012"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-GP-004", "required", "librarian-judgement"], ["IA-NS-012", "recommended", "inferred-from-cambridge"]]
   readings: ["RM-GP-02"]
+  fingerprint: {"chars": 51, "sha256": "06f05d2166bf25c6cf47a58f563ff414075c1e58f61363493a4dfae26c45e1ad"}
 
 - id: "IA-GP-007"
   course: "Groups"
   heading: "Group actions"
-  source: "Group actions; orbits and stabilizers. Orbit-stabilizer theorem."
-  lectures_in_block: 4
+  summary: "Group actions on a set: orbits and stabilisers, and the orbit-stabiliser theorem."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B03"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "1 of 3"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-GP-002", "IA-GP-004"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-GP-002", "required", "librarian-judgement"], ["IA-GP-004", "required", "librarian-judgement"]]
   readings: ["RM-GP-03"]
+  fingerprint: {"chars": 57, "sha256": "0246ae6476ef88c3033597d33cd21bbbff24efeed9a38704d358840ec59affb8"}
 
 - id: "IA-GP-008"
   course: "Groups"
   heading: "Group actions"
-  source: "Cayley's theorem (every group is isomorphic to a subgroup of a permutation group)."
-  lectures_in_block: 4
+  summary: "Cayley's theorem: every group embeds as a subgroup of a permutation group."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B03"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "2 of 3"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-GP-007"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-GP-007", "required", "librarian-judgement"]]
   readings: ["RM-GP-03"]
+  fingerprint: {"chars": 70, "sha256": "87946e456611b4f1ffdb432f9e2bc5426ad2fb7f2b9a912e185deb63fa589acb"}
 
 - id: "IA-GP-009"
   course: "Groups"
   heading: "Group actions"
-  source: "Conjugacy classes. Cauchy's theorem."
-  lectures_in_block: 4
+  summary: "Conjugacy classes in a group; Cauchy's theorem."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B03"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "3 of 3"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-GP-007"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-GP-007", "required", "librarian-judgement"]]
   readings: ["RM-GP-03"]
+  fingerprint: {"chars": 33, "sha256": "f12d357fc9863b94042f85ff203418177ae4035f63649d2a889655be8a15794d"}
 
 - id: "IA-GP-010"
   course: "Groups"
   heading: "Quotient groups"
-  source: "Normal subgroups, quotient groups and the isomorphism theorem."
-  lectures_in_block: 4
+  summary: "Normal subgroups and quotient groups, with the isomorphism theorem."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B04"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "1 of 1"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-GP-004", "IA-GP-002"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-GP-004", "required", "librarian-judgement"], ["IA-GP-002", "required", "librarian-judgement"]]
   readings: ["RM-GP-04"]
+  fingerprint: {"chars": 55, "sha256": "d5667e61c099ae57b0b6521a71ce4c8a19dcd3c16455a99c281dda7e1791864f"}
 
 - id: "IA-GP-011"
   course: "Groups"
   heading: "Matrix groups"
-  source: "The general and special linear groups; relation with the Möbius group."
-  lectures_in_block: 3
+  summary: "The general linear and special linear groups, and how they relate to the Mobius group."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B05"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "1 of 3"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-GP-001", "IA-VM-009"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-GP-001", "required", "librarian-judgement"], ["IA-VM-009", "required", "inferred-from-cambridge"]]
   readings: ["RM-GP-05"]
+  fingerprint: {"chars": 60, "sha256": "1a23a847e6f9fb1b6b2cd0e4d9f521e0993c8c64e660531464d92b485b7f578a"}
 
 - id: "IA-GP-012"
   course: "Groups"
   heading: "Matrix groups"
-  source: "The orthogonal and special orthogonal groups. Proof (in R3) that every element of the orthogonal group is the product of reflections and every rotation in R3 has an axis."
-  lectures_in_block: 3
+  summary: "The orthogonal and special orthogonal groups; a proof, in R^3, that every orthogonal transformation is a product of reflections and every rotation has an axis."
+  summary_status: "librarian-draft"
+  qualifiers: ["proof-given"]
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B05"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "2 of 3"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-GP-011", "IA-VM-012"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-GP-011", "recommended", "librarian-judgement"], ["IA-VM-012", "required", "inferred-from-cambridge"]]
   readings: ["RM-GP-05"]
+  fingerprint: {"chars": 142, "sha256": "141c6c50f1029c464745519ee34b0296de82f44c19ba8aaa270b4a1fa2aeae98"}
 
 - id: "IA-GP-013"
   course: "Groups"
   heading: "Matrix groups"
-  source: "Basis change as an example of conjugation."
-  lectures_in_block: 3
+  summary: "A change of basis viewed as an instance of conjugation."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B05"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "3 of 3"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-GP-003", "IA-VM-015"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-GP-003", "recommended", "librarian-judgement"], ["IA-VM-015", "recommended", "inferred-from-cambridge"]]
   readings: ["RM-GP-05"]
+  fingerprint: {"chars": 36, "sha256": "481dd309a7866d3dc8364a38506052ada6177b10d670ce439a05d60764436acc"}
 
 - id: "IA-GP-014"
   course: "Groups"
   heading: "Permutations"
-  source: "Permutations, cycles and transpositions. The sign of a permutation."
-  lectures_in_block: 4
+  summary: "Permutations written as cycles and as products of transpositions; the sign of a permutation."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B06"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "1 of 3"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-GP-002"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-GP-002", "required", "librarian-judgement"]]
   readings: ["RM-GP-06"]
+  fingerprint: {"chars": 59, "sha256": "52e3a7d029a1ebceb966144ed84af2ee856ec88c04516797ea3bdc8c06f5faa7"}
 
 - id: "IA-GP-015"
   course: "Groups"
   heading: "Permutations"
-  source: "Conjugacy in Sn and in An."
-  lectures_in_block: 4
+  summary: "When two permutations are conjugate in S_n, and in A_n."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B06"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "2 of 3"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-GP-014", "IA-GP-009"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-GP-014", "required", "librarian-judgement"], ["IA-GP-009", "required", "librarian-judgement"]]
   readings: ["RM-GP-06"]
+  fingerprint: {"chars": 21, "sha256": "3e2bbbb8af538d6010bc08d2835f1f37d17b6c9ef4328a1a93ed137e04ec5c0b"}
 
 - id: "IA-GP-016"
   course: "Groups"
   heading: "Permutations"
-  source: "Simple groups; simplicity of A5."
-  lectures_in_block: 4
+  summary: "Simple groups, including a proof that A_5 is simple."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "GP-B06"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "3 of 3"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-GP-010", "IA-GP-015"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-GP-010", "required", "librarian-judgement"], ["IA-GP-015", "required", "librarian-judgement"]]
   readings: ["RM-GP-06"]
+  fingerprint: {"chars": 28, "sha256": "b65b678649f1cd5d499b9e5a5a4fdc054af70530e5d0aa42e7fc0534478ccc95"}
 
 - id: "IA-VM-001"
   course: "Vectors and Matrices"
   heading: "Complex numbers"
-  source: "Review of complex numbers, including complex conjugate, inverse, modulus, argument and Argand diagram."
-  lectures_in_block: 2
+  summary: "Revision of complex numbers: conjugate, inverse, modulus, argument and the Argand diagram."
+  summary_status: "librarian-draft"
+  qualifiers: ["revision"]
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B01"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "1 of 2"
+  lectures_in_block: 2
   status: "examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-VM-01"]
+  fingerprint: {"chars": 90, "sha256": "3ceaf156e10c37a6ed20cc534ccdb31b68d0cedeb16f7106127d8affc0eac308"}
 
 - id: "IA-VM-002"
   course: "Vectors and Matrices"
   heading: "Complex numbers"
-  source: "Informal treatment of complex logarithm, n-th roots and complex powers. de Moivre's theorem."
-  lectures_in_block: 2
+  summary: "Informal treatment of complex logarithms, n-th roots and powers, and de Moivre's theorem."
+  summary_status: "librarian-draft"
+  qualifiers: ["informal-treatment"]
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B01"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "2 of 2"
+  lectures_in_block: 2
   status: "examinable"
-  prerequisites: ["IA-VM-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-001", "required", "librarian-judgement"]]
   readings: ["RM-VM-01"]
+  fingerprint: {"chars": 79, "sha256": "9c4b83457a63a9477f2c661a5338da5d8655de501bc50ccb45fb1eb065fd191f"}
 
 - id: "IA-VM-003"
   course: "Vectors and Matrices"
   heading: "Vectors"
-  source: "Review of elementary algebra of vectors in R3, including scalar product."
-  lectures_in_block: 5
+  summary: "Revision of the elementary algebra of vectors in R^3, including the scalar product."
+  summary_status: "librarian-draft"
+  qualifiers: ["revision"]
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B02"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "1 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-VM-02"]
+  fingerprint: {"chars": 62, "sha256": "de44fc25820162ed3af221b4218fef3dfb79733d9531a80e6137645cbe4ec234"}
 
 - id: "IA-VM-004"
   course: "Vectors and Matrices"
   heading: "Vectors"
-  source: "Brief discussion of vectors in Rn and Cn; scalar product and the Cauchy–Schwarz inequality."
-  lectures_in_block: 5
+  summary: "A brief look at vectors in R^n and C^n, with the scalar product and the Cauchy-Schwarz inequality."
+  summary_status: "librarian-draft"
+  qualifiers: ["brief"]
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B02"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "2 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-VM-003", "IA-VM-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-003", "required", "librarian-judgement"], ["IA-VM-001", "required", "librarian-judgement"]]
   readings: ["RM-VM-02"]
+  fingerprint: {"chars": 78, "sha256": "e27cd6fd956f08e5cbc8bdfc1afa2243e250d6febcba3008f5f8bb0b745d6a5c"}
 
 - id: "IA-VM-005"
   course: "Vectors and Matrices"
   heading: "Vectors"
-  source: "Concepts of linear span, linear independence, subspaces, basis and dimension."
-  lectures_in_block: 5
+  summary: "The ideas of linear span, linear independence, subspace, basis and dimension."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B02"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "3 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-VM-004"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-004", "recommended", "librarian-judgement"]]
   readings: ["RM-VM-02"]
+  fingerprint: {"chars": 68, "sha256": "f21b4e707b5857f52baf1dcb70f00aae580eb80b9fa44b3bd0adcb05e6e442b5"}
 
 - id: "IA-VM-006"
   course: "Vectors and Matrices"
   heading: "Vectors"
-  source: "Suffix notation: including summation convention, δij and ϵijk ."
-  lectures_in_block: 5
+  summary: "Suffix (index) notation: the summation convention and the symbols delta_ij and epsilon_ijk."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B02"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "4 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-VM-003"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-003", "required", "librarian-judgement"]]
   readings: ["RM-VM-02"]
+  fingerprint: {"chars": 55, "sha256": "700ffced4a58523881e91f1013258efb4f7ac07874ad9ba3d412503cf991d0bf"}
 
 - id: "IA-VM-007"
   course: "Vectors and Matrices"
   heading: "Vectors"
-  source: "Vector product and triple product: definition and geometrical interpretation. Solution of linear vector equations."
-  lectures_in_block: 5
+  summary: "The vector product and triple product, their definitions and geometric meaning; solving linear equations in vectors."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B02"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "5 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-VM-006"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-006", "recommended", "librarian-judgement"]]
   readings: ["RM-VM-02"]
+  fingerprint: {"chars": 101, "sha256": "bb1866119f6f7a8dba923e05823e699115e34efb6c8ced9fa591cf6d987216d8"}
 
 - id: "IA-VM-008"
   course: "Vectors and Matrices"
   heading: "Vectors"
-  source: "Applications of vectors to geometry, including equations of lines, planes and spheres."
-  lectures_in_block: 5
+  summary: "Geometric applications of vectors, including the equations of lines, planes and spheres."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B02"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "6 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-VM-007"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-007", "required", "librarian-judgement"]]
   readings: ["RM-VM-02"]
+  fingerprint: {"chars": 75, "sha256": "5bc329e2b45ec164c8f39f3fda69d9ce250eeb6ad68f9cffaa4eac2c57945f90"}
 
 - id: "IA-VM-009"
   course: "Vectors and Matrices"
   heading: "Matrices"
-  source: "Elementary algebra of 3 × 3 matrices, including determinants. Extension to n × n complex matrices. Trace, determinant, non-singular matrices and inverses."
-  lectures_in_block: 4
+  summary: "Arithmetic of 3 x 3 matrices and their determinants, extended to n x n complex matrices; trace, invertibility and inverse matrices."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B03"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "1 of 2"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-VM-03"]
+  fingerprint: {"chars": 132, "sha256": "c514f1940c89d244e02cee78154ee34b146f061d79b8af6f9bd26e8eb1b31c19"}
 
 - id: "IA-VM-010"
   course: "Vectors and Matrices"
   heading: "Matrices"
-  source: "Matrices as linear transformations; examples of geometrical actions including rotations, reflections, dilations, shears; kernel and image, rank–nullity theorem (statement only)."
-  lectures_in_block: 4
+  summary: "Matrices as linear maps, with geometric examples (rotations, reflections, dilations, shears); kernel and image; the rank-nullity theorem is stated only, not proved."
+  summary_status: "librarian-draft"
+  qualifiers: ["statement-only"]
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B03"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "2 of 2"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-VM-009", "IA-VM-005"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-009", "required", "librarian-judgement"], ["IA-VM-005", "required", "librarian-judgement"]]
   readings: ["RM-VM-03"]
+  fingerprint: {"chars": 158, "sha256": "6db68679c4e0c1a5366461ec7cf76f8685023bb61cc46b7fd547fd5e8ace88ff"}
 
 - id: "IA-VM-011"
   course: "Vectors and Matrices"
   heading: "Matrices"
-  source: "Simultaneous linear equations: matrix formulation; existence and uniqueness of solutions, geometric interpretation; Gaussian elimination."
-  lectures_in_block: 3
+  summary: "Systems of linear equations in matrix form: when solutions exist and are unique, the geometric picture, and Gaussian elimination."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B04"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "1 of 1"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-VM-009", "IA-VM-010"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-009", "required", "librarian-judgement"], ["IA-VM-010", "recommended", "librarian-judgement"]]
   readings: ["RM-VM-03"]
+  fingerprint: {"chars": 124, "sha256": "fa65ce9eea8316aad23c194fa0fb9411c7a446faa29bd7464601813a87ce1604"}
 
 - id: "IA-VM-012"
   course: "Vectors and Matrices"
   heading: "Matrices"
-  source: "Symmetric, anti-symmetric, orthogonal, hermitian and unitary matrices. Decomposition of a general matrix into isotropic, symmetric trace-free and antisymmetric parts."
-  lectures_in_block: 1
+  summary: "Special classes of matrix (symmetric, antisymmetric, orthogonal, hermitian, unitary), and writing any matrix as a sum of an isotropic part, a symmetric trace-free part and an antisymmetric part."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B05"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "1 of 1"
+  lectures_in_block: 1
   status: "examinable"
-  prerequisites: ["IA-VM-009"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-009", "required", "librarian-judgement"]]
   readings: ["RM-VM-03"]
+  fingerprint: {"chars": 146, "sha256": "516d767badbfc4fde80258055a48f65502aa573a5b3bcc644e8d372a7c6774e1"}
 
 - id: "IA-VM-013"
   course: "Vectors and Matrices"
   heading: "Eigenvalues and Eigenvectors"
-  source: "Eigenvalues and eigenvectors; geometric significance."
-  lectures_in_block: 2
+  summary: "Eigenvalues and eigenvectors and their geometric meaning."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B06"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "1 of 1"
+  lectures_in_block: 2
   status: "examinable"
-  prerequisites: ["IA-VM-010", "IA-VM-011"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-010", "required", "librarian-judgement"], ["IA-VM-011", "required", "librarian-judgement"]]
   readings: ["RM-VM-04"]
+  fingerprint: {"chars": 49, "sha256": "2743aa5a05c191151e1188ccc54c675ffcdbb4cee1c2eb2dc65eff0a8dfdf135"}
 
 - id: "IA-VM-014"
   course: "Vectors and Matrices"
   heading: "Eigenvalues and Eigenvectors"
-  source: "Proof that eigenvalues of hermitian matrix are real, and that distinct eigenvalues give an orthogonal basis of eigenvectors."
-  lectures_in_block: 5
+  summary: "Proof that hermitian matrices have real eigenvalues and that eigenvectors for different eigenvalues are orthogonal, which gives an orthogonal basis of eigenvectors."
+  summary_status: "librarian-draft"
+  qualifiers: ["proof-given"]
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B07"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "1 of 3"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-VM-013", "IA-VM-012", "IA-VM-004"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-013", "required", "librarian-judgement"], ["IA-VM-012", "required", "librarian-judgement"], ["IA-VM-004", "required", "librarian-judgement"]]
   readings: ["RM-VM-04"]
+  fingerprint: {"chars": 107, "sha256": "6a5a3300a821708e3d6112097af99290da1bedfa78055619643d52c09efee31e"}
 
 - id: "IA-VM-015"
   course: "Vectors and Matrices"
   heading: "Eigenvalues and Eigenvectors"
-  source: "The effect of a general change of basis (similarity transformations)."
-  lectures_in_block: 5
+  summary: "How a matrix changes under an arbitrary change of basis (similarity transformations)."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B07"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "2 of 3"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-VM-013", "IA-VM-005"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-013", "recommended", "librarian-judgement"], ["IA-VM-005", "required", "librarian-judgement"]]
   readings: ["RM-VM-04"]
+  fingerprint: {"chars": 60, "sha256": "0cf2b9609dc9b5227337a5d8b3697588ac4fa8c5eaf9fb2f639917977a157ba4"}
 
 - id: "IA-VM-016"
   course: "Vectors and Matrices"
   heading: "Eigenvalues and Eigenvectors"
-  source: "Diagonalization of general matrices: sufficient conditions; examples of matrices that cannot be diagonalized. Canonical forms for 2 × 2 matrices."
-  lectures_in_block: 5
+  summary: "When a general matrix can be diagonalised (sufficient conditions), examples where it cannot, and canonical forms for 2 x 2 matrices."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B07"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "3 of 3"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-VM-015"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-015", "required", "librarian-judgement"]]
   readings: ["RM-VM-04"]
+  fingerprint: {"chars": 126, "sha256": "3739ac6cec0695b56f8c4441a7389f4e30b714e374dcaf8b0634058d84d283c1"}
 
 - id: "IA-VM-017"
   course: "Vectors and Matrices"
   heading: "Eigenvalues and Eigenvectors"
-  source: "Discussion of quadratic forms, including change of basis. Classification of conics, cartesian and polar forms."
-  lectures_in_block: 1
+  summary: "Quadratic forms, including how they change under a change of basis; classification of conics in Cartesian and polar form."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B08"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "1 of 1"
+  lectures_in_block: 1
   status: "examinable"
-  prerequisites: ["IA-VM-014", "IA-VM-015"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-014", "required", "librarian-judgement"], ["IA-VM-015", "recommended", "librarian-judgement"]]
   readings: ["RM-VM-04"]
+  fingerprint: {"chars": 96, "sha256": "e2f19b7a1ec6623c0d37c483466060d0fbdb8188f6ae3019422bd847bfc9e7d3"}
 
 - id: "IA-VM-018"
   course: "Vectors and Matrices"
   heading: "Eigenvalues and Eigenvectors"
-  source: "Rotation matrices and Lorentz transformations as transformation groups."
-  lectures_in_block: 1
+  summary: "Rotation matrices and Lorentz transformations presented as groups of transformations."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 8
+  pdf_page: 10
   block: "VM-B09"
-  location: "Schedules 2026-27, printed p.8 (PDF p.10)"
+  block_item: "1 of 1"
+  lectures_in_block: 1
   status: "examinable"
-  prerequisites: ["IA-VM-010", "IA-VM-012", "IA-GP-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-010", "required", "librarian-judgement"], ["IA-VM-012", "required", "librarian-judgement"], ["IA-GP-001", "connection", "librarian-judgement"]]
   readings: ["RM-VM-04"]
+  fingerprint: {"chars": 64, "sha256": "fc6b18f89fda716f552286057008a6eab0aaf91b1d82d3f82fe65185d5a159d8"}
 
 - id: "IA-NS-N01"
   course: "Numbers and Sets"
   heading: "(course note)"
-  source: "[Note that this course is omitted from Option (b) of Part IA.]"
-  lectures_in_block: null
+  summary: "Course note: this course does not form part of Option (b), Mathematics with Physics."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: null
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: null
+  lectures_in_block: null
   status: "course-note"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: []
+  fingerprint: {"chars": 51, "sha256": "57724651cfcaa92ed4a352d27bfed4ffde3a33c06a86bd0fabd7f1dd9c2ca32f"}
 
 - id: "IA-NS-001"
   course: "Numbers and Sets"
   heading: "Introduction to number systems and logic"
-  source: "Overview of the natural numbers, integers, real numbers, rational and irrational numbers, algebraic and transcendental numbers. Brief discussion of complex numbers; statement of the Fundamental Theorem of Algebra."
-  lectures_in_block: 2
+  summary: "A survey of the number systems (naturals, integers, rationals, reals, with irrational, algebraic and transcendental numbers); a brief look at the complex numbers, with the Fundamental Theorem of Algebra stated only."
+  summary_status: "librarian-draft"
+  qualifiers: ["statement-only", "brief"]
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B01"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "1 of 2"
+  lectures_in_block: 2
   status: "examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-NS-01"]
+  fingerprint: {"chars": 186, "sha256": "07e220a57114f9a41b8c658520150aedf7dc25d62b1bba961c21671405acbc6b"}
 
 - id: "IA-NS-002"
   course: "Numbers and Sets"
   heading: "Introduction to number systems and logic"
-  source: "Ideas of axiomatic systems and proof within mathematics; the need for proof; the role of counter-examples in mathematics. Elementary logic; implication and negation; examples of negation of compound statements. Proof by contradiction."
-  lectures_in_block: 2
+  summary: "What an axiomatic system and a proof are, why proof is needed, and the role of counterexamples; elementary logic (implication, negation of compound statements); proof by contradiction."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B01"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "2 of 2"
+  lectures_in_block: 2
   status: "examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-NS-01"]
+  fingerprint: {"chars": 202, "sha256": "688a9eb7b4fe62d1c1f530db658bb20f4f60212bd0c31b7e411e087e7f547366"}
 
 - id: "IA-NS-003"
   course: "Numbers and Sets"
   heading: "Sets, relations and functions"
-  source: "Union, intersection and equality of sets."
-  lectures_in_block: 4
+  summary: "Union, intersection and equality of sets."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B02"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "1 of 5"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-NS-002"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-002", "recommended", "librarian-judgement"]]
   readings: ["RM-NS-02"]
+  fingerprint: {"chars": 36, "sha256": "1b3ce83de6da1235ddd3815adfbe21ff8d65d2d420ef92e981c06a6be384e0da"}
 
 - id: "IA-NS-004"
   course: "Numbers and Sets"
   heading: "Sets, relations and functions"
-  source: "Indicator (characteristic) functions; their use in establishing set identities."
-  lectures_in_block: 4
+  summary: "Indicator (characteristic) functions and their use in proving set identities."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B02"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "2 of 5"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-NS-003"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-003", "required", "librarian-judgement"]]
   readings: ["RM-NS-02"]
+  fingerprint: {"chars": 71, "sha256": "91e95570c00e2cdd0ba3282b5871456591f855fcae1b9b4567d4d298c6f1cc4e"}
 
 - id: "IA-NS-005"
   course: "Numbers and Sets"
   heading: "Sets, relations and functions"
-  source: "Functions; injections, surjections and bijections."
-  lectures_in_block: 4
+  summary: "Functions, and the notions of injection, surjection and bijection."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B02"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "3 of 5"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-NS-003"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-003", "required", "librarian-judgement"]]
   readings: ["RM-NS-02"]
+  fingerprint: {"chars": 46, "sha256": "95ed1aef7b913df069f896a091e0bbb9e8d973b2e1cf91dd0f691aa64fedb75e"}
 
 - id: "IA-NS-006"
   course: "Numbers and Sets"
   heading: "Sets, relations and functions"
-  source: "Relations, and equivalence relations."
-  lectures_in_block: 4
+  summary: "Relations in general and equivalence relations in particular."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B02"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "4 of 5"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-NS-003"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-003", "required", "librarian-judgement"]]
   readings: ["RM-NS-02"]
+  fingerprint: {"chars": 34, "sha256": "1bc0d37ee05cd124955e3db88ae804a93f46e4246e090e3957e4a151192049d7"}
 
 - id: "IA-NS-007"
   course: "Numbers and Sets"
   heading: "Sets, relations and functions"
-  source: "Counting the combinations or permutations of a set. The Inclusion-Exclusion Principle."
-  lectures_in_block: 4
+  summary: "Counting arrangements and selections from a set; the Inclusion-Exclusion Principle."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B02"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "5 of 5"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-NS-005"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-005", "recommended", "librarian-judgement"]]
   readings: ["RM-NS-02"]
+  fingerprint: {"chars": 75, "sha256": "515110c40389020c3459dea172872768ed9c97a6fd478533a888146219640b52"}
 
 - id: "IA-NS-008"
   course: "Numbers and Sets"
   heading: "The integers"
-  source: "The natural numbers: mathematical induction and the well-ordering principle. Examples, including the Binomial Theorem."
-  lectures_in_block: 2
+  summary: "Mathematical induction and the well-ordering principle for the natural numbers, with examples including the Binomial Theorem."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B03"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "1 of 1"
+  lectures_in_block: 2
   status: "examinable"
-  prerequisites: ["IA-NS-002", "IA-NS-003"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-002", "recommended", "librarian-judgement"], ["IA-NS-003", "recommended", "librarian-judgement"]]
   readings: ["RM-NS-03"]
+  fingerprint: {"chars": 104, "sha256": "d31d9a727726af0b0e6809cf4c5ac2f8e251ade75d05b5656488f9c46b09849c"}
 
 - id: "IA-NS-009"
   course: "Numbers and Sets"
   heading: "Elementary number theory"
-  source: "Prime numbers: existence and uniqueness of prime factorisation into primes; highest common factors and least common multiples."
-  lectures_in_block: 8
+  summary: "Existence and uniqueness of prime factorisation; hcf and lcm."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B04"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "1 of 6"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-NS-008"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-008", "required", "librarian-judgement"]]
   readings: ["RM-NS-04"]
+  fingerprint: {"chars": 110, "sha256": "c12cc0c3b009737bd4d0f4d0b919a94c600c57a3712077ab7813706af2d20653"}
 
 - id: "IA-NS-010"
   course: "Numbers and Sets"
   heading: "Elementary number theory"
-  source: "Euclid's proof of the infinity of primes."
-  lectures_in_block: 8
+  summary: "Euclid's proof that there are infinitely many primes."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B04"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "2 of 6"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-NS-009"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-009", "required", "librarian-judgement"]]
   readings: ["RM-NS-04"]
+  fingerprint: {"chars": 35, "sha256": "0a234335209576df69288cf6a6df1de82fd929fad6cd87987209ddc3813317ba"}
 
 - id: "IA-NS-011"
   course: "Numbers and Sets"
   heading: "Elementary number theory"
-  source: "Euclid's algorithm. Solution in integers of ax+by = c."
-  lectures_in_block: 8
+  summary: "Euclid's algorithm, and solving ax + by = c in integers."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B04"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "3 of 6"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-NS-009"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-009", "required", "librarian-judgement"]]
   readings: ["RM-NS-04"]
+  fingerprint: {"chars": 46, "sha256": "15770938f28e19d7096f6930b3bcb7f8d9570de4aebe1318f2588929f312b871"}
 
 - id: "IA-NS-012"
   course: "Numbers and Sets"
   heading: "Elementary number theory"
-  source: "Modular arithmetic (congruences). Units modulo n."
-  lectures_in_block: 8
+  summary: "Modular arithmetic (congruences) and the units modulo n."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B04"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "4 of 6"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-NS-011", "IA-NS-006"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-011", "required", "librarian-judgement"], ["IA-NS-006", "recommended", "librarian-judgement"]]
   readings: ["RM-NS-04"]
+  fingerprint: {"chars": 44, "sha256": "a7b05ad4a94503bcd216d3adb6ceb8b6cb9b8c94909654c54a15f495895c280b"}
 
 - id: "IA-NS-013"
   course: "Numbers and Sets"
   heading: "Elementary number theory"
-  source: "Chinese Remainder Theorem. Wilson's Theorem; the Fermat-Euler Theorem."
-  lectures_in_block: 8
+  summary: "The Chinese Remainder Theorem, Wilson's Theorem and the Fermat-Euler Theorem."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B04"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "5 of 6"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-NS-012"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-012", "required", "librarian-judgement"]]
   readings: ["RM-NS-04"]
+  fingerprint: {"chars": 62, "sha256": "dfcd7b478ac3c4b5287e0360befda3ed505c8ce0cbf77ba9adfde7e9acfbd943"}
 
 - id: "IA-NS-014"
   course: "Numbers and Sets"
   heading: "Elementary number theory"
-  source: "Public key cryptography and the RSA algorithm."
-  lectures_in_block: 8
+  summary: "Public-key cryptography and the RSA algorithm."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B04"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "6 of 6"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-NS-013"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-013", "required", "librarian-judgement"]]
   readings: ["RM-NS-04"]
+  fingerprint: {"chars": 40, "sha256": "be7498bd746a0f14707004ec9bc0df6f45e2be02b44b6f374da2614840f67f1d"}
 
 - id: "IA-NS-015"
   course: "Numbers and Sets"
   heading: "The real numbers"
-  source: "Least upper bounds; simple examples. Least upper bound axiom."
-  lectures_in_block: 4
+  summary: "Least upper bounds with simple examples, and the least upper bound axiom for the reals."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B05"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "1 of 4"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-NS-001", "IA-NS-003"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-001", "recommended", "librarian-judgement"], ["IA-NS-003", "recommended", "librarian-judgement"]]
   readings: ["RM-NS-05"]
+  fingerprint: {"chars": 53, "sha256": "8b6358d540297436e85ea43f9b42fa700855b96e51d9b6c361d5cf1c5b6a161d"}
 
 - id: "IA-NS-016"
   course: "Numbers and Sets"
   heading: "The real numbers"
-  source: "Sequences and series; convergence of bounded monotonic sequences."
-  lectures_in_block: 4
+  summary: "Sequences and series, including convergence of bounded monotonic sequences."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B05"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "2 of 4"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-NS-015"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-015", "required", "librarian-judgement"]]
   readings: ["RM-NS-05"]
+  fingerprint: {"chars": 58, "sha256": "b9a9b23380c41b392cc9b97439127ddabdc046c881d72a43b181ec6f142d6629"}
 
 - id: "IA-NS-017"
   course: "Numbers and Sets"
   heading: "The real numbers"
-  source: "Irrationality of √2 and e. Decimal expansions."
-  lectures_in_block: 4
+  summary: "Irrationality of the square root of 2 and of e; decimal expansions."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B05"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "3 of 4"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-NS-009", "IA-NS-016"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-009", "recommended", "librarian-judgement"], ["IA-NS-016", "required", "librarian-judgement"]]
   readings: ["RM-NS-05"]
+  fingerprint: {"chars": 40, "sha256": "9910526ac063e5e1dbc224614d0404176f2925803d5b35ae2444965c248432d3"}
 
 - id: "IA-NS-018"
   course: "Numbers and Sets"
   heading: "The real numbers"
-  source: "Construction of a transcendental number."
-  lectures_in_block: 4
+  summary: "Constructing an explicit transcendental number."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B05"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "4 of 4"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-NS-017"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-017", "recommended", "librarian-judgement"]]
   readings: ["RM-NS-05"]
+  fingerprint: {"chars": 36, "sha256": "95ea8efc2791229666a7bafcb803d72a544ebbf8267fcc127f7065b1704b3dd4"}
 
 - id: "IA-NS-019"
   course: "Numbers and Sets"
   heading: "Countability and uncountability"
-  source: "Definitions of finite, infinite, countable and uncountable sets."
-  lectures_in_block: 4
+  summary: "What it means for a set to be finite, infinite, countable or uncountable."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B06"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "1 of 4"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-NS-005"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-005", "required", "librarian-judgement"]]
   readings: ["RM-NS-06"]
+  fingerprint: {"chars": 57, "sha256": "2e142679d59ab0297ebb8d836d1de728f7f5866bd9ba1cab13550405398816bf"}
 
 - id: "IA-NS-020"
   course: "Numbers and Sets"
   heading: "Countability and uncountability"
-  source: "A countable union of countable sets is countable."
-  lectures_in_block: 4
+  summary: "The union of countably many countable sets is again countable."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B06"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "2 of 4"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-NS-019"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-019", "required", "librarian-judgement"]]
   readings: ["RM-NS-06"]
+  fingerprint: {"chars": 42, "sha256": "57a6a7be6166e3d37afa56362ee15f66cf8c0e2524e9757d44c816c85637db49"}
 
 - id: "IA-NS-021"
   course: "Numbers and Sets"
   heading: "Countability and uncountability"
-  source: "Uncountability of R. Non-existence of a bijection from a set to its power set."
-  lectures_in_block: 4
+  summary: "R is uncountable, and no set admits a bijection onto its power set."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B06"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "3 of 4"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-NS-019", "IA-NS-017"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-019", "required", "librarian-judgement"], ["IA-NS-017", "recommended", "librarian-judgement"]]
   readings: ["RM-NS-06"]
+  fingerprint: {"chars": 64, "sha256": "596f954e9a0eae89d32f21020a0eb86aa62eb54578ac12475fc76ed240092de4"}
 
 - id: "IA-NS-022"
   course: "Numbers and Sets"
   heading: "Countability and uncountability"
-  source: "Indirect proof of existence of transcendental numbers."
-  lectures_in_block: 4
+  summary: "An indirect (non-constructive) proof that transcendental numbers exist."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "NS-B06"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "4 of 4"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-NS-020", "IA-NS-021", "IA-NS-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-020", "required", "librarian-judgement"], ["IA-NS-021", "required", "librarian-judgement"], ["IA-NS-001", "recommended", "librarian-judgement"]]
   readings: ["RM-NS-06"]
+  fingerprint: {"chars": 48, "sha256": "da7640c7f899720d252d1d6cba5480db3a434391e91bb97727b352bf43e9a622"}
 
 - id: "IA-DE-001"
   course: "Differential Equations"
   heading: "Basic calculus"
-  source: "Informal treatment of differentiation as a limit, the chain rule, Leibnitz's rule, Taylor series, informal treatment of O and o notation and l'Hôpital's rule; integration as an area, fundamental theorem of calculus, integration by substitution and parts."
-  lectures_in_block: 3
+  summary: "A working (non-rigorous) review of single-variable calculus: derivative as a limit, chain rule, Leibniz's rule, Taylor series, big-O and little-o notation and l'Hopital's rule treated informally; integral as area, the fundamental theorem, and integration by substitution and by parts."
+  summary_status: "librarian-draft"
+  qualifiers: ["informal-treatment"]
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B01"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "1 of 1"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-DE-01"]
+  fingerprint: {"chars": 218, "sha256": "c4ba814896301323f5eeff6e38edb6f297c2204496d621f211cf103f76662f53"}
 
 - id: "IA-DE-002"
   course: "Differential Equations"
   heading: "Basic calculus"
-  source: "Informal treatment of partial derivatives, geometrical interpretation, statement (only) of symmetry of mixed partial derivatives, chain rule, implicit differentiation."
-  lectures_in_block: 2
+  summary: "Partial derivatives introduced informally with their geometric meaning; the equality of mixed partials is stated only; chain rule and implicit differentiation."
+  summary_status: "librarian-draft"
+  qualifiers: ["statement-only", "informal-treatment"]
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B02"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "1 of 3"
+  lectures_in_block: 2
   status: "examinable"
-  prerequisites: ["IA-DE-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-001", "required", "librarian-judgement"]]
   readings: ["RM-DE-01"]
+  fingerprint: {"chars": 149, "sha256": "cb9136e8eacb13eef1fc5debdaf5889d40f2eee0cb10652c2711c0cb620da931"}
 
 - id: "IA-DE-003"
   course: "Differential Equations"
   heading: "Basic calculus"
-  source: "Informal treatment of differentials, including exact differentials."
-  lectures_in_block: 2
+  summary: "Differentials, treated informally, including exact differentials."
+  summary_status: "librarian-draft"
+  qualifiers: ["informal-treatment"]
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B02"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "2 of 3"
+  lectures_in_block: 2
   status: "examinable"
-  prerequisites: ["IA-DE-002"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-002", "required", "librarian-judgement"]]
   readings: ["RM-DE-01"]
+  fingerprint: {"chars": 61, "sha256": "51c8e37271e21351fae2524565a676ef533538ae89016bbeea1cfc1ba3e37773"}
 
 - id: "IA-DE-004"
   course: "Differential Equations"
   heading: "Basic calculus"
-  source: "Differentiation of an integral with respect to a parameter."
-  lectures_in_block: 2
+  summary: "Differentiating an integral with respect to a parameter."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B02"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "3 of 3"
+  lectures_in_block: 2
   status: "examinable"
-  prerequisites: ["IA-DE-002"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-002", "required", "librarian-judgement"]]
   readings: ["RM-DE-01"]
+  fingerprint: {"chars": 51, "sha256": "4beebb6ba809a58f7cb745370121916e005aafc0d92219283566e676bf566e67"}
 
 - id: "IA-DE-005"
   course: "Differential Equations"
   heading: "First-order linear differential equations"
-  source: "Equations with constant coefficients: exponential growth, comparison with discrete equations, series solution; modelling examples including radioactive decay."
-  lectures_in_block: 2
+  summary: "First-order linear equations with constant coefficients: exponential growth, the comparison with discrete (difference) equations, series solutions, and modelling examples such as radioactive decay."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B03"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "1 of 2"
+  lectures_in_block: 2
   status: "examinable"
-  prerequisites: ["IA-DE-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-001", "required", "librarian-judgement"]]
   readings: ["RM-DE-02"]
+  fingerprint: {"chars": 142, "sha256": "528e9718764320eb96a1714cf4b9fad79bdadae6e1f95ac8f021a0c5f0a18f67"}
 
 - id: "IA-DE-006"
   course: "Differential Equations"
   heading: "First-order linear differential equations"
-  source: "Equations with non-constant coefficients: solution by integrating factor."
-  lectures_in_block: 2
+  summary: "First-order linear equations with variable coefficients, solved with an integrating factor."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B03"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "2 of 2"
+  lectures_in_block: 2
   status: "examinable"
-  prerequisites: ["IA-DE-005"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-005", "recommended", "librarian-judgement"]]
   readings: ["RM-DE-02"]
+  fingerprint: {"chars": 65, "sha256": "f997998d7f56d4d0e54fb8f6f6cae4b62f57de23a81abc91781d3066191aebc7"}
 
 - id: "IA-DE-007"
   course: "Differential Equations"
   heading: "Nonlinear first-order equations"
-  source: "Separable equations. Exact equations."
-  lectures_in_block: 4
+  summary: "Separable equations and exact equations."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B04"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "1 of 3"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-DE-006"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-006", "recommended", "librarian-judgement"]]
   readings: ["RM-DE-03"]
+  fingerprint: {"chars": 34, "sha256": "f96b5c49d9bd56f4d7155244a2b134ff3aaddd7b5359cf608e11eeb631ee75e5"}
 
 - id: "IA-DE-008"
   course: "Differential Equations"
   heading: "Nonlinear first-order equations"
-  source: "Sketching solution trajectories. Equilibrium solutions, stability by perturbation; examples, including logistic equation and chemical kinetics."
-  lectures_in_block: 4
+  summary: "Sketching solution curves; equilibria and their stability by perturbation, with examples including the logistic equation and chemical kinetics."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B04"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "2 of 3"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-DE-007"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-007", "recommended", "librarian-judgement"]]
   readings: ["RM-DE-03"]
+  fingerprint: {"chars": 129, "sha256": "5ebe73634b3f38bfd5ade7b78cfa721608c9f4cf3d8648d04c7541d91deb11d4"}
 
 - id: "IA-DE-009"
   course: "Differential Equations"
   heading: "Nonlinear first-order equations"
-  source: "Discrete equations: equilibrium solutions, stability; examples including the logistic map."
-  lectures_in_block: 4
+  summary: "Discrete (difference) equations: equilibria and stability, with examples including the logistic map."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B04"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "3 of 3"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-DE-005", "IA-DE-008"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-005", "recommended", "librarian-judgement"], ["IA-DE-008", "required", "librarian-judgement"]]
   readings: ["RM-DE-03"]
+  fingerprint: {"chars": 81, "sha256": "1d86b9c1fcd52e4714f11a93c042abaf81a44d5a8b5ffa070efc315bc585ddb2"}
 
 - id: "IA-DE-010"
   course: "Differential Equations"
   heading: "Higher-order linear differential equations"
-  source: "Complementary function and particular integral, linear independence, Wronskian (for second-order equations), Abel's theorem."
-  lectures_in_block: 8
+  summary: "Linear equations of higher order: complementary function plus particular integral, linear independence, the Wronskian for second-order equations, and Abel's theorem."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B05"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "1 of 5"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-DE-005", "IA-VM-005"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-005", "required", "librarian-judgement"], ["IA-VM-005", "recommended", "librarian-judgement"]]
   readings: ["RM-DE-04"]
+  fingerprint: {"chars": 111, "sha256": "317d1e4e3a30841b0689e422b8edb99c6e237285dfbfcbba1156c5f0b1e6ddb3"}
 
 - id: "IA-DE-011"
   course: "Differential Equations"
   heading: "Higher-order linear differential equations"
-  source: "Equations with constant coefficients and examples including radioactive sequences, comparison in simple cases with difference equations, reduction of order, resonance, transients, damping."
-  lectures_in_block: 8
+  summary: "Higher-order linear equations with constant coefficients and their examples (including radioactive decay chains), a comparison with difference equations in simple cases, reduction of order, resonance, transients and damping."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B05"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "2 of 5"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-DE-010", "IA-VM-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-010", "required", "librarian-judgement"], ["IA-VM-001", "required", "librarian-judgement"]]
   readings: ["RM-DE-04"]
+  fingerprint: {"chars": 167, "sha256": "b515c5ccdcee30fee4c238d529146126f09a66cc59657a23e837db0dccaa3b37"}
 
 - id: "IA-DE-012"
   course: "Differential Equations"
   heading: "Higher-order linear differential equations"
-  source: "Homogeneous equations."
-  lectures_in_block: 8
+  summary: "Homogeneous (equidimensional) equations."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B05"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "3 of 5"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-DE-011"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-011", "recommended", "librarian-judgement"]]
   readings: ["RM-DE-04"]
+  fingerprint: {"chars": 21, "sha256": "ffa5c4e5abcebb4f3c9ed2c39564d5cb713fef001901b073d137e1be68af0e8b"}
 
 - id: "IA-DE-013"
   course: "Differential Equations"
   heading: "Higher-order linear differential equations"
-  source: "Response to step and impulse function inputs; introduction to the notions of the Heaviside step-function and the Dirac delta-function."
-  lectures_in_block: 8
+  summary: "How a system responds to step and impulse inputs, introducing the Heaviside step function and the Dirac delta."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B05"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "4 of 5"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-DE-011"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-011", "required", "librarian-judgement"]]
   readings: ["RM-DE-04"]
+  fingerprint: {"chars": 114, "sha256": "d593b16ef60d13334a3d48daa26c84ac260494d7800540c6dcd63f3593c10d89"}
 
 - id: "IA-DE-014"
   course: "Differential Equations"
   heading: "Higher-order linear differential equations"
-  source: "Series solutions including statement only of the need for the logarithmic solution."
-  lectures_in_block: 8
+  summary: "Series solutions of linear equations; it is only stated, not shown in detail, that a logarithmic solution can be needed."
+  summary_status: "librarian-draft"
+  qualifiers: ["statement-only"]
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B05"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "5 of 5"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-DE-010"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-010", "required", "librarian-judgement"]]
   readings: ["RM-DE-04"]
+  fingerprint: {"chars": 72, "sha256": "c33f720f5d8dbb3223a43a379fce0a2355ccb928f37aa7bbf5aecb770edb9683"}
 
 - id: "IA-DE-015"
   course: "Differential Equations"
   heading: "Multivariate functions: applications"
-  source: "Directional derivatives and the gradient vector."
-  lectures_in_block: 5
+  summary: "Directional derivatives and the gradient vector."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B06"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "1 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-DE-002"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-002", "required", "librarian-judgement"]]
   readings: ["RM-DE-05"]
+  fingerprint: {"chars": 43, "sha256": "4fdeee7c41c8e071e69a52f7ebc1c3445619ee5a25122501a3f6c25a5db86c87"}
 
 - id: "IA-DE-016"
   course: "Differential Equations"
   heading: "Multivariate functions: applications"
-  source: "Statement of Taylor series for functions on Rn."
-  lectures_in_block: 5
+  summary: "The Taylor series for functions of several variables, stated only."
+  summary_status: "librarian-draft"
+  qualifiers: ["statement-only"]
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B06"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "2 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-DE-002", "IA-DE-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-002", "required", "librarian-judgement"], ["IA-DE-001", "required", "librarian-judgement"]]
   readings: ["RM-DE-05"]
+  fingerprint: {"chars": 40, "sha256": "e1237c7c4528865490175a439355baa7e5afdcc7e627da8fcb912a6b14af449b"}
 
 - id: "IA-DE-017"
   course: "Differential Equations"
   heading: "Multivariate functions: applications"
-  source: "Local extrema of real functions, classification using the Hessian matrix."
-  lectures_in_block: 5
+  summary: "Local extrema of functions of several variables, classified by the Hessian matrix."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B06"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "3 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-DE-016", "IA-VM-014"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-016", "required", "librarian-judgement"], ["IA-VM-014", "recommended", "librarian-judgement"]]
   readings: ["RM-DE-05"]
+  fingerprint: {"chars": 64, "sha256": "6e9c3dd6a7e00d65941674b5a0072c67835a0b68424623ed7f273a9faf5d3f40"}
 
 - id: "IA-DE-018"
   course: "Differential Equations"
   heading: "Multivariate functions: applications"
-  source: "Coupled first order systems: equivalence to single higher order equations; solution by matrix methods."
-  lectures_in_block: 5
+  summary: "Coupled first-order systems: equivalence with a single higher-order equation, and solution by matrix methods."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B06"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "4 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-DE-011", "IA-VM-016"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-011", "required", "librarian-judgement"], ["IA-VM-016", "required", "inferred-from-cambridge"]]
   readings: ["RM-DE-05"]
+  fingerprint: {"chars": 89, "sha256": "68da30e8899f767babf9f2151f176d59c2fe9b7afb2f04747faf91fd83cf024d"}
 
 - id: "IA-DE-019"
   course: "Differential Equations"
   heading: "Multivariate functions: applications"
-  source: "Non-degenerate phase portraits local to equilibrium points; stability."
-  lectures_in_block: 5
+  summary: "Phase portraits near non-degenerate equilibrium points, and stability."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B06"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "5 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-DE-018", "IA-DE-008"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-018", "required", "librarian-judgement"], ["IA-DE-008", "recommended", "librarian-judgement"]]
   readings: ["RM-DE-05"]
+  fingerprint: {"chars": 62, "sha256": "d8f28563aa3ed76b39169f1677bdf0a21962c5cba5c65f83f8017a4e93f2ff0d"}
 
 - id: "IA-DE-020"
   course: "Differential Equations"
   heading: "Multivariate functions: applications"
-  source: "Simple examples of first- and second-order partial differential equations, solution of the wave equation in the form f (x + ct) + g(x − ct)."
-  lectures_in_block: 5
+  summary: "Simple first- and second-order partial differential equations, including the wave equation solved in the form f(x+ct) + g(x-ct)."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 9
+  pdf_page: 11
   block: "DE-B06"
-  location: "Schedules 2026-27, printed p.9 (PDF p.11)"
+  block_item: "6 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-DE-002"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-002", "required", "librarian-judgement"]]
   readings: ["RM-DE-05"]
+  fingerprint: {"chars": 114, "sha256": "ca0261aea55a37662ef2859042f52cbf21d804dacc1b7d1c91fea9bf0a6ec78d"}
 
 - id: "IA-AN-001"
   course: "Analysis I"
   heading: "Limits and convergence"
-  source: "Sequences and series in R and C. Sums, products and quotients. Absolute convergence; absolute convergence implies convergence."
-  lectures_in_block: 6
+  summary: "Sequences and series in R and C: limits of sums, products and quotients; absolute convergence implies convergence."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B01"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "1 of 3"
+  lectures_in_block: 6
   status: "examinable"
-  prerequisites: ["IA-NS-016", "IA-NS-015", "IA-VM-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-016", "recommended", "inferred-from-cambridge"], ["IA-NS-015", "recommended", "inferred-from-cambridge"], ["IA-VM-001", "required", "librarian-judgement"]]
   readings: ["RM-AN-01"]
+  fingerprint: {"chars": 110, "sha256": "3f0e649b5e647e56d6ffb15a60476d4621534fdc7fb9213ca959223dbcce27d9"}
 
 - id: "IA-AN-002"
   course: "Analysis I"
   heading: "Limits and convergence"
-  source: "The Bolzano-Weierstrass theorem and applications (the General Principle of Convergence)."
-  lectures_in_block: 6
+  summary: "The Bolzano-Weierstrass theorem and its applications, including the General Principle of Convergence."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B01"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "2 of 3"
+  lectures_in_block: 6
   status: "examinable"
-  prerequisites: ["IA-AN-001", "IA-NS-015"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-001", "required", "librarian-judgement"], ["IA-NS-015", "required", "librarian-judgement"]]
   readings: ["RM-AN-01"]
+  fingerprint: {"chars": 78, "sha256": "f487692dbd5541449d459b4b2cad1fa7ee7dd699d0c7b82cac7f4eef61b2dbbd"}
 
 - id: "IA-AN-003"
   course: "Analysis I"
   heading: "Limits and convergence"
-  source: "Comparison and ratio tests, alternating series test."
-  lectures_in_block: 6
+  summary: "Convergence tests for series: comparison, ratio and alternating series."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B01"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "3 of 3"
+  lectures_in_block: 6
   status: "examinable"
-  prerequisites: ["IA-AN-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-001", "required", "librarian-judgement"]]
   readings: ["RM-AN-01"]
+  fingerprint: {"chars": 46, "sha256": "abd3ab22cb3c26754592ff8343598202b18be7509ca15e3fd3e41ae786c89593"}
 
 - id: "IA-AN-004"
   course: "Analysis I"
   heading: "Continuity"
-  source: "Continuity of real- and complex-valued functions defined on subsets of R and C."
-  lectures_in_block: 3
+  summary: "Continuity of real- or complex-valued functions on subsets of R or C."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B02"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "1 of 3"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-AN-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-001", "required", "librarian-judgement"]]
   readings: ["RM-AN-02"]
+  fingerprint: {"chars": 65, "sha256": "87aaa248b4d94372f137a563e577f4ce4734d0d09111404d7b5445276b1227eb"}
 
 - id: "IA-AN-005"
   course: "Analysis I"
   heading: "Continuity"
-  source: "The intermediate value theorem."
-  lectures_in_block: 3
+  summary: "The intermediate value theorem."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B02"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "2 of 3"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-AN-004", "IA-AN-002"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-004", "required", "librarian-judgement"], ["IA-AN-002", "recommended", "librarian-judgement"]]
   readings: ["RM-AN-02"]
+  fingerprint: {"chars": 28, "sha256": "ed10afb3af51cb014e7db816523ffe3b7641f2bf83492d3f108ea609838d2c4d"}
 
 - id: "IA-AN-006"
   course: "Analysis I"
   heading: "Continuity"
-  source: "A continuous function on a closed bounded interval is bounded and attains its bounds."
-  lectures_in_block: 3
+  summary: "A continuous function on a closed interval is bounded and achieves its upper and lower bounds."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B02"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "3 of 3"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-AN-004", "IA-AN-002"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-004", "required", "librarian-judgement"], ["IA-AN-002", "required", "librarian-judgement"]]
   readings: ["RM-AN-02"]
+  fingerprint: {"chars": 72, "sha256": "3a59143319bc3ebf47ef2d37de48aca74a7be4e80bc00e66a20a81f01a1098ef"}
 
 - id: "IA-AN-007"
   course: "Analysis I"
   heading: "Differentiability"
-  source: "Differentiability of functions from R to R."
-  lectures_in_block: 5
+  summary: "Differentiability of functions from R to R."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B03"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "1 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-AN-004", "IA-DE-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-004", "required", "librarian-judgement"], ["IA-DE-001", "connection", "inferred-from-cambridge"]]
   readings: ["RM-AN-03"]
+  fingerprint: {"chars": 37, "sha256": "9fccbf5277e41b941bc8be9d03ed7098a85687a7621566ada151d38ac7b69d12"}
 
 - id: "IA-AN-008"
   course: "Analysis I"
   heading: "Differentiability"
-  source: "Derivative of sums and products. The chain rule. Derivative of the inverse function."
-  lectures_in_block: 5
+  summary: "The derivative of sums and products, the chain rule, and the derivative of an inverse function."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B03"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "2 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-AN-007"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-007", "required", "librarian-judgement"]]
   readings: ["RM-AN-03"]
+  fingerprint: {"chars": 72, "sha256": "f9ef3d5a072b3a3da09ec5c68936d979dee3715ceebde83771f2beb0aa500127"}
 
 - id: "IA-AN-009"
   course: "Analysis I"
   heading: "Differentiability"
-  source: "Rolle's theorem; the mean value theorem."
-  lectures_in_block: 5
+  summary: "Rolle's theorem and the mean value theorem."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B03"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "3 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-AN-008", "IA-AN-006"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-008", "recommended", "librarian-judgement"], ["IA-AN-006", "required", "librarian-judgement"]]
   readings: ["RM-AN-03"]
+  fingerprint: {"chars": 35, "sha256": "e630d6fb42b3314cdeda9fa9d647bfb73fde3770f35cc119ba85b9b3e83e18af"}
 
 - id: "IA-AN-010"
   course: "Analysis I"
   heading: "Differentiability"
-  source: "One-dimensional version of the inverse function theorem."
-  lectures_in_block: 5
+  summary: "The one-variable inverse function theorem."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B03"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "4 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-AN-009", "IA-AN-005"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-009", "required", "librarian-judgement"], ["IA-AN-005", "required", "librarian-judgement"]]
   readings: ["RM-AN-03"]
+  fingerprint: {"chars": 49, "sha256": "4ca50d7ffd73f96da621038986623e512daab070ee174cf78e220919e13cec65"}
 
 - id: "IA-AN-011"
   course: "Analysis I"
   heading: "Differentiability"
-  source: "Taylor's theorem from R to R; Lagrange's form of the remainder."
-  lectures_in_block: 5
+  summary: "Taylor's theorem for functions from R to R, with Lagrange's form of the remainder."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B03"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "5 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-AN-009"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-009", "required", "librarian-judgement"], ["IA-DE-001", "connection", "inferred-from-cambridge"]]
   readings: ["RM-AN-03"]
+  fingerprint: {"chars": 53, "sha256": "e6d52ee0923c743cfdb83cd805268ecfb3063052e71aa318f4d48e111373f722"}
 
 - id: "IA-AN-012"
   course: "Analysis I"
   heading: "Differentiability"
-  source: "Complex differentiation."
-  lectures_in_block: 5
+  summary: "Differentiation of functions of a complex variable."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B03"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "6 of 6"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-AN-007", "IA-VM-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-007", "required", "librarian-judgement"], ["IA-VM-001", "required", "librarian-judgement"]]
   readings: ["RM-AN-03"]
+  fingerprint: {"chars": 23, "sha256": "1d5f2a1a0f54c78328b02820738ebd7bf38ba5ddb783ee354fcd5ec573fbdd54"}
 
 - id: "IA-AN-013"
   course: "Analysis I"
   heading: "Power series"
-  source: "Complex power series and radius of convergence."
-  lectures_in_block: 4
+  summary: "Complex power series and the radius of convergence."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B04"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "1 of 3"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-AN-003"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-003", "required", "librarian-judgement"]]
   readings: ["RM-AN-04"]
+  fingerprint: {"chars": 41, "sha256": "c56eb12c76bd35cd2aa7d2da00e07cbabc45b8433b14f75e44ce58e38db5818a"}
 
 - id: "IA-AN-014"
   course: "Analysis I"
   heading: "Power series"
-  source: "Exponential, trigonometric and hyperbolic functions, and relations between them."
-  lectures_in_block: 4
+  summary: "The exponential, trigonometric and hyperbolic functions and the relations among them."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B04"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "2 of 3"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-AN-013", "IA-VM-002"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-013", "required", "librarian-judgement"], ["IA-VM-002", "recommended", "librarian-judgement"]]
   readings: ["RM-AN-04"]
+  fingerprint: {"chars": 72, "sha256": "47bfc39df96c96f11fbccac635d2d3bdf9a45afb7f331c1caecd915265c4bb63"}
 
 - id: "IA-AN-015"
   course: "Analysis I"
   heading: "Power series"
-  source: "*Direct proof of the differentiability of a power series within its circle of convergence*."
-  lectures_in_block: 4
+  summary: "Starred (lectured but not examinable): a direct proof that a power series is differentiable inside its circle of convergence."
+  summary_status: "librarian-draft"
+  qualifiers: ["proof-given"]
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B04"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "3 of 3"
+  lectures_in_block: 4
   status: "starred-not-examinable"
-  prerequisites: ["IA-AN-013", "IA-AN-008"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-013", "required", "librarian-judgement"], ["IA-AN-008", "recommended", "librarian-judgement"]]
   readings: ["RM-AN-04"]
+  fingerprint: {"chars": 78, "sha256": "3930a3f1349aa083129ec0f1d3b3611e18a66677e044eae36d672c2c6c4b05a1"}
 
 - id: "IA-AN-016"
   course: "Analysis I"
   heading: "Integration"
-  source: "Definition and basic properties of the Riemann integral."
-  lectures_in_block: 6
+  summary: "The definition of the Riemann integral and its basic properties."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B05"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "1 of 5"
+  lectures_in_block: 6
   status: "examinable"
-  prerequisites: ["IA-NS-015", "IA-AN-006"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-NS-015", "required", "librarian-judgement"], ["IA-AN-006", "required", "librarian-judgement"], ["IA-DE-001", "connection", "inferred-from-cambridge"]]
   readings: ["RM-AN-05"]
+  fingerprint: {"chars": 49, "sha256": "08b399603e163db6116a7e635026a21cdaa1a37c13c304b7c1000d526121f01f"}
 
 - id: "IA-AN-017"
   course: "Analysis I"
   heading: "Integration"
-  source: "A non-integrable function. Integrability of monotonic functions. Integrability of piecewise-continuous functions."
-  lectures_in_block: 6
+  summary: "A function that is not integrable; monotonic functions and piecewise-continuous functions are integrable."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B05"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "2 of 5"
+  lectures_in_block: 6
   status: "examinable"
-  prerequisites: ["IA-AN-016"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-016", "required", "librarian-judgement"]]
   readings: ["RM-AN-05"]
+  fingerprint: {"chars": 101, "sha256": "1d9e76c34929f51f07b08333688636490c57a0cfdb06e768665dac08d4ff0979"}
 
 - id: "IA-AN-018"
   course: "Analysis I"
   heading: "Integration"
-  source: "The fundamental theorem of calculus. Differentiation of indefinite integrals."
-  lectures_in_block: 6
+  summary: "The fundamental theorem of calculus, and differentiation of indefinite integrals."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B05"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "3 of 5"
+  lectures_in_block: 6
   status: "examinable"
-  prerequisites: ["IA-AN-016", "IA-AN-009"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-016", "required", "librarian-judgement"], ["IA-AN-009", "required", "librarian-judgement"]]
   readings: ["RM-AN-05"]
+  fingerprint: {"chars": 69, "sha256": "efe5e3e0358a03170477739f4634fb268898c467c70a09743ee43cc3aafef243"}
 
 - id: "IA-AN-019"
   course: "Analysis I"
   heading: "Integration"
-  source: "Integration by parts. The integral form of the remainder in Taylor's theorem."
-  lectures_in_block: 6
+  summary: "Integration by parts; the Taylor remainder written as an integral."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B05"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "4 of 5"
+  lectures_in_block: 6
   status: "examinable"
-  prerequisites: ["IA-AN-018", "IA-AN-011"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-018", "required", "librarian-judgement"], ["IA-AN-011", "required", "librarian-judgement"]]
   readings: ["RM-AN-05"]
+  fingerprint: {"chars": 66, "sha256": "8e3297f4e4abb7d9202bd669f90657b25ebcab24722c0d2f8abc700d0d8b7d8d"}
 
 - id: "IA-AN-020"
   course: "Analysis I"
   heading: "Integration"
-  source: "Improper integrals."
-  lectures_in_block: 6
+  summary: "Improper integrals."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "AN-B05"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "5 of 5"
+  lectures_in_block: 6
   status: "examinable"
-  prerequisites: ["IA-AN-016", "IA-AN-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-AN-016", "required", "librarian-judgement"], ["IA-AN-001", "required", "librarian-judgement"]]
   readings: ["RM-AN-05"]
+  fingerprint: {"chars": 18, "sha256": "3f3e7f4dcadca8ad47022f130704b93990d75a60ca5be9680733a1ed946c464a"}
 
 - id: "IA-PR-001"
   course: "Probability"
   heading: "Basic concepts"
-  source: "Classical probability, equally likely outcomes."
-  lectures_in_block: 3
+  summary: "Classical probability with equally likely outcomes."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B01"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "1 of 3"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-NS-007"]
-  prereq_basis: "cambridge-stated"
+  builds_on: [["IA-NS-007", "recommended", "cambridge-stated"]]
   readings: ["RM-PR-01"]
+  fingerprint: {"chars": 43, "sha256": "7ccee6708b7734b4f9371b39a1d0492294470cc69bc005e62d47bb48ee7c09f1"}
 
 - id: "IA-PR-002"
   course: "Probability"
   heading: "Basic concepts"
-  source: "Combinatorial analysis, permutations and combinations."
-  lectures_in_block: 3
+  summary: "Combinatorial analysis: permutations and combinations."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B01"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "2 of 3"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-NS-007"]
-  prereq_basis: "cambridge-stated"
+  builds_on: [["IA-NS-007", "recommended", "cambridge-stated"]]
   readings: ["RM-PR-01"]
+  fingerprint: {"chars": 50, "sha256": "9eda6c6f61a326a523bb8e8787f668c3bc67a36a2d07c0ff0daceb559ecf5a8f"}
 
 - id: "IA-PR-003"
   course: "Probability"
   heading: "Basic concepts"
-  source: "Stirling's formula (asymptotics for log n! proved)."
-  lectures_in_block: 3
+  summary: "Stirling's formula, with the asymptotics of log n! proved."
+  summary_status: "librarian-draft"
+  qualifiers: ["proof-given"]
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B01"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "3 of 3"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-PR-002", "IA-AN-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-002", "recommended", "librarian-judgement"], ["IA-AN-001", "recommended", "librarian-judgement"]]
   readings: ["RM-PR-01"]
+  fingerprint: {"chars": 45, "sha256": "6ebd041ca54af0b2c8a88b37dad8b9be4d4c1bba5dfa6f0f0c6996b83a04668b"}
 
 - id: "IA-PR-004"
   course: "Probability"
   heading: "Axiomatic approach"
-  source: "Axioms (countable case). Probability spaces."
-  lectures_in_block: 5
+  summary: "The axioms of probability in the countable case; probability spaces."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B02"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "1 of 5"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-PR-001", "IA-NS-003"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-001", "recommended", "librarian-judgement"], ["IA-NS-003", "recommended", "librarian-judgement"]]
   readings: ["RM-PR-02"]
+  fingerprint: {"chars": 40, "sha256": "7a29bcf1c920e2a119e7513a35bf043ccc78f165f457b717f193bc83879f2f38"}
 
 - id: "IA-PR-005"
   course: "Probability"
   heading: "Axiomatic approach"
-  source: "Inclusion-exclusion formula. Continuity and subadditivity of probability measures."
-  lectures_in_block: 5
+  summary: "Inclusion-exclusion; continuity and subadditivity properties of a probability measure."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B02"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "2 of 5"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-PR-004", "IA-NS-007"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-004", "required", "librarian-judgement"], ["IA-NS-007", "recommended", "librarian-judgement"]]
   readings: ["RM-PR-02"]
+  fingerprint: {"chars": 74, "sha256": "b799a832bb9a3ae506ff695316ba4271d771aeca170876499a77345736ab880e"}
 
 - id: "IA-PR-006"
   course: "Probability"
   heading: "Axiomatic approach"
-  source: "Independence."
-  lectures_in_block: 5
+  summary: "Independence of events."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B02"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "3 of 5"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-PR-004"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-004", "required", "librarian-judgement"]]
   readings: ["RM-PR-02"]
+  fingerprint: {"chars": 13, "sha256": "83cea427aff57b7269d139e96358bee90e27626ef4bfc072b1e7f18b977da3d3"}
 
 - id: "IA-PR-007"
   course: "Probability"
   heading: "Axiomatic approach"
-  source: "Binomial, Poisson and geometric distributions. Relation between Poisson and binomial distributions."
-  lectures_in_block: 5
+  summary: "The binomial, Poisson and geometric distributions, and how the Poisson distribution arises from the binomial."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B02"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "4 of 5"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-PR-006", "IA-PR-002"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-006", "required", "librarian-judgement"], ["IA-PR-002", "recommended", "librarian-judgement"]]
   readings: ["RM-PR-02"]
+  fingerprint: {"chars": 89, "sha256": "9a70fae8b1ca8af6b3f1387b6f24fe345e5157181622ef1e95687f48940e89de"}
 
 - id: "IA-PR-008"
   course: "Probability"
   heading: "Axiomatic approach"
-  source: "Conditional probability, Bayes's formula. Examples, including Simpson's paradox."
-  lectures_in_block: 5
+  summary: "Conditional probability and Bayes's formula, with examples including Simpson's paradox."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B02"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "5 of 5"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-PR-004"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-004", "required", "librarian-judgement"]]
   readings: ["RM-PR-02"]
+  fingerprint: {"chars": 73, "sha256": "1e6a5b870bf6c64249dedec9722f5af690e361020b99b778ff63fa9cbb112dca"}
 
 - id: "IA-PR-009"
   course: "Probability"
   heading: "Discrete random variables"
-  source: "Expectation."
-  lectures_in_block: 7
+  summary: "Expectation of a discrete random variable."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B03"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "1 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-PR-007"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-007", "recommended", "librarian-judgement"]]
   readings: ["RM-PR-03"]
+  fingerprint: {"chars": 12, "sha256": "0dd609c838aad2ae9c618d8715ff2c1281e5af976f45882cd76f52b528846067"}
 
 - id: "IA-PR-010"
   course: "Probability"
   heading: "Discrete random variables"
-  source: "Functions of a random variable, indicator function, variance, standard deviation."
-  lectures_in_block: 7
+  summary: "Functions of a random variable, indicator functions, variance and standard deviation."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B03"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "2 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-PR-009"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-009", "required", "librarian-judgement"]]
   readings: ["RM-PR-03"]
+  fingerprint: {"chars": 72, "sha256": "98bfb95f3492a79f325dbdd3224b5541da3fd0cb78cf0519d2213d61eea605ad"}
 
 - id: "IA-PR-011"
   course: "Probability"
   heading: "Discrete random variables"
-  source: "Covariance, independence of random variables."
-  lectures_in_block: 7
+  summary: "Covariance and independence of random variables."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B03"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "3 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-PR-010", "IA-PR-006"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-010", "required", "librarian-judgement"], ["IA-PR-006", "required", "librarian-judgement"]]
   readings: ["RM-PR-03"]
+  fingerprint: {"chars": 41, "sha256": "ceda244e27a116508d67667659ddbde471a46a62c39d5ae0e50700307cee2734"}
 
 - id: "IA-PR-012"
   course: "Probability"
   heading: "Discrete random variables"
-  source: "Generating functions: sums of independent random variables, random sum formula, moments."
-  lectures_in_block: 7
+  summary: "Generating functions: sums of independent random variables, the random sum formula and moments."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B03"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "4 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-PR-011", "IA-AN-013"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-011", "required", "librarian-judgement"], ["IA-AN-013", "recommended", "librarian-judgement"]]
   readings: ["RM-PR-03"]
+  fingerprint: {"chars": 78, "sha256": "04ffe558b02740e2f606818e8b1cfffc8f4240c9d0c736bc03f4875ed29a406e"}
 
 - id: "IA-PR-013"
   course: "Probability"
   heading: "Discrete random variables"
-  source: "Conditional expectation."
-  lectures_in_block: 7
+  summary: "Conditional expectation."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B03"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "5 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-PR-009", "IA-PR-008"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-009", "required", "librarian-judgement"], ["IA-PR-008", "required", "librarian-judgement"]]
   readings: ["RM-PR-03"]
+  fingerprint: {"chars": 23, "sha256": "8e04371bb206ca330b3742522ce1d67a60f9a6e0b9fcb661583937cf52c20d58"}
 
 - id: "IA-PR-014"
   course: "Probability"
   heading: "Discrete random variables"
-  source: "Random walks: gambler's ruin, recurrence relations. Difference equations and their solution. Mean time to absorption."
-  lectures_in_block: 7
+  summary: "Random walks: gambler's ruin and recurrence relations, solving difference equations, and the mean time to absorption."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B03"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "6 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-PR-013", "IA-DE-011"]
-  prereq_basis: "cambridge-stated"
+  builds_on: [["IA-PR-013", "recommended", "librarian-judgement"], ["IA-DE-011", "connection", "cambridge-stated"]]
   readings: ["RM-PR-03"]
+  fingerprint: {"chars": 103, "sha256": "89e6aee29431494aec45edee2285b6791e3d80388fa77bd1aabf49a6d9ddfbf5"}
 
 - id: "IA-PR-015"
   course: "Probability"
   heading: "Discrete random variables"
-  source: "Branching processes: generating functions and extinction probability."
-  lectures_in_block: 7
+  summary: "Branching processes: generating functions and the probability of extinction."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B03"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "7 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-PR-012", "IA-PR-013"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-012", "required", "librarian-judgement"], ["IA-PR-013", "required", "librarian-judgement"]]
   readings: ["RM-PR-03"]
+  fingerprint: {"chars": 63, "sha256": "f657c846c4df07d49f3c59c69b5a989b5a234919705ba3a7df6586d3bfa9d8cd"}
 
 - id: "IA-PR-016"
   course: "Probability"
   heading: "Discrete random variables"
-  source: "Combinatorial applications of generating functions."
-  lectures_in_block: 7
+  summary: "Combinatorial applications of generating functions."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B03"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "8 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-PR-012"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-012", "required", "librarian-judgement"]]
   readings: ["RM-PR-03"]
+  fingerprint: {"chars": 47, "sha256": "5fc3f8acd4f51dfdb5ac0be2e252f480182d3580eb89e0f7c5e775c4ce18059c"}
 
 - id: "IA-PR-017"
   course: "Probability"
   heading: "Continuous random variables"
-  source: "Distributions and density functions. Expectations; expectation of a function of a random variable."
-  lectures_in_block: 6
+  summary: "Distributions and density functions of continuous random variables; expectations, including of a function of a random variable."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B04"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "1 of 6"
+  lectures_in_block: 6
   status: "examinable"
-  prerequisites: ["IA-PR-009", "IA-DE-001", "IA-AN-020"]
-  prereq_basis: "cambridge-stated"
+  builds_on: [["IA-PR-009", "recommended", "librarian-judgement"], ["IA-DE-001", "recommended", "inferred-from-cambridge"], ["IA-AN-020", "recommended", "inferred-from-cambridge"]]
   readings: ["RM-PR-04"]
+  fingerprint: {"chars": 86, "sha256": "4242d4d2c0c96f6658d2e765a065ed6a7efa83855cc851e986188920c0a1d302"}
 
 - id: "IA-PR-018"
   course: "Probability"
   heading: "Continuous random variables"
-  source: "Uniform, normal and exponential random variables. Memoryless property of exponential distribution."
-  lectures_in_block: 6
+  summary: "The uniform, normal and exponential distributions, and the memoryless property of the exponential."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B04"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "2 of 6"
+  lectures_in_block: 6
   status: "examinable"
-  prerequisites: ["IA-PR-017"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-017", "required", "librarian-judgement"]]
   readings: ["RM-PR-04"]
+  fingerprint: {"chars": 88, "sha256": "0beeb1c1463e3df87ab44c91105f9f28ca6ba7a959aa5664464774105866aceb"}
 
 - id: "IA-PR-019"
   course: "Probability"
   heading: "Continuous random variables"
-  source: "Joint distributions: transformation of random variables (including Jacobians), examples."
-  lectures_in_block: 6
+  summary: "Joint distributions and transformations of random variables, including Jacobians, with examples."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B04"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "3 of 6"
+  lectures_in_block: 6
   status: "examinable"
-  prerequisites: ["IA-PR-017", "IA-DE-002", "IA-VC-002"]
-  prereq_basis: "cambridge-stated"
+  builds_on: [["IA-PR-017", "required", "librarian-judgement"], ["IA-DE-002", "recommended", "inferred-from-cambridge"], ["IA-VC-003", "recommended", "inferred-from-cambridge"]]
   readings: ["RM-PR-04"]
+  fingerprint: {"chars": 80, "sha256": "4c90281e637a6ce0fc71d9c8769ab322137a16f248b7ac7ce35c2fc9decd96d8"}
 
 - id: "IA-PR-020"
   course: "Probability"
   heading: "Continuous random variables"
-  source: "Simulation: generating continuous random variables, Box–Muller transform, rejection sampling."
-  lectures_in_block: 6
+  summary: "Simulation of continuous random variables: the Box-Muller transform and rejection sampling."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B04"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "4 of 6"
+  lectures_in_block: 6
   status: "examinable"
-  prerequisites: ["IA-PR-018", "IA-PR-019"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-018", "required", "librarian-judgement"], ["IA-PR-019", "recommended", "librarian-judgement"]]
   readings: ["RM-PR-04"]
+  fingerprint: {"chars": 85, "sha256": "3b3ce02e490e4ae9803147f9e3f55714b408a5e1ef9482fe17cde6125b3d89a4"}
 
 - id: "IA-PR-021"
   course: "Probability"
   heading: "Continuous random variables"
-  source: "Geometrical probability: Bertrand's paradox, Buffon's needle."
-  lectures_in_block: 6
+  summary: "Geometrical probability: Bertrand's paradox and Buffon's needle."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B04"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "5 of 6"
+  lectures_in_block: 6
   status: "examinable"
-  prerequisites: ["IA-PR-017"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-017", "required", "librarian-judgement"]]
   readings: ["RM-PR-04"]
+  fingerprint: {"chars": 56, "sha256": "0515a4a29a26a890d3121d83a55a5ba284705ed015ab67e76cde3397c5b5393f"}
 
 - id: "IA-PR-022"
   course: "Probability"
   heading: "Continuous random variables"
-  source: "Correlation coefficient, bivariate normal random variables."
-  lectures_in_block: 6
+  summary: "The correlation coefficient and bivariate normal random variables."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B04"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "6 of 6"
+  lectures_in_block: 6
   status: "examinable"
-  prerequisites: ["IA-PR-019", "IA-PR-011"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-019", "required", "librarian-judgement"], ["IA-PR-011", "required", "librarian-judgement"]]
   readings: ["RM-PR-04"]
+  fingerprint: {"chars": 54, "sha256": "921d4652bc9bf2d44dd63be450a773bd373f6199de3074612b9d3c02b7f5a21a"}
 
 - id: "IA-PR-023"
   course: "Probability"
   heading: "Inequalities and limits"
-  source: "Markov's inequality, Chebyshev's inequality."
-  lectures_in_block: 3
+  summary: "Markov's inequality and Chebyshev's inequality."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B05"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "1 of 5"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-PR-009", "IA-PR-010"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-009", "required", "librarian-judgement"], ["IA-PR-010", "required", "librarian-judgement"]]
   readings: ["RM-PR-05"]
+  fingerprint: {"chars": 41, "sha256": "0586932988a4aae744766f6f7d5c80241ae8f46f0ebad4213dbf0f7f45ecd88d"}
 
 - id: "IA-PR-024"
   course: "Probability"
   heading: "Inequalities and limits"
-  source: "Weak law of large numbers."
-  lectures_in_block: 3
+  summary: "The weak law of large numbers."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B05"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "2 of 5"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-PR-023", "IA-PR-011"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-023", "required", "librarian-judgement"], ["IA-PR-011", "required", "librarian-judgement"]]
   readings: ["RM-PR-05"]
+  fingerprint: {"chars": 22, "sha256": "defd6deb9eb454608ea32d80498e697f2f9332e814565bc16bc86d5820dccc11"}
 
 - id: "IA-PR-025"
   course: "Probability"
   heading: "Inequalities and limits"
-  source: "Convexity: Jensen's inequality for general random variables, AM/GM inequality."
-  lectures_in_block: 3
+  summary: "Convex functions, Jensen's inequality for arbitrary random variables, and the AM-GM inequality."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B05"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "3 of 5"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-PR-009"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-009", "required", "librarian-judgement"]]
   readings: ["RM-PR-05"]
+  fingerprint: {"chars": 70, "sha256": "46f51045e0cb3bd0191ad4a1807d9afeac9811105d0c83f21409f3fe903cb78b"}
 
 - id: "IA-PR-026"
   course: "Probability"
   heading: "Inequalities and limits"
-  source: "Moment generating functions and statement (no proof) of continuity theorem."
-  lectures_in_block: 3
+  summary: "Moment generating functions; the continuity theorem is stated without proof."
+  summary_status: "librarian-draft"
+  qualifiers: ["statement-only"]
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B05"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "4 of 5"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-PR-012", "IA-PR-017"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-012", "recommended", "librarian-judgement"], ["IA-PR-017", "required", "librarian-judgement"]]
   readings: ["RM-PR-05"]
+  fingerprint: {"chars": 66, "sha256": "411dc787c92203d5d4f44853b7497ef841e37f84d748652977f9085772db215c"}
 
 - id: "IA-PR-027"
   course: "Probability"
   heading: "Inequalities and limits"
-  source: "Statement of central limit theorem and sketch of proof. Examples, including sampling."
-  lectures_in_block: 3
+  summary: "The central limit theorem is stated and its proof sketched; examples, including sampling."
+  summary_status: "librarian-draft"
+  qualifiers: ["statement-only", "proof-sketch"]
+  source_doc: "SRC-01"
+  printed_page: 10
+  pdf_page: 12
   block: "PR-B05"
-  location: "Schedules 2026-27, printed p.10 (PDF p.12)"
+  block_item: "5 of 5"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-PR-026", "IA-PR-018", "IA-PR-024"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-PR-026", "required", "librarian-judgement"], ["IA-PR-018", "required", "librarian-judgement"], ["IA-PR-024", "recommended", "librarian-judgement"]]
   readings: ["RM-PR-05"]
+  fingerprint: {"chars": 74, "sha256": "361682d97dcaf5f7fea4c0f90d26b9bf0f7a004f88b16283f28ab6f7d9a89fd7"}
 
 - id: "IA-VC-001"
   course: "Vector Calculus"
   heading: "Curves in R3"
-  source: "Parameterised curves and arc length, tangents and normals to curves in R3; curvature and torsion."
-  lectures_in_block: 1
+  summary: "Parametrised curves in R^3: arc length, tangent and normal vectors, curvature and torsion."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "VC-B01"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "1 of 1"
+  lectures_in_block: 1
   status: "examinable"
-  prerequisites: ["IA-DE-001", "IA-VM-007"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-001", "recommended", "librarian-judgement"], ["IA-VM-007", "recommended", "librarian-judgement"], ["IA-AN-007", "connection", "inferred-from-cambridge"]]
   readings: ["RM-VC-01"]
+  fingerprint: {"chars": 83, "sha256": "959d3b7674d4cf22df2238cb8a94350a724d8d8950d0de810ff58f78f211787a"}
 
 - id: "IA-VC-002"
   course: "Vector Calculus"
   heading: "Integration in R2 and R3"
-  source: "Line integrals."
-  lectures_in_block: 4
+  summary: "Line integrals."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "VC-B02"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "1 of 2"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-VC-001", "IA-DE-002"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VC-001", "required", "librarian-judgement"], ["IA-DE-002", "recommended", "librarian-judgement"], ["IA-AN-016", "connection", "inferred-from-cambridge"]]
   readings: ["RM-VC-02"]
+  fingerprint: {"chars": 14, "sha256": "f4725ae122e8305c01865d04431f823bb60860dbb03affdd7ba9e7ee5fd0d65d"}
 
 - id: "IA-VC-003"
   course: "Vector Calculus"
   heading: "Integration in R2 and R3"
-  source: "Surface and volume integrals: definitions, examples using Cartesian, cylindrical and spherical coordinates; change of variables."
-  lectures_in_block: 4
+  summary: "Surface and volume integrals: definitions, examples in Cartesian, cylindrical and spherical coordinates, and change of variables."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "VC-B02"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "2 of 2"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-VC-002", "IA-VM-007"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VC-002", "recommended", "librarian-judgement"], ["IA-VM-007", "recommended", "librarian-judgement"], ["IA-AN-016", "connection", "inferred-from-cambridge"]]
   readings: ["RM-VC-02"]
+  fingerprint: {"chars": 114, "sha256": "8f94c3af5b15a212af0db11aef94bde471899319940a0d8a5a9dbb17a584ed2d"}
 
 - id: "IA-VC-004"
   course: "Vector Calculus"
   heading: "Vector operators"
-  source: "Directional derivatives. The gradient of a real-valued function: definition; interpretation as normal to level surfaces; examples including the use of cylindrical, spherical ∗and general orthogonal curvilinear ∗ coordinates."
-  lectures_in_block: 5
+  summary: "Directional derivatives and the gradient of a scalar function: its definition, its role as a normal to level surfaces, and examples in cylindrical and spherical coordinates. Use of general orthogonal curvilinear coordinates is a starred part (lectured, not examinable)."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  starred_part: "general orthogonal curvilinear coordinates"
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "VC-B03"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "1 of 4"
+  lectures_in_block: 5
   status: "examinable"
-  starred_spans: ["and general orthogonal curvilinear"]
-  prerequisites: ["IA-DE-015", "IA-VM-006"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DE-015", "recommended", "inferred-from-cambridge"], ["IA-VM-006", "recommended", "librarian-judgement"]]
   readings: ["RM-VC-03"]
+  fingerprint: {"chars": 196, "sha256": "83145ceb38a4247368976c8b9e8c272154505ab4e40f3c01dca10339fd7ac111"}
 
 - id: "IA-VC-005"
   course: "Vector Calculus"
   heading: "Vector operators"
-  source: "Divergence, curl and ∇2 in Cartesian coordinates, examples; formulae for these operators (statement only) in cylindrical, spherical ∗and general orthogonal curvilinear ∗ coordinates."
-  lectures_in_block: 5
+  summary: "Divergence, curl and the Laplacian in Cartesian coordinates, with examples; the corresponding formulae in cylindrical and spherical coordinates are quoted without derivation. The general orthogonal curvilinear case is a starred part (lectured, not examinable)."
+  summary_status: "librarian-draft"
+  qualifiers: ["statement-only"]
+  starred_part: "general orthogonal curvilinear coordinates"
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "VC-B03"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "2 of 4"
+  lectures_in_block: 5
   status: "examinable"
-  starred_spans: ["and general orthogonal curvilinear"]
-  prerequisites: ["IA-VC-004", "IA-VM-006"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VC-004", "required", "librarian-judgement"], ["IA-VM-006", "recommended", "librarian-judgement"]]
   readings: ["RM-VC-03"]
+  fingerprint: {"chars": 160, "sha256": "4d978ca8957f11cb3344a748ad71acd1b6a7030f64337b045c8a31a6d7dbe31f"}
 
 - id: "IA-VC-006"
   course: "Vector Calculus"
   heading: "Vector operators"
-  source: "Solenoidal fields, irrotational fields and conservative fields; scalar potentials."
-  lectures_in_block: 5
+  summary: "Solenoidal, irrotational and conservative fields, and scalar potentials."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "VC-B03"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "3 of 4"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-VC-005"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VC-005", "required", "librarian-judgement"]]
   readings: ["RM-VC-03"]
+  fingerprint: {"chars": 74, "sha256": "1ac5ee266bef35b209736e70a2c051bb5526621216cd8b6d5a57527539bda6d8"}
 
 - id: "IA-VC-007"
   course: "Vector Calculus"
   heading: "Vector operators"
-  source: "Vector derivative identities."
-  lectures_in_block: 5
+  summary: "Identities between vector derivative operators."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "VC-B03"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "4 of 4"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-VC-005", "IA-VM-006"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VC-005", "required", "librarian-judgement"], ["IA-VM-006", "recommended", "librarian-judgement"]]
   readings: ["RM-VC-03"]
+  fingerprint: {"chars": 27, "sha256": "74a99a797499644caa15a1e7eb8f5a44143de5d0c503f3d1bf3c23b8f134ec69"}
 
 - id: "IA-VC-008"
   course: "Vector Calculus"
   heading: "Integration theorems"
-  source: "Divergence theorem, Green's theorem, Stokes's theorem, Green's second theorem: statements; informal proofs; examples; application to fluid dynamics, and to electromagnetism including statement of Maxwell's equations."
-  lectures_in_block: 5
+  summary: "The divergence theorem, Green's theorem, Stokes's theorem and Green's second theorem: statements, informal proofs and examples, with applications to fluid dynamics and to electromagnetism (Maxwell's equations are stated)."
+  summary_status: "librarian-draft"
+  qualifiers: ["informal-proof"]
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "VC-B04"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "1 of 1"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-VC-003", "IA-VC-005"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VC-003", "required", "librarian-judgement"], ["IA-VC-005", "required", "librarian-judgement"]]
   readings: ["RM-VC-04"]
+  fingerprint: {"chars": 192, "sha256": "0d7da481c374c6506c833ae0169aa050b4f12564f9bd556e82c691c2bcecddb8"}
 
 - id: "IA-VC-009"
   course: "Vector Calculus"
   heading: "Laplace's equation"
-  source: "Laplace's equation in R2 and R3: uniqueness theorem and maximum principle."
-  lectures_in_block: 4
+  summary: "Laplace's equation in R^2 and R^3: the uniqueness theorem and the maximum principle."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "VC-B05"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "1 of 2"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-VC-008", "IA-VC-005"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VC-008", "required", "librarian-judgement"], ["IA-VC-005", "required", "librarian-judgement"]]
   readings: ["RM-VC-05"]
+  fingerprint: {"chars": 64, "sha256": "ae56f93cf65951c13b6bc1a61bb96c412841ce8a438619b4fd13a1572eb65a64"}
 
 - id: "IA-VC-010"
   course: "Vector Calculus"
   heading: "Laplace's equation"
-  source: "Solution of Poisson's equation by Gauss's method (for spherical and cylindrical symmetry) and as an integral."
-  lectures_in_block: 4
+  summary: "Solving Poisson's equation: Gauss's method when the symmetry is spherical or cylindrical, and a general integral solution."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "VC-B05"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "2 of 2"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-VC-009", "IA-VC-008"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VC-009", "recommended", "librarian-judgement"], ["IA-VC-008", "required", "librarian-judgement"]]
   readings: ["RM-VC-05"]
+  fingerprint: {"chars": 94, "sha256": "6b1d8a0678fe6c3e38de18d941f42388ef55fd2c330cf7c1dd39a828ed0e38d7"}
 
 - id: "IA-VC-011"
   course: "Vector Calculus"
   heading: "Cartesian tensors in R3"
-  source: "Tensor transformation laws, addition, multiplication, contraction, with emphasis on tensors of second rank."
-  lectures_in_block: 5
+  summary: "How tensor components transform under change of axes; adding, multiplying and contracting tensors, with emphasis on second-rank tensors."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "VC-B06"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "1 of 4"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-VM-006", "IA-VM-018"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-006", "required", "inferred-from-cambridge"], ["IA-VM-018", "required", "inferred-from-cambridge"]]
   readings: ["RM-VC-06"]
+  fingerprint: {"chars": 95, "sha256": "3d1a03b14b5509f6cd1ce4c9b229e00b8199d69de53a5dd97fff848f49663e60"}
 
 - id: "IA-VC-012"
   course: "Vector Calculus"
   heading: "Cartesian tensors in R3"
-  source: "Isotropic second and third rank tensors."
-  lectures_in_block: 5
+  summary: "Isotropic tensors of second and third rank."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "VC-B06"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "2 of 4"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-VC-011"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VC-011", "required", "librarian-judgement"]]
   readings: ["RM-VC-06"]
+  fingerprint: {"chars": 35, "sha256": "0c32e0a9409bcc652ff23da3177a1cf7c6c8c8497379de68de485cb49b824a68"}
 
 - id: "IA-VC-013"
   course: "Vector Calculus"
   heading: "Cartesian tensors in R3"
-  source: "Symmetric and antisymmetric tensors. Revision of principal axes and diagonalization."
-  lectures_in_block: 5
+  summary: "Symmetric and antisymmetric tensors; a revision of principal axes and diagonalisation."
+  summary_status: "librarian-draft"
+  qualifiers: ["revision"]
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "VC-B06"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "3 of 4"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-VC-011", "IA-VM-014"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VC-011", "required", "librarian-judgement"], ["IA-VM-014", "recommended", "inferred-from-cambridge"]]
   readings: ["RM-VC-06"]
+  fingerprint: {"chars": 75, "sha256": "d2098ef7dffae9361f787774b254ff1e5bf8955d7712126a5e4f4f1db744161e"}
 
 - id: "IA-VC-014"
   course: "Vector Calculus"
   heading: "Cartesian tensors in R3"
-  source: "Quotient theorem. Examples including inertia and conductivity."
-  lectures_in_block: 5
+  summary: "The quotient theorem, with examples such as the inertia tensor and conductivity."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "VC-B06"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "4 of 4"
+  lectures_in_block: 5
   status: "examinable"
-  prerequisites: ["IA-VC-011"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VC-011", "required", "librarian-judgement"]]
   readings: ["RM-VC-06"]
+  fingerprint: {"chars": 56, "sha256": "de9cc469f04290f8011b2c79a8d087c67d2d3e118a894a8e975f25fafd5c92f6"}
 
 - id: "IA-DR-N01"
   course: "Dynamics and Relativity"
   heading: "(course note)"
-  source: "[Note that this course is omitted from Option (b) of Part IA.]"
-  lectures_in_block: null
+  summary: "Course note: this course does not form part of Option (b), Mathematics with Physics."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: null
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: null
+  lectures_in_block: null
   status: "course-note"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: []
+  fingerprint: {"chars": 51, "sha256": "57724651cfcaa92ed4a352d27bfed4ffde3a33c06a86bd0fabd7f1dd9c2ca32f"}
 
 - id: "IA-DR-N02"
   course: "Dynamics and Relativity"
   heading: "(course note)"
-  source: "Familiarity with the topics covered in the non-examinable Mechanics course is assumed."
-  lectures_in_block: null
+  summary: "Course note: familiarity with the non-examinable Mechanics course is assumed."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: null
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: null
+  lectures_in_block: null
   status: "course-note"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: []
+  fingerprint: {"chars": 74, "sha256": "04dc0c6601fd215779f3c556e9da5841cbcf4cea7407d605c35bbe6a25798888"}
 
 - id: "IA-DR-001"
   course: "Dynamics and Relativity"
   heading: "Basic concepts"
-  source: "Space and time, frames of reference, Galilean transformations."
-  lectures_in_block: 4
+  summary: "Space, time and frames of reference; Galilean transformations."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B01"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "1 of 4"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-MC-002"]
-  prereq_basis: "cambridge-stated"
+  builds_on: [["IA-MC-002", "required", "inferred-from-cambridge"]]
   readings: ["RM-DR-01"]
+  fingerprint: {"chars": 55, "sha256": "655f1deca7521031bdae5ab44d4893d5a744b9209ae70eff2a71a6d275bfca53"}
 
 - id: "IA-DR-002"
   course: "Dynamics and Relativity"
   heading: "Basic concepts"
-  source: "Newton's laws."
-  lectures_in_block: 4
+  summary: "Newton's laws of motion."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B01"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "2 of 4"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-MC-005"]
-  prereq_basis: "cambridge-stated"
+  builds_on: [["IA-MC-005", "required", "inferred-from-cambridge"]]
   readings: ["RM-DR-01"]
+  fingerprint: {"chars": 13, "sha256": "98bbaeba75e5143c367559e28d9ef486939f2f8985f9bc2d0f1540132fc08866"}
 
 - id: "IA-DR-003"
   course: "Dynamics and Relativity"
   heading: "Basic concepts"
-  source: "Dimensional analysis."
-  lectures_in_block: 4
+  summary: "Dimensional analysis."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B01"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "3 of 4"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-DR-01"]
+  fingerprint: {"chars": 20, "sha256": "4a17a01cc20a528b841ce88a11b4b1656612e24bb773cd4432eebcb8a1ef00bb"}
 
 - id: "IA-DR-004"
   course: "Dynamics and Relativity"
   heading: "Basic concepts"
-  source: "Examples of forces, including gravity, friction and Lorentz."
-  lectures_in_block: 4
+  summary: "Examples of forces: gravity, friction and the Lorentz force."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B01"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "4 of 4"
+  lectures_in_block: 4
   status: "examinable"
-  prerequisites: ["IA-MC-003"]
-  prereq_basis: "cambridge-stated"
+  builds_on: [["IA-MC-003", "required", "inferred-from-cambridge"]]
   readings: ["RM-DR-01"]
+  fingerprint: {"chars": 53, "sha256": "88389fcf40a7f3ed04571b0347d46dbcfe378b7f74dab6953d8640da71ab7c29"}
 
 - id: "IA-DR-005"
   course: "Dynamics and Relativity"
   heading: "Newtonian dynamics of a single particle"
-  source: "Equation of motion in Cartesian and plane polar coordinates."
-  lectures_in_block: 8
+  summary: "Equations of motion in Cartesian and plane polar coordinates."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B02"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "1 of 6"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-DR-002", "IA-DE-011", "IA-VM-006"]
-  prereq_basis: "cambridge-stated"
+  builds_on: [["IA-DR-002", "required", "librarian-judgement"], ["IA-DE-011", "recommended", "cambridge-stated"], ["IA-VM-003", "required", "cambridge-stated"]]
   readings: ["RM-DR-02"]
+  fingerprint: {"chars": 52, "sha256": "bb73f1be9397a5db43acfa9c47cb0d9b09a568052aa48b8eea80c05c30611962"}
 
 - id: "IA-DR-006"
   course: "Dynamics and Relativity"
   heading: "Newtonian dynamics of a single particle"
-  source: "Work, conservative forces and potential energy, motion and the shape of the potential energy function; stable equilibria and small oscillations; effect of damping."
-  lectures_in_block: 8
+  summary: "Work, conservative forces and potential energy; what the shape of a potential energy curve says about motion; stable equilibria and small oscillations; the effect of damping."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B02"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "2 of 6"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-DR-005", "IA-MC-007", "IA-VC-004"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-005", "required", "librarian-judgement"], ["IA-MC-007", "required", "inferred-from-cambridge"], ["IA-VC-004", "connection", "librarian-judgement"]]
   readings: ["RM-DR-02"]
+  fingerprint: {"chars": 141, "sha256": "a8a0c40c6780ed936d310db86605b12a1fcc5de3ad52a4476cd4f7f14a0adfce"}
 
 - id: "IA-DR-007"
   course: "Dynamics and Relativity"
   heading: "Newtonian dynamics of a single particle"
-  source: "Angular velocity, angular momentum, torque."
-  lectures_in_block: 8
+  summary: "Angular velocity, angular momentum and torque."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B02"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "3 of 6"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-VM-007", "IA-MC-004"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-VM-007", "required", "librarian-judgement"], ["IA-MC-004", "recommended", "inferred-from-cambridge"]]
   readings: ["RM-DR-02"]
+  fingerprint: {"chars": 39, "sha256": "d23eedb8458fa314936aecf96ba1073f8808ca373f071901d7c8f27a606b6be2"}
 
 - id: "IA-DR-008"
   course: "Dynamics and Relativity"
   heading: "Newtonian dynamics of a single particle"
-  source: "Orbits: the u(θ) equation; escape velocity; Kepler's laws; stability of orbits; motion in a repulsive potential (Rutherford scattering)."
-  lectures_in_block: 8
+  summary: "Orbits in a central force: the u(theta) equation, escape velocity, Kepler's laws, whether orbits are stable, and scattering from a repulsive potential (Rutherford)."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B02"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "4 of 6"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-DR-007", "IA-DR-006", "IA-DE-011"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-007", "required", "librarian-judgement"], ["IA-DR-006", "required", "librarian-judgement"], ["IA-DE-011", "recommended", "cambridge-stated"]]
   readings: ["RM-DR-02"]
+  fingerprint: {"chars": 119, "sha256": "3f4de72937bd676138e33ce3a482644efa276a32a6803d991459d995404c33c6"}
 
 - id: "IA-DR-009"
   course: "Dynamics and Relativity"
   heading: "Newtonian dynamics of a single particle"
-  source: "Rotating frames: centrifugal and Coriolis forces."
-  lectures_in_block: 8
+  summary: "Rotating frames: the centrifugal and Coriolis forces."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B02"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "5 of 6"
+  lectures_in_block: 8
   status: "examinable"
-  prerequisites: ["IA-DR-007", "IA-VM-007"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-007", "required", "librarian-judgement"], ["IA-VM-007", "recommended", "librarian-judgement"]]
   readings: ["RM-DR-02"]
+  fingerprint: {"chars": 44, "sha256": "3266dfc8e17a64399337398ca7e6bd8ed08c523702a4b5099b5c3afde1090065"}
 
 - id: "IA-DR-010"
   course: "Dynamics and Relativity"
   heading: "Newtonian dynamics of a single particle"
-  source: "*Brief discussion of Foucault pendulum.*"
-  lectures_in_block: 8
+  summary: "Starred (lectured but not examinable): a brief discussion of the Foucault pendulum."
+  summary_status: "librarian-draft"
+  qualifiers: ["brief"]
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B02"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "6 of 6"
+  lectures_in_block: 8
   status: "starred-not-examinable"
-  prerequisites: ["IA-DR-009"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-009", "required", "librarian-judgement"]]
   readings: ["RM-DR-02"]
+  fingerprint: {"chars": 36, "sha256": "4f742d21b6794a6ee605c2fb82d3e558f9564d4068a6b8875858a05047f78b12"}
 
 - id: "IA-DR-011"
   course: "Dynamics and Relativity"
   heading: "Newtonian dynamics of systems of particles"
-  source: "Momentum, angular momentum, energy."
-  lectures_in_block: 2
+  summary: "Momentum, angular momentum and energy for a system of particles."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B03"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "1 of 3"
+  lectures_in_block: 2
   status: "examinable"
-  prerequisites: ["IA-DR-007", "IA-MC-008"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-007", "recommended", "librarian-judgement"], ["IA-MC-008", "required", "inferred-from-cambridge"]]
   readings: ["RM-DR-03"]
+  fingerprint: {"chars": 32, "sha256": "f443730b8c35d3daea1d98063530901acfe4b503bf5ffd7b5a7156e2d9fb2422"}
 
 - id: "IA-DR-012"
   course: "Dynamics and Relativity"
   heading: "Newtonian dynamics of systems of particles"
-  source: "Motion relative to the centre of mass; the two body problem."
-  lectures_in_block: 2
+  summary: "The centre-of-mass frame and the two-body problem."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B03"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "2 of 3"
+  lectures_in_block: 2
   status: "examinable"
-  prerequisites: ["IA-DR-011"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-011", "required", "librarian-judgement"]]
   readings: ["RM-DR-03"]
+  fingerprint: {"chars": 50, "sha256": "9aecd5aa1c90eeea7ff116644da76fbf78f4ad7064494aca58ea1a484976e578"}
 
 - id: "IA-DR-013"
   course: "Dynamics and Relativity"
   heading: "Newtonian dynamics of systems of particles"
-  source: "Variable mass problems; the rocket equation."
-  lectures_in_block: 2
+  summary: "Problems with variable mass, including the rocket equation."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B03"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "3 of 3"
+  lectures_in_block: 2
   status: "examinable"
-  prerequisites: ["IA-DR-011"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-011", "required", "librarian-judgement"]]
   readings: ["RM-DR-03"]
+  fingerprint: {"chars": 39, "sha256": "f5e354fd1a218e621efaa0519714fb843a27551aabb05d15a40ac88960d3f500"}
 
 - id: "IA-DR-014"
   course: "Dynamics and Relativity"
   heading: "Rigid bodies"
-  source: "Moments of inertia, angular momentum and energy of a rigid body."
-  lectures_in_block: 3
+  summary: "Moments of inertia, and the angular momentum and energy of a rigid body."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B04"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "1 of 3"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-DR-011"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-011", "required", "librarian-judgement"]]
   readings: ["RM-DR-04"]
+  fingerprint: {"chars": 54, "sha256": "49e67081047d84cc2dc484bf605e171d286f29d29fe095253ec3eb1d77576fae"}
 
 - id: "IA-DR-015"
   course: "Dynamics and Relativity"
   heading: "Rigid bodies"
-  source: "Parallel axis theorem."
-  lectures_in_block: 3
+  summary: "The parallel axis theorem."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B04"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "2 of 3"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-DR-014"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-014", "required", "librarian-judgement"]]
   readings: ["RM-DR-04"]
+  fingerprint: {"chars": 20, "sha256": "f8b96361e34b1e60593e3d73656868e20ebc1e5f4780c99eab95e04f71ef9a5c"}
 
 - id: "IA-DR-016"
   course: "Dynamics and Relativity"
   heading: "Rigid bodies"
-  source: "Simple examples of motion involving both rotation and translation (e.g. rolling)."
-  lectures_in_block: 3
+  summary: "Simple motions combining rotation and translation, such as rolling."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B04"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "3 of 3"
+  lectures_in_block: 3
   status: "examinable"
-  prerequisites: ["IA-DR-015", "IA-DR-014"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-015", "recommended", "librarian-judgement"], ["IA-DR-014", "required", "librarian-judgement"]]
   readings: ["RM-DR-04"]
+  fingerprint: {"chars": 71, "sha256": "9c405f9f4cc850f4316e468591880db116c8cc254c24722f2d2a31134c7067ba"}
 
 - id: "IA-DR-017"
   course: "Dynamics and Relativity"
   heading: "Special relativity"
-  source: "The principle of relativity. Relativity and simultaneity."
-  lectures_in_block: 7
+  summary: "The principle of relativity, and the relativity of simultaneity."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B05"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "1 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-DR-001"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-001", "required", "librarian-judgement"]]
   readings: ["RM-DR-05"]
+  fingerprint: {"chars": 51, "sha256": "e30beea277a868aa8a98ddf111920a298d9e91c25353055594c6a79e2f35cadc"}
 
 - id: "IA-DR-018"
   course: "Dynamics and Relativity"
   heading: "Special relativity"
-  source: "The invariant interval."
-  lectures_in_block: 7
+  summary: "The invariant interval."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B05"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "2 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-DR-017"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-017", "required", "librarian-judgement"]]
   readings: ["RM-DR-05"]
+  fingerprint: {"chars": 21, "sha256": "f111eb46157461fc2d3a7b15b2f921167c73d367334e5b3ae20858fde69ab0f5"}
 
 - id: "IA-DR-019"
   course: "Dynamics and Relativity"
   heading: "Special relativity"
-  source: "Lorentz transformations in (1 + 1)-dimensional spacetime. Time dilation and length contraction."
-  lectures_in_block: 7
+  summary: "Lorentz transformations in one space and one time dimension; time dilation and length contraction."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B05"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "3 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-DR-018", "IA-VM-018"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-018", "required", "librarian-judgement"], ["IA-VM-018", "connection", "librarian-judgement"]]
   readings: ["RM-DR-05"]
+  fingerprint: {"chars": 83, "sha256": "3b85d0f9903f04d05e1833bb92f312b4a7e352fa1c3b95ac1c3d062d54c075c9"}
 
 - id: "IA-DR-020"
   course: "Dynamics and Relativity"
   heading: "Special relativity"
-  source: "The Minkowski metric for (1 + 1)-dimensional spacetime."
-  lectures_in_block: 7
+  summary: "The Minkowski metric for one space and one time dimension."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B05"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "4 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-DR-019"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-019", "required", "librarian-judgement"]]
   readings: ["RM-DR-05"]
+  fingerprint: {"chars": 47, "sha256": "c8b01a9b1a212795efbdb898403b4006ee7b9d33d3ca5881778328b023ac9510"}
 
 - id: "IA-DR-021"
   course: "Dynamics and Relativity"
   heading: "Special relativity"
-  source: "Lorentz transformations in (3 + 1) dimensions."
-  lectures_in_block: 7
+  summary: "Lorentz transformations in three space dimensions plus time."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B05"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "5 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-DR-019", "IA-VM-018"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-019", "required", "librarian-judgement"], ["IA-VM-018", "recommended", "librarian-judgement"]]
   readings: ["RM-DR-05"]
+  fingerprint: {"chars": 40, "sha256": "fe129688801b6a4b267bfbd8a61e8305b8541c48354c1d904c8a2b14db765411"}
 
 - id: "IA-DR-022"
   course: "Dynamics and Relativity"
   heading: "Special relativity"
-  source: "4–vectors and Lorentz invariants. Proper time."
-  lectures_in_block: 7
+  summary: "Four-vectors and Lorentz invariants; proper time."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B05"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "6 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-DR-021", "IA-VM-006"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-021", "required", "librarian-judgement"], ["IA-VM-006", "recommended", "librarian-judgement"]]
   readings: ["RM-DR-05"]
+  fingerprint: {"chars": 41, "sha256": "a2462a4ae0ea3bc993d2a2955cd46aa57fb1c019d26027b382e14bccec994ca7"}
 
 - id: "IA-DR-023"
   course: "Dynamics and Relativity"
   heading: "Special relativity"
-  source: "4–velocity and 4–momentum."
-  lectures_in_block: 7
+  summary: "Four-velocity and four-momentum."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B05"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "7 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-DR-022"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-022", "required", "librarian-judgement"]]
   readings: ["RM-DR-05"]
+  fingerprint: {"chars": 24, "sha256": "2c40621672b7416ffd586c301d525f5e60b56c31efc41b1db4d3b10a93803dee"}
 
 - id: "IA-DR-024"
   course: "Dynamics and Relativity"
   heading: "Special relativity"
-  source: "Conservation of 4–momentum in particle decay. Collisions. The Newtonian limit."
-  lectures_in_block: 7
+  summary: "Conservation of four-momentum in particle decay and collisions; the Newtonian limit."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 11
+  pdf_page: 13
   block: "DR-B05"
-  location: "Schedules 2026-27, printed p.11 (PDF p.13)"
+  block_item: "8 of 8"
+  lectures_in_block: 7
   status: "examinable"
-  prerequisites: ["IA-DR-023", "IA-DR-011"]
-  prereq_basis: "librarian-judgement"
+  builds_on: [["IA-DR-023", "required", "librarian-judgement"], ["IA-DR-011", "recommended", "librarian-judgement"]]
   readings: ["RM-DR-05"]
+  fingerprint: {"chars": 69, "sha256": "efc12c55e0d53e85eb5b86c11813593ecf8cdb5cb2f5ef9dacea825669b2a331"}
 
 - id: "IA-CP-001"
   course: "Computational Projects (non-examinable in Part IA)"
   heading: "Introductory lectures"
-  source: "The Computational Projects course is examined in Part IB. However introductory lectures are given in the Easter Full Term of the Part IA year. The lectures cover an introduction to algorithms and aspects of the Matlab programming language."
-  lectures_in_block: 8
+  summary: "Introductory lectures in the Easter Term of Part IA on algorithms and aspects of the Matlab language. The course itself is examined in Part IB."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 12
+  pdf_page: 14
   block: "CP-B01"
-  location: "Schedules 2026-27, printed p.12 (PDF p.14)"
+  block_item: "1 of 2"
+  lectures_in_block: 8
   status: "ancillary-non-examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-CP-01"]
+  fingerprint: {"chars": 202, "sha256": "59f3f9ca7c99471aa17308e3673a6e5188272839f96e1d13492106f60aef33ee"}
 
 - id: "IA-CP-002"
   course: "Computational Projects (non-examinable in Part IA)"
   heading: "Projects and manual"
-  source: "The projects that need to be completed for credit are published by the Faculty in a manual usually at the end of July or the beginning of August at the end of the Part IA year. The manual contains details of the projects and information about course administration. The manual is available on the Faculty website at https://www.maths.cam.ac.uk/undergrad/catam/. Full credit may be obtained from the submission of the two core projects and a further two additional projects. Once the manual is available, these projects may be undertaken at any time up to the submission deadlines, which are near the start of the Full Lent Term in the Part IB year for the two core projects, and near the start of the Full Easter Term in the Part IB year for the two additional projects. A list of suitable books can be found in the manual."
-  lectures_in_block: null
+  summary: "The Faculty publishes a projects manual around the end of July or start of August after Part IA. Full credit needs two core projects and two further projects, which may be done once the manual is out and are submitted by deadlines early in the Lent Term (core) and Easter Term (additional) of Part IB. The manual lists suitable books."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 12
+  pdf_page: 14
   block: "CP-B01"
-  location: "Schedules 2026-27, printed p.12 (PDF p.14)"
+  block_item: "2 of 2"
+  lectures_in_block: null
   status: "ancillary-non-examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-CP-02"]
+  fingerprint: {"chars": 679, "sha256": "a47b370710595c9d900feffdb1657f297e4c0b6792d09bb5e8f4a7ad1adbdbfb"}
 
 - id: "IA-MC-N01"
   course: "Mechanics (non-examinable)"
   heading: "(course note)"
-  source: "This course is intended for students who have taken only a limited amount of Mechanics at A-level (or the equivalent). The material is prerequisite for Dynamics and Relativity in the Lent Term."
-  lectures_in_block: 10
+  summary: "Course note: ten lectures for students with limited A-level mechanics; Dynamics and Relativity builds on them."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 12
+  pdf_page: 14
   block: null
-  location: "Schedules 2026-27, printed p.12 (PDF p.14)"
+  block_item: null
+  lectures_in_block: 10
   status: "course-note"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: []
+  fingerprint: {"chars": 161, "sha256": "cbe221000f5f0b05e1ac21f38db13f50f5e73ad4ab1c0a8fc535d36031751501"}
 
 - id: "IA-MC-001"
   course: "Mechanics (non-examinable)"
   heading: "Lectures"
-  source: "Lecture 1 Brief introduction"
-  lectures_in_block: 1
+  summary: "Lecture 1: a brief introduction to the course."
+  summary_status: "librarian-draft"
+  qualifiers: ["brief"]
+  source_doc: "SRC-01"
+  printed_page: 12
+  pdf_page: 14
   block: "MC-B01"
-  location: "Schedules 2026-27, printed p.12 (PDF p.14)"
+  block_item: "1 of 1"
+  lectures_in_block: 1
   status: "ancillary-non-examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-MC-01"]
+  fingerprint: {"chars": 25, "sha256": "4f7153b7235d0d30f53c7a5456837eae12c85b21d984f4ba2dc60ab2b7e1e102"}
 
 - id: "IA-MC-002"
   course: "Mechanics (non-examinable)"
   heading: "Lectures"
-  source: "Lecture 2: Kinematics of a single particle Position, velocity, speed, acceleration. Constant acceleration in one-dimension. Projectile motion in two-dimensions."
-  lectures_in_block: 1
+  summary: "Lecture 2: kinematics of one particle (position, velocity, speed, acceleration), with uniform acceleration in a line and projectile motion in a plane."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 12
+  pdf_page: 14
   block: "MC-B02"
-  location: "Schedules 2026-27, printed p.12 (PDF p.14)"
+  block_item: "1 of 1"
+  lectures_in_block: 1
   status: "ancillary-non-examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-MC-01"]
+  fingerprint: {"chars": 140, "sha256": "88096e78550ed5027000aeb51c65641f2455787901319cc72ad8821282fd4049"}
 
 - id: "IA-MC-003"
   course: "Mechanics (non-examinable)"
   heading: "Lectures"
-  source: "Lecture 3: Equilibrium of a single particle The vector nature of forces, addition of forces, examples including gravity, tension in a string, normal reaction (Newton's third law), friction. Conditions for equilibrium."
-  lectures_in_block: 1
+  summary: "Lecture 3: equilibrium of a single particle - forces as vectors and their addition; examples (gravity, string tension, normal reaction with Newton's third law, friction); conditions for equilibrium."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 12
+  pdf_page: 14
   block: "MC-B03"
-  location: "Schedules 2026-27, printed p.12 (PDF p.14)"
+  block_item: "1 of 1"
+  lectures_in_block: 1
   status: "ancillary-non-examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-MC-01"]
+  fingerprint: {"chars": 187, "sha256": "0bf40367564705f68dee68ea2538ef42db0b04da25dad9712e537bfc5b1d51cc"}
 
 - id: "IA-MC-004"
   course: "Mechanics (non-examinable)"
   heading: "Lectures"
-  source: "Lecture 4: Equilibrium of a rigid body Resultant of several forces, couple, moment of a force. Conditions for equilibrium."
-  lectures_in_block: 1
+  summary: "Lecture 4: equilibrium of a rigid body: combining forces, couples and moments, and the conditions for equilibrium."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 12
+  pdf_page: 14
   block: "MC-B04"
-  location: "Schedules 2026-27, printed p.12 (PDF p.14)"
+  block_item: "1 of 1"
+  lectures_in_block: 1
   status: "ancillary-non-examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-MC-01"]
+  fingerprint: {"chars": 104, "sha256": "643f80981dc7893ea18ce0e1eee02142b2d5f58fc8142dc43b8c1c27fcbf4fa7"}
 
 - id: "IA-MC-005"
   course: "Mechanics (non-examinable)"
   heading: "Lectures"
-  source: "Lecture 5: Dynamics of particles Newton's second law. Examples of pulleys, motion on an inclined plane."
-  lectures_in_block: 1
+  summary: "Lecture 5: particle dynamics through Newton's second law, with pulleys and slopes as examples."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 12
+  pdf_page: 14
   block: "MC-B05"
-  location: "Schedules 2026-27, printed p.12 (PDF p.14)"
+  block_item: "1 of 1"
+  lectures_in_block: 1
   status: "ancillary-non-examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-MC-01"]
+  fingerprint: {"chars": 88, "sha256": "d31a8a24b96ac56174a585bb76d095f45e7a38ddd34e70ecbbd13b59c7c84fbe"}
 
 - id: "IA-MC-006"
   course: "Mechanics (non-examinable)"
   heading: "Lectures"
-  source: "Lecture 6: Dynamics of particles Further examples, including motion of a projectile with air-resistance."
-  lectures_in_block: 1
+  summary: "Lecture 6: more particle dynamics, for instance a projectile subject to air resistance."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 12
+  pdf_page: 14
   block: "MC-B06"
-  location: "Schedules 2026-27, printed p.12 (PDF p.14)"
+  block_item: "1 of 1"
+  lectures_in_block: 1
   status: "ancillary-non-examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-MC-01"]
+  fingerprint: {"chars": 90, "sha256": "f5c6750e9fc05d345955ceaedef1238a80e230178ec1bcc9c68636d79a1d1f10"}
 
 - id: "IA-MC-007"
   course: "Mechanics (non-examinable)"
   heading: "Lectures"
-  source: "Lecture 7: Energy Definition of energy and work. Kinetic energy, potential energy of a particle in a uniform gravitational field. Conservation of energy."
-  lectures_in_block: 1
+  summary: "Lecture 7: work and energy - kinetic energy, gravitational potential energy in a uniform field, and conservation of energy."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 12
+  pdf_page: 14
   block: "MC-B07"
-  location: "Schedules 2026-27, printed p.12 (PDF p.14)"
+  block_item: "1 of 1"
+  lectures_in_block: 1
   status: "ancillary-non-examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-MC-01"]
+  fingerprint: {"chars": 131, "sha256": "b452dadf624b8f8d3abe3bc1a35f30b43a1d1460c022861cd30cff0e9270a48c"}
 
 - id: "IA-MC-008"
   course: "Mechanics (non-examinable)"
   heading: "Lectures"
-  source: "Lecture 8: Momentum Definition of momentum (as a vector), conservation of momentum, collisions, coefficient of restitution, impulse."
-  lectures_in_block: 1
+  summary: "Lecture 8: momentum - momentum as a vector and its conservation, collisions, coefficient of restitution, impulse."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 12
+  pdf_page: 14
   block: "MC-B08"
-  location: "Schedules 2026-27, printed p.12 (PDF p.14)"
+  block_item: "1 of 1"
+  lectures_in_block: 1
   status: "ancillary-non-examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-MC-01"]
+  fingerprint: {"chars": 116, "sha256": "4651fee098f11db106a220ff3d21a0e072b4f591351b2efdf53d65994f666204"}
 
 - id: "IA-MC-009"
   course: "Mechanics (non-examinable)"
   heading: "Lectures"
-  source: "Lecture 9: Springs, strings and SHM Force exerted by elastic springs and strings (Hooke's law). Oscillations of a particle attached to a spring, and of a particle hanging on a string. Simple harmonic motion of a particle for small displacement from equilibrium."
-  lectures_in_block: 1
+  summary: "Lecture 9: springs, strings and simple harmonic motion - Hooke's law, oscillations of a particle on a spring or hanging on a string, SHM for small displacements."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 12
+  pdf_page: 14
   block: "MC-B09"
-  location: "Schedules 2026-27, printed p.12 (PDF p.14)"
+  block_item: "1 of 1"
+  lectures_in_block: 1
   status: "ancillary-non-examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-MC-01"]
+  fingerprint: {"chars": 220, "sha256": "32a45613719c34f31656254ce81296e03650396fcbd12674bb75a7a05928ee57"}
 
 - id: "IA-MC-010"
   course: "Mechanics (non-examinable)"
   heading: "Lectures"
-  source: "Lecture 10: Motion in a circle Derivation of the central acceleration of a particle constrained to move on a circle. Simple pendulum; motion of a particle sliding on a cylinder."
-  lectures_in_block: 1
+  summary: "Lecture 10: motion in a circle - the central acceleration for circular motion, the simple pendulum, and a particle sliding on a cylinder."
+  summary_status: "librarian-draft"
+  qualifiers: []
+  source_doc: "SRC-01"
+  printed_page: 12
+  pdf_page: 14
   block: "MC-B10"
-  location: "Schedules 2026-27, printed p.12 (PDF p.14)"
+  block_item: "1 of 1"
+  lectures_in_block: 1
   status: "ancillary-non-examinable"
-  prerequisites: []
-  prereq_basis: null
+  builds_on: []
   readings: ["RM-MC-01"]
+  fingerprint: {"chars": 148, "sha256": "65d76962595b9c96a09f90d42a0c4a155b73b2ebfe1bbddb501a667468af1202"}

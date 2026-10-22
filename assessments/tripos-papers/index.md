@@ -9,13 +9,12 @@ Source page: https://www.maths.cam.ac.uk/undergrad/pastpapers/maths-ia/2025 (ret
 All 2025 questions in one file: https://www.maths.cam.ac.uk/undergrad/pastpapers/files/2025/list_ia.pdf
 (not examined for this baseline).
 
-## Edition note (open question)
+## Edition note (decided)
 
-These papers are the **2025** Part IA papers (academic year 2024-25). The Schedules and Guide used for
-the syllabus register are the **2026-27** editions. The syllabus may have changed between the two. The
-curriculum director should confirm that using the 2025 papers against the 2026-27 syllabus is
-acceptable (see `reports/baseline-v1-review-report.md`). Until then, a question that touches material
-absent from the 2026-27 Schedules should be treated as out of syllabus.
+These papers are the **2025** Part IA papers (academic year 2024-25). The Schedules and Guide used for the syllabus register are the **2026-27**
+editions, and the syllabus may have changed between the two. The curriculum director has **accepted the 2025 papers for examination practice, with the
+edition differences acknowledged** ([director decision D-03](../../governance/director-decisions.md)). A question that touches material absent from the
+2026-27 Schedules should be treated as out of syllabus, and the assessor should say so when setting it.
 
 ## Papers
 

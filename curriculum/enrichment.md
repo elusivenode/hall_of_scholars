@@ -2,7 +2,10 @@
 
 **Everything here is optional enrichment. None of it is Cambridge-required.** The Cambridge Schedules
 are the authority for what Part IA covers ([syllabus.md](syllabus.md)). Enrichment is taken after the
-relevant Cambridge material, never instead of it and never at the expense of the example sheets.
+relevant Cambridge material, never instead of it and never at the expense of the example sheets, and it
+**must not displace the complete Cambridge Pure and Applied curriculum** (director decision D-18). The
+**pace and breadth of Math 55 are not objectives**: the aim is to deepen mathematical maturity, not to match
+a Harvard timetable.
 
 Retrieved 21/10/2026. Two Harvard resources were supplied and they are **different courses**. They are
 documented separately and must not be conflated.
@@ -67,7 +70,7 @@ URL: https://people.math.harvard.edu/~cmwang/teaching/55/ . **This is not the ho
 
 Judgement (not sourced): modest relevance to Numbers and Sets, as extra routine practice with worked
 solutions on logic, counting and modular arithmetic. Introductory and computational; Cambridge treats
-these more rigorously. Graph theory is outside Part IA. Low priority.
+these more rigorously. Graph theory is outside Part IA. **Director decision D-07: low-priority optional practice.**
 
 ## C. Enrichment map to Part IA
 
@@ -121,7 +124,22 @@ Little or no overlap with the Math 55 topic lists. The only loose link is 55b L2
 calculus, differential forms, Stokes) to Vector Calculus, a much more abstract treatment (adjacent at
 best). No mapping is forced. Part IA applied coverage is unaffected by enrichment.
 
-## D. Recommended use (for the director to confirm)
+## D. What enrichment is for: priorities
+
+Enrichment is chosen to strengthen the qualities the programme exists to build ([teaching charter](../governance/teaching-charter.md)), in this order:
+
+1. **Proof construction.** Math 55's problem culture (the 55a page stresses writing up one's own proofs) supports the independent-proof aim. Use it as a source of the *kind* of
+   problem, not as extra volume: the Cambridge example sheets and past papers remain the main exercise supply.
+2. **Abstract linear algebra.** Axler (owned, free) is the shared text: abstract vector spaces, linear maps, eigenvalues and inner-product spaces after the concrete Cambridge
+   treatment (see the Axler plan in [reading-map.md](reading-map.md)). 55a lectures 6 to 10 and 15 to 17 follow the same material.
+3. **Group theory.** After the Cambridge Groups course, a second treatment through Artin (55a lectures 1 to 4 and 21 to 22), deepening quotients, actions and conjugacy.
+4. **Rigorous analysis.** After Analysis I, Rudin and 55b lectures 19 and 20 as consolidation; metric spaces and compactness (55b lectures 1 to 9) as a stretch into Part IB Analysis II.
+5. **Connections between mathematical structures.** Where the same idea appears in groups, linear algebra and analysis (for example group actions and linear maps, or Mobius maps as
+   matrices), note it in the session record; the Princeton Companion (owned) may help as orientation, subject to its verification.
+
+What enrichment is **not**: a race through Sylow theory, representation theory, algebraic topology or complex analysis, which the "beyond" rows in section C place outside Part IA.
+
+## E. Recommended use (for the director to confirm)
 
 1. After Groups: read the opening group theory of Artin (55a L1-L4, L21-L22) as a second treatment.
 2. After Vectors and Matrices: read the matching Axler chapters (already owned); see
@@ -130,7 +148,7 @@ best). No mapping is forced. Part IA applied coverage is unaffected by enrichmen
    and compactness as a stretch into Part IB.
 4. Treat everything labelled "beyond" as optional and not for the diagnostic.
 
-## E. Unverified items
+## F. Unverified items
 
 - The lecture notes and problem sets linked from the Canvas pages (not opened; may need a Harvard login).
 - Editions of Axler and Artin for 55a (not stated on the page).

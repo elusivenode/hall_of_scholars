@@ -1,15 +1,13 @@
 # Source register
 
-Every external document that the curriculum baseline rests on, with edition, retrieval details and
-status. Retrieval date for all entries: **21/10/2026**, by `curl` from the working VM. The SHA-256 lets
-the student check that the copies they hold are identical to the ones used here.
+Every external document that the curriculum baseline rests on, with edition, retrieval details and status. Retrieval date for all entries:
+**21/10/2026**, by `curl` from the working VM. The SHA-256 lets the student check that the copies they hold are identical to the ones used here.
 
 ## 1. Documents the student named
 
-The student supplied these file names: `schedules.pdf`, `coursesIA.pdf`, `paperia_1_2025.pdf` to
-`paperia_4_2025.pdf`. No copies were found in the repository or on the VM, so the same-named files were
-retrieved from the Faculty's public site and the student later supplied the URLs below. Whether the
-student's own copies are the same editions has **not been confirmed** - compare hashes.
+The student supplied these file names: `schedules.pdf`, `coursesIA.pdf`, `paperia_1_2025.pdf` to `paperia_4_2025.pdf`. No copies were found in the
+repository or on the VM, so the same-named files were retrieved from the Faculty's public site and the student later supplied the URLs below. Whether
+the student's own copies are the same editions has **not been confirmed**: compare hashes.
 
 | ID | Document | Edition stamped on the document | URL | Server `Last-Modified` | Pages | SHA-256 |
 |---|---|---|---|---|---|---|
@@ -24,67 +22,77 @@ student's own copies are the same editions has **not been confirmed** - compare 
 | SRC-09 | Harvard Math 55B syllabus (Canvas) | Spring 2025-26, Auroux | https://canvas.harvard.edu/courses/162402/assignments/syllabus | n/a | n/a | n/a |
 | SRC-10 | Harvard "Math 55" worksheets (discrete mathematics, 2018) | Spring 2018 | https://people.math.harvard.edu/~cmwang/teaching/55/ | n/a | n/a | n/a |
 
-The Guide (SRC-02) links to the Schedules at `https://www.maths.cam.ac.uk/undergrad/course/schedules.pdf`.
-That URL redirects to `/undergrad/files/schedules.pdf`, the file used here; the two downloads have
-identical SHA-256 hashes (checked 21/10/2026).
+The Guide (SRC-02) links to the Schedules at `https://www.maths.cam.ac.uk/undergrad/course/schedules.pdf`. That URL redirects to `/undergrad/files/schedules.pdf`,
+the file used here; the two downloads have identical SHA-256 hashes (checked 21/10/2026).
 
-### Edition mismatch (open question for the director)
+### Decisions already taken about these sources
 
-The Schedules and Guide are the **2026-27** editions; the supplied examination papers are the **2025**
-papers (academic year 2024-25). The 2026-27 Schedules note a new merit-mark formula and a new Part IB
-Easter Term course (Geometry), and may differ in Part IA content from the year the papers were set. The
-baseline uses the 2026-27 Schedules as the syllabus authority. The director should confirm that, or ask
-for the 2024-25 Schedules, which this baseline did not obtain.
+| Matter | Decision (see [governance/director-decisions.md](../governance/director-decisions.md)) |
+|---|---|
+| Programme | Part IA Option (a), Pure and Applied Mathematics (D-01) |
+| Syllabus authority | The 2026-27 Schedules (D-02) |
+| Examination practice | The 2025 papers are accepted, with the edition difference acknowledged (D-03). The 2026-27 Schedules note a new merit-mark formula and a new Part IB Easter course (Geometry) and may differ in Part IA content from the year the papers were set; a question touching material absent from the 2026-27 Schedules is treated as out of syllabus |
 
-### Copyright and redistribution (open question for the director)
+## 2. Representation of Cambridge text in this public repository
 
-- The Faculty states of the examination papers: "All papers are copyright by the University of Cambridge
-  and may not be reproduced without permission." **No paper is stored here**; `.gitignore` excludes PDFs.
-- SRC-01 and SRC-02 carry **no copyright, licence or reuse statement** that was found (searched for
-  "copyright", "licence", "Creative Commons"). Redistribution rights are therefore **not established**.
-- The syllabus register ([coverage.yaml](../curriculum/coverage.yaml)) and its readable form
-  ([syllabus.md](../curriculum/syllabus.md)) quote the Part IA syllabus statements verbatim, as the task
-  requires ("exact source heading or syllabus statement"). This is a substantial extract of a Cambridge
-  document in a **public** repository. Options for the director: (a) keep as is and accept the risk,
-  (b) obtain Faculty permission, (c) keep the repository private, or (d) replace the verbatim text with
-  headings, page references and a hash, keeping the register as pointers only. Claude Code recommends
-  deciding this before the branch is merged.
+**Director decision D-16:** the public repository must not reproduce substantial Cambridge syllabus text. The Schedules and Guide carry no copyright, licence or reuse
+statement that was found (searched for "copyright", "licence" and "Creative Commons"), so redistribution rights are **not established**. The Faculty states of the
+examination papers: "All papers are copyright by the University of Cambridge and may not be reproduced without permission."
 
-## 2. How the syllabus text was extracted
+What the repository therefore holds:
 
-- Tool: `pypdf` 6.21.2 (`page.extract_text()`), run in a throwaway virtual environment outside the
-  repository. `scripts/extract_pdf_text.py` reproduces this.
-- Pages used: Schedules PDF pp.10 to 14 (printed pp.8 to 12) for the courses, and printed p.7 for the
-  examination structure.
-- Normalisation applied to produce the `source` field of each register record (nothing else was altered):
-  1. line breaks joined with a single space;
-  2. line-end hyphenation removed where it is a word break (for example "isomor-" + "phic"), and kept where
-     the hyphen is real ("(1 + 1)-dimensional", "two-dimensions");
-  3. extraction artefacts of accented letters repaired: "M¨ obius" to "Möbius", "Hˆ opital" to "Hôpital";
-     spurious spaces repaired: "V ector" to "Vector"; curly apostrophes made straight;
-  4. the lecture-count marker `[n]` removed from the statement and stored as `lectures_in_block`;
-  5. everything else kept exactly as extracted, including the asterisk and `∗` star markers.
-- **Known limitation:** text extraction flattens superscripts and subscripts (R^3 appears as `R3`, S_n as
-  `Sn`, A_5 as `A5`, nabla-squared as `∇2`) and drops the typographic distinction of blackboard-bold R and C.
-- Visual check: PDF pages 12 and 13 were rendered to images and compared with the extracted text
-  (starred spans and superscripts). Pages 10, 11 and 14 were **not** visually checked.
-- Automated check: `python3 scripts/validate.py --schedules-text <extracted text>` confirms that every
-  statement for the eight examinable courses occurs in order in the Schedules text and that **no Schedules
-  text between the headings is left unmapped**. The ancillary courses (Mechanics, Computational Projects)
-  are not covered by that audit; Codex should check them by hand.
+| Held | Not held |
+|---|---|
+| For each syllabus item: an **original summary** written by the librarian, the **exact Cambridge sub-heading** (a short label), the source document, **printed and PDF page**, the **paragraph** (block) and the item's **position within it** | The Schedules' syllabus sentences |
+| A **fingerprint** per item: the length and SHA-256 of the normalised source passage | The Cambridge PDFs, the extracted text, and the examination papers (`.gitignore` blocks PDFs) |
+| Scope tags (for example `statement-only`, `informal-treatment`) derived from the source wording | Any textbook or lecture notes |
+| Short quotations in prose (a clause or a sentence) where needed for a documented argument, for example in [dependencies.md](../curriculum/dependencies.md) | Reproduction of lists or paragraphs |
 
-## 3. Part IA structure facts used
+The summaries are **librarian drafts** (`summary_status: librarian-draft`). They are written to preserve mathematical meaning and scope, including qualifiers such as "statement only" or
+"informal"; none has yet been compared with the source by the director or the independent reviewer. They must not be relied on as a statement of Cambridge's syllabus: the Schedules are.
 
-From Schedules 2026-27, printed p.7: two options (a) Pure and Applied Mathematics and (b) Mathematics with
-Physics. This programme follows **option (a)**, all eight examinable courses; Option (b) replaces Numbers and
-Sets and Dynamics and Relativity with the Natural Sciences Physics course. Whether the student follows
-option (a) is an assumption to be confirmed. Papers 1 to 4 pair the courses as shown in
+### Already-published material (needs a director decision)
+
+Before this remediation, the branch `feature/curriculum-baseline-v1` was pushed to the public repository (commits `774a338` and `c337c7a`, 21/10/2026) and contained the verbatim
+syllabus statements in `curriculum/coverage.yaml` and `curriculum/syllabus.md`. It was readable anonymously (checked 21/10/2026; `main` was clean; no forks, stars or pull requests).
+Replacing the text on a later commit **does not remove it from the already-published history**. Options for the director, none of which Claude Code has taken: (a) leave the history as it is
+and accept the risk; (b) delete the remote branch and republish from a history that never contained the text, which needs a force push or deleting and recreating the branch (and GitHub may
+retain cached objects reachable by commit hash until garbage collected); (c) ask GitHub to purge cached views; (d) seek Faculty permission. Deleting the branch is destructive and outward-facing, so it
+needs the owner's explicit instruction.
+
+## 3. Auditing an item against the original Schedules (optional, local)
+
+Without a local copy the register can be checked only structurally. With a copy of the Schedules PDF on the reviewer's machine:
+
+1. Download `schedules.pdf` and confirm its SHA-256 matches SRC-01.
+2. Extract the text with `scripts/extract_pdf_text.py` (needs the optional third-party package `pypdf`; the fingerprints were calibrated on `pypdf` 6.21.2).
+3. Run `python3 scripts/validate.py --schedules-text schedules.txt`.
+
+The audit normalises the source (straight apostrophes, repaired extraction artefacts such as "M¨ obius" to "Möbius" and "V ector" to "Vector", no spaces or hyphens), then walks each course in order.
+For every item it takes the passage of the recorded length at the expected position, hashes it, and compares the hash with the register. It also requires that the passages **tile** the
+course's text with nothing left over except the known headings and lecture counts, so any omitted syllabus text is reported. It warns if a summary shares about nine consecutive words with its
+source passage (a check against copying).
+
+**What a pass means, and does not mean.** A pass shows that each item was built from this edition of the document and that no syllabus text is unmapped. It is a **structural and text-matching
+audit**. It is **not** proof of semantic equivalence: it cannot tell whether a summary is a faithful, complete and accurate rendering of its source. That is an academic judgement for the director
+and the independent reviewer, who should compare each summary with the PDF page cited. A different extractor may produce different spacing, ligatures or accents and so different fingerprints
+(use `--show-mismatch` to see the local passage).
+
+Known limitations of the source text:
+
+- Text extraction flattens superscripts and subscripts (R^3 appears as `R3`, S_n as `Sn`). The summaries write them with `^` and `_`.
+- PDF pages 12 and 13 were rendered and visually compared with the extracted text (starred spans, superscripts). Pages 10, 11 and 14 were **not** visually checked.
+- The audit covers the eight examinable courses and the course notes in them; the ancillary courses (Mechanics, Computational Projects) are not covered by the fingerprint audit and need a manual check.
+- Two spans are starred inside otherwise examinable items (general orthogonal curvilinear coordinates, in IA-VC-004 and IA-VC-005); whole starred items are IA-AN-015 and IA-DR-010.
+
+## 4. Part IA structure facts used
+
+From Schedules 2026-27, printed p.7: two options, (a) Pure and Applied Mathematics and (b) Mathematics with Physics. This programme follows **option (a)** (D-01); option (b) replaces Numbers and
+Sets and Dynamics and Relativity with the Natural Sciences Physics course. Papers 1 to 4 pair the courses as shown in
 [assessments/tripos-papers/index.md](../assessments/tripos-papers/index.md).
 
-## 4. Statuses
+## 5. Statuses
 
 - **Retrieved and read (SRC-01 to SRC-06):** the PDF was downloaded, hashed and its text read.
-- **Fetched (SRC-07 to SRC-10):** the page was fetched on 21/10/2026 and its text read; SRC-08 and
-  SRC-09 were read as raw HTML (not only as a tool summary). They carry no licence statement of their own.
-- Textbook and lecture-note sources are listed with their own verification status in
-  [bibliography.md](bibliography.md).
+- **Fetched (SRC-07 to SRC-10):** the page was fetched on 21/10/2026 and its text read; SRC-08 and SRC-09 were read as raw HTML (not only as a tool summary). They carry no licence statement of their own.
+- Textbook and lecture-note sources are listed with their own four-part verification status in [bibliography.md](bibliography.md), and the outstanding checks in [verification-tasks.md](verification-tasks.md).

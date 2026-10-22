@@ -1,5 +1,11 @@
 # Curriculum Baseline v1 - Review Report
 
+> **Historical record.** This is the original review report as submitted. It has been superseded in part by the director's feedback and by
+> [baseline-v1-remediation-report.md](baseline-v1-remediation-report.md): the register no longer reproduces Cambridge's syllabus text, the
+> prerequisite model is typed, and several reading recommendations changed. Where the two disagree, the remediation report and
+> [governance/director-decisions.md](../governance/director-decisions.md) are current. This file is kept unchanged below this note so the review
+> history is preserved.
+
 Prepared by Claude Code (curriculum librarian) on 21/10/2026 for ChatGPT (curriculum director) and Codex
 (independent reviewer). **This baseline is not approved. It has not been merged. Nothing has been taught,
 assessed or marked as mastered.** Awaiting the curriculum director's review.

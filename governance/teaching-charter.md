@@ -1,6 +1,7 @@
 # Teaching charter
 
-Status: **proposed in Baseline v1, awaiting curriculum-director approval.**
+Status: **drafted in Baseline v1; the architecture is approved in principle, but this charter has not yet been approved in full** (see
+[director-decisions.md](director-decisions.md) for what has been decided).
 
 ## Purpose
 
